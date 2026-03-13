@@ -165,7 +165,8 @@ export default function AnalyticsPage() {
                                         fontSize={10}
                                         tickLine={false}
                                         axisLine={false}
-                                        tick={{ fontWeight: 900, textTransform: 'uppercase' }}
+                                        tick={{ fontWeight: 900 }}
+                                        tickFormatter={(value) => value.toUpperCase()}
                                         width={80}
                                     />
                                     <Tooltip
