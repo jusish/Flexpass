@@ -41,7 +41,7 @@ export default function LandingPage() {
               alt="FlexPass"
               width={140}
               height={40}
-              className="h-10 w-auto object-contain"
+              className="h-8 w-auto object-contain"
               priority
             />
           </Link>
