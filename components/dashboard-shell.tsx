@@ -66,28 +66,22 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                 <div className="h-20 flex items-center px-6 justify-between border-b border-white/5">
                     <AnimatePresence mode="wait">
                         {isOpen ? (
-                            <motion.div
-                                key="logo-full"
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -10 }}
-                                className="flex items-center gap-3"
-                            >
-                                <div className="flex items-center gap-3">
+                                <motion.div
+                                    key="logo-full"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -10 }}
+                                    className="flex items-center"
+                                >
                                     <Image
-                                        src="/logos/icon-on-dark.svg"
-                                        alt="FlexPass Icon"
-                                        width={32}
-                                        height={32}
-                                        className="h-8 w-8 object-contain"
+                                        src="/logos/wordmark-on-dark.svg"
+                                        alt="FlexPass"
+                                        width={140}
+                                        height={42}
+                                        className="h-9 w-auto object-contain"
                                         priority
                                     />
-                                    <div className="flex flex-col">
-                                        <span className="text-lg font-black tracking-tighter text-glow-silver leading-none">FlexPass</span>
-                                        <span className="text-[8px] font-black uppercase tracking-[0.2em] text-primary/40 mt-0.5">{role} PORTAL</span>
-                                    </div>
-                                </div>
-                            </motion.div>
+                                </motion.div>
                         ) : (
                             <motion.div
                                 key="logo-short"
@@ -234,11 +228,12 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                         >
                             <div className="flex items-center justify-between mb-12">
                                     <Image
-                                        src="/logos/logo-on-dark.svg"
-                                        alt="FlexPass Logo"
+                                        src="/logos/wordmark-on-dark.svg"
+                                        alt="FlexPass"
                                         width={140}
-                                        height={40}
+                                        height={42}
                                         className="h-10 w-auto object-contain"
+                                        priority
                                     />
                                 <Button variant="ghost" size="icon" onClick={() => setIsMobileOpen(false)} className="h-10 w-10 rounded-xl glass">
                                     <X className="w-5 h-5" />

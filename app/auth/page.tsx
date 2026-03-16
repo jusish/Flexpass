@@ -21,14 +21,13 @@ export default function AuthChoicePage() {
                 </Link>
                 <div className="flex flex-col items-center mb-8">
                      <Image
-                        src="/logos/icon-on-dark.svg"
-                        alt="FlexPass Icon"
-                        width={64}
-                        height={64}
-                        className="h-16 w-16 object-contain mb-4"
+                        src="/logos/wordmark-on-dark.svg"
+                        alt="FlexPass"
+                        width={240}
+                        height={72}
+                        className="h-16 w-auto object-contain"
                         priority
                     />
-                    <span className="text-2xl font-black tracking-tighter text-glow-silver">FlexPass</span>
                 </div>
 
                 <div className="text-center mb-12">

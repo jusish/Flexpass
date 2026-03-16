@@ -54,14 +54,13 @@ export default function LoginPage() {
                     <div className="text-center mb-8">
                         <div className="flex flex-col items-center mb-6">
                             <Image
-                                src="/logos/icon-on-dark.svg"
-                                alt="FlexPass Icon"
-                                width={48}
-                                height={48}
-                                className="h-12 w-12 object-contain mb-2"
+                                src="/logos/wordmark-on-dark.svg"
+                                alt="FlexPass"
+                                width={180}
+                                height={54}
+                                className="h-12 w-auto object-contain"
                                 priority
                             />
-                            <span className="text-xl font-black tracking-tighter text-glow-silver">FlexPass</span>
                         </div>
                         <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                             {isCorporate ? (

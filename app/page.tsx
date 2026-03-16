@@ -35,16 +35,15 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-40 glass border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center">
             <Image
-              src="/logos/icon-on-dark.svg"
-              alt="FlexPass Icon"
-              width={32}
-              height={32}
-              className="h-8 w-8 object-contain"
+              src="/logos/wordmark-on-dark.svg"
+              alt="FlexPass"
+              width={140}
+              height={40}
+              className="h-10 w-auto object-contain"
               priority
             />
-            <span className="text-xl font-bold tracking-tight">FlexPass</span>
           </Link>
           <div className="hidden md:flex items-center gap-6 text-xs font-medium text-muted-foreground">
             <a href="#features" className="hover:text-primary transition-colors">Features</a>
@@ -189,15 +188,14 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-white/5 glass">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center">
             <Image
-              src="/logos/icon-on-dark.svg"
+              src="/logos/wordmark-on-dark.svg"
               alt="FlexPass Logo"
-              width={24}
-              height={24}
-              className="h-6 w-auto object-contain opacity-80"
+              width={120}
+              height={36}
+              className="h-9 w-auto object-contain opacity-80"
             />
-            <span className="text-base font-bold tracking-tight">FlexPass Rwanda</span>
           </div>
           <p className="text-muted-foreground text-[10px] opacity-60 font-medium">
             © 2026 OneFit Rwanda Ltd. All rights reserved.
