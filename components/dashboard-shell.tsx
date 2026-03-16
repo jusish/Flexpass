@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -72,12 +73,19 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                                 exit={{ opacity: 0, x: -10 }}
                                 className="flex items-center gap-3"
                             >
-                                <div className="w-8 h-8 silver-gradient rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(197,199,201,0.2)] border-glow-silver">
-                                    <Zap className="text-black w-4 h-4 fill-current" />
-                                </div>
-                                <div className="flex flex-col">
-                                    <span className="text-lg font-black tracking-tighter text-glow-silver leading-none">FlexPass</span>
-                                    <span className="text-[8px] font-black uppercase tracking-[0.2em] text-primary/40 mt-0.5">{role} PORTAL</span>
+                                <div className="flex items-center gap-3">
+                                    <Image
+                                        src="/logos/icon-on-dark.svg"
+                                        alt="FlexPass Icon"
+                                        width={32}
+                                        height={32}
+                                        className="h-8 w-8 object-contain"
+                                        priority
+                                    />
+                                    <div className="flex flex-col">
+                                        <span className="text-lg font-black tracking-tighter text-glow-silver leading-none">FlexPass</span>
+                                        <span className="text-[8px] font-black uppercase tracking-[0.2em] text-primary/40 mt-0.5">{role} PORTAL</span>
+                                    </div>
                                 </div>
                             </motion.div>
                         ) : (
@@ -86,9 +94,15 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.8 }}
-                                className="w-10 h-10 silver-gradient rounded-xl flex items-center justify-center border-glow-silver"
+                                className="flex items-center justify-center"
                             >
-                                <Zap className="text-black w-5 h-5 fill-current" />
+                                <Image
+                                    src="/logos/icon-on-dark.svg"
+                                    alt="FlexPass"
+                                    width={32}
+                                    height={32}
+                                    className="h-8 w-8 object-contain"
+                                />
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -219,12 +233,13 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                             className="fixed inset-y-0 left-0 w-[300px] bg-black border-r border-white/10 z-70 p-8 shadow-2xl flex flex-col"
                         >
                             <div className="flex items-center justify-between mb-12">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 silver-gradient rounded-xl flex items-center justify-center">
-                                        <Zap className="text-black w-5 h-5 fill-current" />
-                                    </div>
-                                    <span className="text-2xl font-black tracking-tighter text-glow-silver">FlexPass</span>
-                                </div>
+                                    <Image
+                                        src="/logos/logo-on-dark.svg"
+                                        alt="FlexPass Logo"
+                                        width={140}
+                                        height={40}
+                                        className="h-10 w-auto object-contain"
+                                    />
                                 <Button variant="ghost" size="icon" onClick={() => setIsMobileOpen(false)} className="h-10 w-10 rounded-xl glass">
                                     <X className="w-5 h-5" />
                                 </Button>

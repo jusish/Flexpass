@@ -18,6 +18,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Flexpass - OneFit",
   description: "Flexpass - OneFit",
+  icons: {
+    icon: [
+      {
+        url: "/logos/icon-on-dark.svg",
+        href: "/logos/icon-on-dark.svg",
+      },
+    ],
+  },
 };
 
 import { ThemeProvider } from "@/components/theme-provider";

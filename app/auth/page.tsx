@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -18,6 +19,17 @@ export default function AuthChoicePage() {
                     <ArrowLeft className="mr-2 w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
                     Back to Terminal
                 </Link>
+                <div className="flex flex-col items-center mb-8">
+                     <Image
+                        src="/logos/icon-on-dark.svg"
+                        alt="FlexPass Icon"
+                        width={64}
+                        height={64}
+                        className="h-16 w-16 object-contain mb-4"
+                        priority
+                    />
+                    <span className="text-2xl font-black tracking-tighter text-glow-silver">FlexPass</span>
+                </div>
 
                 <div className="text-center mb-12">
                     <motion.h1

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useMockStore } from "@/lib/store";
@@ -51,6 +52,17 @@ export default function LoginPage() {
 
                 <Card className="glass-dark p-8 border-white/5 rounded-2xl shadow-xl">
                     <div className="text-center mb-8">
+                        <div className="flex flex-col items-center mb-6">
+                            <Image
+                                src="/logos/icon-on-dark.svg"
+                                alt="FlexPass Icon"
+                                width={48}
+                                height={48}
+                                className="h-12 w-12 object-contain mb-2"
+                                priority
+                            />
+                            <span className="text-xl font-black tracking-tighter text-glow-silver">FlexPass</span>
+                        </div>
                         <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                             {isCorporate ? (
                                 <Building2 className="w-7 h-7 text-primary" />
