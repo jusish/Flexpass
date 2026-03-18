@@ -22,6 +22,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { CheckInModal } from "@/components/partner/check-in-modal";
 
 const CHECK_INS = [
     { id: 1, name: "Alice Mukana", tier: "Platinum", time: "14:20", date: "Mar 12, 2026", facility: "Gym", status: "Verified" },
@@ -34,21 +35,27 @@ const CHECK_INS = [
 ];
 
 export default function CheckInsPage() {
+    const [isCheckInModalOpen, setIsCheckInModalOpen] = useState(false);
     const [search, setSearch] = useState("");
 
     return (
-        <div className="space-y-8 pb-20">
+        <div className="space-y-8 pb-20 text-white">
+            <CheckInModal isOpen={isCheckInModalOpen} onClose={() => setIsCheckInModalOpen(false)} />
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="space-y-1">
-                    <h1 className="text-3xl font-black tracking-tighter text-glow-silver">Verification Stream</h1>
-                    <p className="text-muted-foreground text-[11px] font-black uppercase tracking-widest opacity-40">Live facility access and member validation history</p>
+                    <h1 className="text-3xl font-black tracking-tighter">Verification Stream</h1>
+                    <p className="text-muted-foreground text-[11px] font-semibold tracking-wide opacity-50">Live facility access and member validation history</p>
                 </div>
                 <div className="flex gap-3">
-                    <Button variant="outline" size="sm" className="glass border-white/5 h-11 px-6 rounded-xl text-[9px] font-black uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">
+                    <Button variant="outline" size="sm" className="glass border-white/5 h-11 px-6 rounded-xl text-[9px] font-bold tracking-tight opacity-60 hover:opacity-100 transition-opacity">
                         <Download className="w-3.5 h-3.5 mr-2 opacity-60" /> Export Archive
                     </Button>
-                    <Button size="sm" className="h-11 px-8 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] border-glow-silver silver-gradient text-black">
-                        <QrCode className="w-4 h-4 mr-2" /> Sync Scanner
+                    <Button 
+                        size="sm" 
+                        onClick={() => setIsCheckInModalOpen(true)}
+                        className="h-11 px-8 rounded-xl text-[10px] font-bold tracking-tight silver-gradient text-black shadow-[0_0_20px_rgba(197,199,201,0.2)]"
+                    >
+                        <QrCode className="w-4 h-4 mr-2" /> Terminal Entry
                     </Button>
                 </div>
             </div>
@@ -64,7 +71,7 @@ export default function CheckInsPage() {
                             onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
-                    <Button variant="outline" className="h-12 px-6 glass border-white/10 rounded-xl text-[9px] font-black uppercase tracking-widest opacity-60 hover:opacity-100">
+                    <Button variant="outline" className="h-12 px-6 glass border-white/10 rounded-xl text-[9px] font-bold tracking-tight opacity-60 hover:opacity-100">
                         <Filter className="w-3.5 h-3.5 mr-2 opacity-40" /> Temporal Filter
                     </Button>
                 </div>
@@ -72,8 +79,8 @@ export default function CheckInsPage() {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-white/5 text-muted-foreground text-[9px] font-black uppercase tracking-[0.2em] bg-black/40">
-                                <th className="px-8 py-5">Identity</th>
+                            <tr className="border-b border-white/5 text-[9px] font-black uppercase tracking-widest bg-black/40 text-white">
+                                <th className="px-8 py-5">Identity</th> 
                                 <th className="px-8 py-5">Access Tier</th>
                                 <th className="px-8 py-5">Facility Zone</th>
                                 <th className="px-8 py-5 text-center">Timestamp</th>
@@ -90,8 +97,8 @@ export default function CheckInsPage() {
                                                 {log.name.charAt(0)}
                                             </div>
                                             <div>
-                                                <span className="font-bold text-[13px] tracking-tight block group-hover:text-glow-silver transition-all">{log.name}</span>
-                                                <span className="text-[9px] text-muted-foreground font-black uppercase tracking-widest opacity-30 group-hover:opacity-100 transition-opacity">Member ID: FP-{log.id}82</span>
+                                                <span className="font-bold text-[13px] tracking-tight block text-white">{log.name}</span>
+                                                <span className="text-[9px] text-muted-foreground font-semibold opacity-40">Member ID: FP-{log.id}82</span>
                                             </div>
                                         </div>
                                     </td>
@@ -103,17 +110,17 @@ export default function CheckInsPage() {
                                     <td className="px-8 py-6">
                                         <div className="flex items-center gap-2">
                                             <div className="w-1.5 h-1.5 rounded-full bg-secondary/40" />
-                                            <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-tight">
+                                            <span className="text-[10px] text-muted-foreground font-bold tracking-tight uppercase">
                                                 {log.facility}
                                             </span>
                                         </div>
                                     </td>
                                     <td className="px-8 py-6 text-center">
                                         <div className="flex flex-col items-center">
-                                            <span className="font-bold text-[11px] flex items-center gap-2 text-glow-silver leading-none">
+                                            <span className="font-bold text-[11px] flex items-center gap-2 text-white leading-none">
                                                 <Clock className="w-3 h-3 text-secondary opacity-40 leading-none" /> {log.time}
                                             </span>
-                                            <span className="text-[9px] text-muted-foreground font-black uppercase tracking-widest opacity-30 mt-1.5">{log.date}</span>
+                                            <span className="text-[9px] text-muted-foreground font-semibold opacity-40 mt-1.5">{log.date}</span>
                                         </div>
                                     </td>
                                     <td className="px-8 py-6">
@@ -122,7 +129,7 @@ export default function CheckInsPage() {
                                         </div>
                                     </td>
                                     <td className="px-8 py-6 text-right">
-                                        <Button variant="ghost" size="icon" className="h-10 w-10 rounded-xl group-hover:bg-white/5 transition-colors border border-transparent group-hover:border-white/5">
+                                        <Button variant="ghost" size="icon" className="h-10 w-10 rounded-xl group-hover:bg-white/5 transition-colors border border-transparent group-hover:border-white/5 text-white">
                                             <MoreHorizontal className="w-4 h-4 text-muted-foreground group-hover:text-white" />
                                         </Button>
                                     </td>
@@ -133,8 +140,8 @@ export default function CheckInsPage() {
                 </div>
 
                 <div className="p-8 border-t border-white/5 flex items-center justify-between bg-black/40">
-                    <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest opacity-40">
-                        Displaying <span className="text-foreground font-black opacity-100">1</span> - <span className="text-foreground font-black opacity-100">7</span> of 342 records
+                    <p className="text-[10px] text-muted-foreground font-semibold tracking-wide opacity-50">
+                        Displaying <span className="text-white font-bold opacity-100">1</span> - <span className="text-white font-bold opacity-100">7</span> of 342 records
                     </p>
                     <div className="flex gap-2">
                         <Button variant="outline" className="glass border-white/10 rounded-xl h-10 w-10 p-0 disabled:opacity-20 transition-all"><ChevronLeft className="w-4 h-4" /></Button>

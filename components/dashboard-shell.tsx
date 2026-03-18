@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
     LayoutDashboard,
     Users,
@@ -18,13 +18,16 @@ import {
     Menu,
     X,
     Bell,
-    Search
+    Search,
+    QrCode,
+    CheckCircle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useMockStore } from "@/lib/store";
 import { motion, AnimatePresence } from "framer-motion";
+import { CheckInModal } from "@/components/partner/check-in-modal";
 
 interface SidebarItem {
     title: string;
@@ -35,10 +38,8 @@ interface SidebarItem {
 interface DashboardShellProps {
     children: React.ReactNode;
     items: SidebarItem[];
-    role: "Corporate" | "Partner";
+    role: "Corporate" | "Partner" | "Admin";
 }
-
-import { useRouter } from "next/navigation";
 
 export function DashboardShell({ children, items, role }: DashboardShellProps) {
     const pathname = usePathname();
@@ -46,6 +47,7 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
     const { user, logout } = useMockStore();
     const [isOpen, setIsOpen] = React.useState(true);
     const [isMobileOpen, setIsMobileOpen] = React.useState(false);
+    const [isCheckInOpen, setIsCheckInOpen] = React.useState(false);
 
     const handleLogout = () => {
         logout();
@@ -66,22 +68,22 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                 <div className="h-20 flex items-center px-6 justify-between border-b border-white/5">
                     <AnimatePresence mode="wait">
                         {isOpen ? (
-                                <motion.div
-                                    key="logo-full"
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -10 }}
-                                    className="flex items-center"
-                                >
-                                    <Image
-                                        src="/logos/wordmark-on-dark.svg"
-                                        alt="FlexPass"
-                                        width={140}
-                                        height={42}
-                                        className="h-9 w-auto object-contain"
-                                        priority
-                                    />
-                                </motion.div>
+                            <motion.div
+                                key="logo-full"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -10 }}
+                                className="flex items-center"
+                            >
+                                <Image
+                                    src="/logos/wordmark-on-dark.svg"
+                                    alt="FlexPass"
+                                    width={140}
+                                    height={42}
+                                    className="h-9 w-auto object-contain"
+                                    priority
+                                />
+                            </motion.div>
                         ) : (
                             <motion.div
                                 key="logo-short"
@@ -125,8 +127,8 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                                     <item.icon className={cn("w-4 h-4 relative z-10 transition-transform", isActive ? "scale-110" : "opacity-40 group-hover:opacity-100")} />
                                     {isOpen && (
                                         <span className={cn(
-                                            "font-black text-[12px] uppercase tracking-widest relative z-10",
-                                            isActive ? "" : "opacity-60"
+                                            "font-bold text-[11px] tracking-wide relative z-10",
+                                            isActive ? "" : "opacity-40"
                                         )}>{item.title}</span>
                                     )}
                                     {isActive && isOpen && (
@@ -145,20 +147,20 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                 <div className="p-4 border-t border-white/5 space-y-4">
                     <div className={cn("flex items-center gap-3 p-3 bg-black/40 border border-white/10 rounded-2xl satin-card", !isOpen && "p-1 justify-center")}>
                         <Avatar className="h-8 w-8 border border-white/10 ring-2 ring-black/20">
-                            <AvatarImage src={user?.avatar} />
-                            <AvatarFallback className="text-[10px] font-black">{user?.name?.charAt(0)}</AvatarFallback>
+                            {user?.avatar && <AvatarImage src={user.avatar} />}
+                            <AvatarFallback className="text-[10px] font-bold">{user?.name?.charAt(0) || "U"}</AvatarFallback>
                         </Avatar>
                         {isOpen && (
                             <div className="flex-1 min-w-0">
-                                <p className="text-[11px] font-black uppercase tracking-tight truncate group-hover:text-primary transition-colors">{user?.name}</p>
-                                <p className="text-[9px] text-muted-foreground truncate opacity-40 font-bold">{user?.email}</p>
+                                <p className="text-[11px] font-bold tracking-tight truncate group-hover:text-primary transition-colors text-white">{user?.name}</p>
+                                <p className="text-[9px] text-muted-foreground truncate opacity-40 font-semibold">{user?.email}</p>
                             </div>
                         )}
                     </div>
 
                     <Button
                         variant="ghost"
-                        className={cn("w-full justify-start rounded-xl h-10 gap-3 text-rose-500/60 hover:text-rose-500 hover:bg-rose-500/10 font-black text-[10px] uppercase tracking-widest transition-all", !isOpen && "px-0 justify-center")}
+                        className={cn("w-full justify-start rounded-xl h-10 gap-3 text-rose-500/60 hover:text-rose-500 hover:bg-rose-500/10 font-bold text-[10px] tracking-wide transition-all", !isOpen && "px-0 justify-center")}
                         onClick={handleLogout}
                     >
                         <LogOut className="w-4 h-4" />
@@ -192,16 +194,32 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
 
                     <div className="flex items-center gap-6">
                         <div className="hidden sm:flex flex-col items-end">
-                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-glow-silver">12 MAR 2026</span>
-                            <span className="text-[9px] text-muted-foreground font-black uppercase tracking-widest opacity-40">Thursday</span>
+                            <span className="text-[10px] font-bold tracking-widest text-glow-silver text-white">12 MAR 2026</span>
+                            <span className="text-[9px] text-muted-foreground font-semibold tracking-wide opacity-50">Thursday</span>
                         </div>
                         <div className="h-8 w-px bg-white/5" />
+                        {role === "Partner" && (
+                            <Button 
+                                onClick={() => setIsCheckInOpen(true)}
+                                className="h-10 px-6 rounded-xl text-[10px] font-bold tracking-tight silver-gradient text-black hidden sm:flex"
+                            >
+                                <QrCode className="w-4 h-4 mr-2" /> Terminal
+                            </Button>
+                        )}
+                        {role === "Admin" && (
+                            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                <span className="text-[9px] font-black text-emerald-500 uppercase tracking-widest leading-none">System Global</span>
+                            </div>
+                        )}
                         <Button variant="ghost" size="icon" className="relative h-10 w-10 rounded-xl border border-white/10 glass-dark group">
                             <Bell className="w-4 h-4 text-secondary group-hover:text-primary transition-colors" />
                             <span className="absolute top-3 right-3 w-1.5 h-1.5 bg-primary rounded-full border-2 border-black" />
                         </Button>
                     </div>
                 </header>
+
+                <CheckInModal isOpen={isCheckInOpen} onClose={() => setIsCheckInOpen(false)} />
 
                 {/* Page Content */}
                 <div className="p-8 md:p-12 max-w-7xl mx-auto">
@@ -227,14 +245,14 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                             className="fixed inset-y-0 left-0 w-[300px] bg-black border-r border-white/10 z-70 p-8 shadow-2xl flex flex-col"
                         >
                             <div className="flex items-center justify-between mb-12">
-                                    <Image
-                                        src="/logos/wordmark-on-dark.svg"
-                                        alt="FlexPass"
-                                        width={140}
-                                        height={42}
-                                        className="h-10 w-auto object-contain"
-                                        priority
-                                    />
+                                <Image
+                                    src="/logos/wordmark-on-dark.svg"
+                                    alt="FlexPass"
+                                    width={140}
+                                    height={42}
+                                    className="h-10 w-auto object-contain"
+                                    priority
+                                />
                                 <Button variant="ghost" size="icon" onClick={() => setIsMobileOpen(false)} className="h-10 w-10 rounded-xl glass">
                                     <X className="w-5 h-5" />
                                 </Button>
@@ -246,7 +264,7 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                                     return (
                                         <Link key={item.href} href={item.href} onClick={() => setIsMobileOpen(false)} className="block">
                                             <div className={cn(
-                                                "flex items-center gap-4 px-5 py-4 rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all relative overflow-hidden",
+                                                "flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-[11px] tracking-wide transition-all relative overflow-hidden",
                                                 isActive
                                                     ? "text-black border-glow-silver shadow-xl"
                                                     : "text-muted-foreground hover:bg-white/5 hover:text-white"
@@ -263,7 +281,7 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                             <div className="mt-auto pt-8 border-t border-white/5 space-y-4">
                                 <Button
                                     variant="ghost"
-                                    className="w-full justify-start rounded-2xl h-14 gap-4 text-rose-500 font-black text-xs uppercase tracking-widest"
+                                    className="w-full justify-start rounded-2xl h-14 gap-4 text-rose-500 font-bold text-xs tracking-wide"
                                     onClick={handleLogout}
                                 >
                                     <LogOut className="w-5 h-5" />

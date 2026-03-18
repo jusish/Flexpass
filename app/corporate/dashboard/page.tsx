@@ -47,27 +47,27 @@ const weeklyData = [
 ];
 
 const tierDistribution = [
-    { tier: 'Platinum', count: 120, fill: "#C5C7C9" },
-    { tier: 'Gold', count: 80, fill: "#6E6E73" },
-    { tier: 'Silver', count: 45, fill: "#1F1F23" },
+    { tier: 'Platinum', count: 120, fill: "#6366f1" },
+    { tier: 'Gold', count: 80, fill: "#10b981" },
+    { tier: 'Silver', count: 45, fill: "#f59e0b" },
 ];
 
 const chartConfig = {
     active: {
         label: "Active Users",
-        color: "#C5C7C9",
+        color: "#6366f1",
     },
     platinum: {
         label: "Platinum",
-        color: "#C5C7C9",
+        color: "#6366f1",
     },
     gold: {
         label: "Gold",
-        color: "#6E6E73",
+        color: "#10b981",
     },
     silver: {
         label: "Silver",
-        color: "#1F1F23",
+        color: "#f59e0b",
     },
 } satisfies ChartConfig;
 
@@ -152,8 +152,8 @@ export default function CorporateDashboard() {
                             >
                                 <defs>
                                     <linearGradient id="colorActive" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#C5C7C9" stopOpacity={0.2} />
-                                        <stop offset="95%" stopColor="#C5C7C9" stopOpacity={0} />
+                                        <stop offset="5%" stopColor="#6366f1" stopOpacity={0.2} />
+                                        <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="rgba(255,255,255,0.02)" />
@@ -173,7 +173,7 @@ export default function CorporateDashboard() {
                                 <Area
                                     type="monotone"
                                     dataKey="active"
-                                    stroke="#C5C7C9"
+                                    stroke="#6366f1"
                                     strokeWidth={3}
                                     fillOpacity={1}
                                     fill="url(#colorActive)"
