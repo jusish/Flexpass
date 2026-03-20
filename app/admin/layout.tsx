@@ -8,7 +8,8 @@ import {
     TrendingUp,
     Settings,
     ShieldCheck,
-    Globe
+    Globe,
+    Zap
 } from "lucide-react";
 import { DashboardShell } from "@/components/dashboard-shell";
 
@@ -24,6 +25,11 @@ const adminNavItems = [
         icon: Building2,
     },
     {
+        title: "Activities",
+        href: "/admin/activities",
+        icon: Zap,
+    },
+    {
         title: "Corporates",
         href: "/admin/corporates",
         icon: Users,
@@ -37,6 +43,16 @@ const adminNavItems = [
         title: "Market Insights",
         href: "/admin/analytics",
         icon: TrendingUp,
+    },
+    {
+        title: "Coaches",
+        href: "/admin/coaches",
+        icon: ShieldCheck,
+    },
+    {
+        title: "Nutritionists",
+        href: "/admin/nutritionists",
+        icon: Globe,
     },
     {
         title: "Platform Settings",

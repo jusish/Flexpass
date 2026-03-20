@@ -23,11 +23,17 @@ export function useMockStore() {
         }
     }, []);
 
-    const login = useCallback((role: "CORPORATE" | "PARTNER") => {
+    const login = useCallback((role: "CORPORATE" | "PARTNER" | "COACH" | "NUTRITIONIST") => {
+        const roleEnumMap: Record<string, User["role"]> = {
+            CORPORATE: "CORPORATE_ADMIN",
+            PARTNER: "PARTNER_ADMIN",
+            COACH: "COACH_ADMIN",
+            NUTRITIONIST: "NUTRITIONIST_ADMIN"
+        };
         const mockUser: User = {
             ...MOCK_USER,
-            role: role === "CORPORATE" ? "CORPORATE_ADMIN" : "PARTNER_ADMIN",
-            id: role === "CORPORATE" ? "cu_1" : "pu_1",
+            role: roleEnumMap[role] || "CORPORATE_ADMIN",
+            id: role.toLowerCase() + "_1",
         };
         setUser(mockUser);
         localStorage.setItem("flexpass_user", JSON.stringify(mockUser));

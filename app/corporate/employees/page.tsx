@@ -29,7 +29,9 @@ import {
     DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { useMockStore } from "@/lib/store";
+import { useRouter } from "next/navigation";
 import { type Employee } from "@/lib/mock-data";
 import { AddEmployeeModal } from "@/components/corporate/add-employee-modal";
 import { EditEmployeeModal } from "@/components/corporate/edit-employee-modal";
@@ -38,6 +40,7 @@ import { toast } from "sonner";
 
 export default function EmployeesPage() {
     const { employees, deleteEmployee } = useMockStore();
+    const router = useRouter();
     const [search, setSearch] = useState("");
     const [tierFilter, setTierFilter] = useState<string | null>(null);
 
@@ -57,8 +60,7 @@ export default function EmployeesPage() {
     }, [employees, search, tierFilter]);
 
     const handleView = (emp: Employee) => {
-        setSelectedEmployee(emp);
-        setIsViewModalOpen(true);
+        router.push(`/corporate/employees/${emp.id}`);
     };
 
     const handleEdit = (emp: Employee) => {
@@ -147,7 +149,9 @@ export default function EmployeesPage() {
                                                 {emp.name.charAt(0)}
                                             </div>
                                             <div>
-                                                <p className="font-bold text-foreground group-hover:text-primary transition-colors text-sm">{emp.name}</p>
+                                                <Link href={`/corporate/employees/${emp.id}`}>
+                                                    <p className="font-bold text-foreground group-hover:text-primary transition-colors text-sm underline-offset-4 hover:underline cursor-pointer">{emp.name}</p>
+                                                </Link>
                                                 <p className="text-[10px] text-muted-foreground opacity-60 flex items-center gap-1 font-medium mt-0.5">
                                                     {emp.email}
                                                 </p>

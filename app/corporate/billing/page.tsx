@@ -38,7 +38,7 @@ const PLANS = [
         price: "1,250,000",
         period: "per month",
         desc: "Comprehensive health for growth",
-        features: ["25+ Premium Venues", "Up to 200 Employees", "ROI Analytics", "Account Manager"],
+        features: ["25+ Premium Venues", "Up to 200 Employees", "Detailed Reports", "Account Manager"],
         popular: true
     },
     {
@@ -47,7 +47,7 @@ const PLANS = [
         price: "3,500,000",
         period: "per month",
         desc: "The ultimate wellness luxury",
-        features: ["Unlimited Access", "Unlimited Employees", "Enterprise API", "VIP Concierge"]
+        features: ["Unlimited Access", "Unlimited Employees", "Company Integration", "VIP Concierge"]
     }
 ];
 
@@ -204,8 +204,8 @@ export default function BillingPage() {
                             <ShieldCheck className="w-5 h-5 border-glow-silver" />
                         </div>
                         <div>
-                            <h4 className="text-sm font-bold mb-1 uppercase tracking-wide text-glow-silver">Enterprise Security</h4>
-                            <p className="text-[11px] text-muted-foreground leading-relaxed font-medium">Compliance-ready billing with full invoice transparency and PCI-DSS wallet protection.</p>
+                            <h4 className="text-sm font-bold mb-1 uppercase tracking-wide text-glow-silver">Secure Billing</h4>
+                            <p className="text-[11px] text-muted-foreground leading-relaxed font-medium">Official and transparent invoicing with high-level payment security.</p>
                         </div>
                     </Card>
                     <div className="p-6 bg-linear-to-r from-white/5 to-transparent border border-white/10 rounded-2xl flex items-center justify-between satin-card">

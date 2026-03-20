@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { 
     Users, 
     Building2, 
@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const corporateData = [
     { 
@@ -100,6 +100,8 @@ const corporateData = [
 ];
 
 export default function CorporateManagement() {
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
     return (
         <div className="space-y-10 pb-20">
             {/* Header */}
@@ -112,7 +114,11 @@ export default function CorporateManagement() {
                     <Button variant="outline" size="sm" className="glass border-white/5 h-12 px-6 rounded-2xl text-[10px] font-bold tracking-widest opacity-60 hover:opacity-100 transition-all">
                         <Download className="w-4 h-4 mr-2" /> Global Audit
                     </Button>
-                    <Button size="sm" className="silver-gradient text-black h-12 px-8 rounded-2xl text-[10px] font-black tracking-widest transition-all shadow-xl shadow-white/5">
+                    <Button 
+                        size="sm" 
+                        className="silver-gradient text-black h-12 px-8 rounded-2xl text-[10px] font-black tracking-widest transition-all shadow-xl shadow-white/5"
+                        onClick={() => setIsAddModalOpen(true)}
+                    >
                         <Plus className="w-4 h-4 mr-2" /> Enroll Entity
                     </Button>
                 </div>
@@ -228,6 +234,89 @@ export default function CorporateManagement() {
                     </Table>
                 </Card>
             </div>
+            {/* Modal - Enroll Corporate Entity */}
+            <AnimatePresence>
+                {isAddModalOpen && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="w-full max-w-xl glass-dark border border-white/10 rounded-3xl p-10 relative overflow-hidden"
+                        >
+                            <div className="absolute top-0 left-0 w-full h-1 silver-gradient" />
+                            
+                            <div className="flex justify-between items-start mb-10">
+                                <div>
+                                    <h2 className="text-2xl font-black tracking-tighter text-white">Enroll Corporate Entity</h2>
+                                    <p className="text-[10px] font-bold text-muted-foreground opacity-40 tracking-widest uppercase mt-1">Cross-Entity Governance Registry</p>
+                                </div>
+                                <Button 
+                                    variant="ghost" 
+                                    size="icon" 
+                                    className="rounded-full hover:bg-white/5"
+                                    onClick={() => setIsAddModalOpen(false)}
+                                >
+                                    <XCircle className="w-5 h-5 text-muted-foreground" />
+                                </Button>
+                            </div>
+
+                            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setIsAddModalOpen(false); }}>
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-[9px] font-black tracking-widest text-muted-foreground opacity-60 uppercase">Organization Name</label>
+                                        <Input className="h-12 bg-white/5 border-white/5 rounded-xl text-xs font-bold" placeholder="e.g. Bank of Kigali" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[9px] font-black tracking-widest text-muted-foreground opacity-60 uppercase">Industry Sector</label>
+                                        <Input className="h-12 bg-white/5 border-white/5 rounded-xl text-xs font-bold" placeholder="e.g. Financial Services" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[9px] font-black tracking-widest text-muted-foreground opacity-60 uppercase">Revenue Model</label>
+                                        <select className="w-full h-12 bg-white/5 border border-white/5 rounded-xl text-xs font-bold px-4 text-white appearance-none outline-none focus:ring-1 focus:ring-white/10">
+                                            <option className="bg-zinc-900">Utilization Based</option>
+                                            <option className="bg-zinc-900">Subscription Based</option>
+                                            <option className="bg-zinc-900">Hybrid Framework</option>
+                                        </select>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[9px] font-black tracking-widest text-muted-foreground opacity-60 uppercase">Total Employees</label>
+                                        <Input type="number" className="h-12 bg-white/5 border-white/5 rounded-xl text-xs font-bold" placeholder="500" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[9px] font-black tracking-widest text-muted-foreground opacity-60 uppercase">Domain Authentication</label>
+                                        <Input className="h-12 bg-white/5 border-white/5 rounded-xl text-xs font-bold" placeholder="corp.rw" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[9px] font-black tracking-widest text-muted-foreground opacity-60 uppercase">Billing Cycle</label>
+                                        <div className="flex gap-2">
+                                            <Button type="button" variant="outline" className="flex-1 h-12 rounded-xl text-[9px] font-black border-white/5">MONTHLY</Button>
+                                            <Button type="button" variant="outline" className="flex-1 h-12 rounded-xl text-[9px] font-black border-white/5">YEARLY</Button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="pt-6 flex gap-4">
+                                    <Button 
+                                        type="button"
+                                        variant="outline" 
+                                        className="flex-1 h-14 rounded-2xl text-[10px] font-black tracking-widest border-white/5"
+                                        onClick={() => setIsAddModalOpen(false)}
+                                    >
+                                        CANCEL
+                                    </Button>
+                                    <Button 
+                                        type="submit"
+                                        className="flex-2 h-14 rounded-2xl text-[10px] font-black tracking-widest silver-gradient text-black"
+                                    >
+                                        INITIALIZE GOVERNANCE NODE
+                                    </Button>
+                                </div>
+                            </form>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

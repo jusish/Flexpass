@@ -15,6 +15,8 @@ import {
     ChevronRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
     ChartContainer,
     ChartTooltip,
@@ -141,8 +143,8 @@ export default function CorporateDashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <Card className="glass-dark lg:col-span-2 p-6 border-white/5 rounded-2xl relative flex flex-col satin-card">
                     <div className="mb-8">
-                        <h3 className="text-sm font-bold uppercase tracking-wider mb-1">Weekly Activity</h3>
-                        <p className="text-muted-foreground text-[10px] font-medium opacity-60">Employee attendance metrics across all venues</p>
+                        <h3 className="text-sm font-bold uppercase tracking-wider mb-1">Company Activity</h3>
+                        <p className="text-muted-foreground text-[10px] font-medium opacity-60">Total visits recorded across all wellness centers</p>
                     </div>
                     <div className="flex-1 min-h-[300px] w-full">
                         <ChartContainer config={chartConfig} className="h-full w-full">
@@ -185,8 +187,8 @@ export default function CorporateDashboard() {
 
                 <Card className="glass-dark p-6 border-white/5 rounded-2xl flex flex-col satin-card">
                     <div className="mb-8">
-                        <h3 className="text-sm font-bold uppercase tracking-wider mb-1 text-glow-silver">Subscriptions</h3>
-                        <p className="text-muted-foreground text-[10px] font-medium opacity-60">Membership distribution scale</p>
+                        <h3 className="text-sm font-bold uppercase tracking-wider mb-1 text-glow-silver">Plan Distribution</h3>
+                        <p className="text-muted-foreground text-[10px] font-medium opacity-60">Number of employees in each subscription tier</p>
                     </div>
                     <div className="flex-1 min-h-[240px] w-full mb-8">
                         <ChartContainer config={chartConfig} className="h-full w-full">
@@ -238,10 +240,12 @@ export default function CorporateDashboard() {
             <Card className="glass-dark border-white/5 rounded-2xl overflow-hidden">
                 <div className="p-6 border-b border-white/5 flex justify-between items-center">
                     <div>
-                        <h3 className="text-lg font-semibold mb-1">Recent Enrollments</h3>
-                        <p className="text-muted-foreground text-xs font-medium">Latest team additions</p>
+                        <h3 className="text-lg font-semibold mb-1">Newest Members</h3>
+                        <p className="text-muted-foreground text-xs font-medium">Latest team additions to the platform</p>
                     </div>
-                    <Button variant="link" size="sm" className="text-xs text-primary font-medium hover:opacity-80 p-0 h-auto">View Directory</Button>
+                    <Link href="/corporate/employees">
+                        <Button variant="link" size="sm" className="text-xs text-primary font-medium hover:opacity-80 p-0 h-auto">View Directory</Button>
+                    </Link>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left font-sans">
@@ -256,10 +260,10 @@ export default function CorporateDashboard() {
                         </thead>
                         <tbody className="divide-y divide-white/5">
                             {[
-                                { name: "Sonia Gakwaya", email: "sonia@bk.rw", tier: "Platinum", date: "10 Mar", status: "Active" },
-                                { name: "Alaric Nshuti", email: "alaric@bk.rw", tier: "Gold", date: "08 Mar", status: "Active" },
-                                { name: "Brenda Umutoni", email: "brenda@bk.rw", tier: "Platinum", date: "07 Mar", status: "Pending" },
-                                { name: "Kevin Kalisa", email: "kevin@bk.rw", tier: "Silver", date: "05 Mar", status: "Active" },
+                                { name: "Sonia Gakwaya", email: "sonia@bk.rw", tier: "Platinum", date: "10 Mar", status: "Active", id: "e1" },
+                                { name: "Alaric Nshuti", email: "alaric@bk.rw", tier: "Gold", date: "08 Mar", status: "Active", id: "e2" },
+                                { name: "Brenda Umutoni", email: "brenda@bk.rw", tier: "Platinum", date: "07 Mar", status: "Pending", id: "e3" },
+                                { name: "Kevin Kalisa", email: "kevin@bk.rw", tier: "Silver", date: "05 Mar", status: "Active", id: "e4" },
                             ].map((row, i) => (
                                 <tr key={i} className="group hover:bg-white/5 transition-colors text-xs font-medium">
                                     <td className="px-6 py-4">
@@ -268,7 +272,9 @@ export default function CorporateDashboard() {
                                                 {row.name.charAt(0)}
                                             </div>
                                             <div>
-                                                <p className="font-semibold">{row.name}</p>
+                                                <Link href={`/corporate/employees/${row.id}`}>
+                                                    <p className="font-semibold hover:text-primary transition-colors cursor-pointer">{row.name}</p>
+                                                </Link>
                                                 <p className="text-[10px] text-muted-foreground opacity-70">{row.email}</p>
                                             </div>
                                         </div>
@@ -289,9 +295,11 @@ export default function CorporateDashboard() {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 text-right">
-                                        <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg group-hover:bg-primary/10">
-                                            <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary" />
-                                        </Button>
+                                        <Link href={`/corporate/employees/${row.id}`}>
+                                            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg group-hover:bg-primary/10">
+                                                <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary" />
+                                            </Button>
+                                        </Link>
                                     </td>
                                 </tr>
                             ))}

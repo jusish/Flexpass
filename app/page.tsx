@@ -12,7 +12,9 @@ import {
   BarChart3,
   Users,
   ArrowRight,
-  ChevronRight
+  ChevronRight,
+  Apple,
+  Dumbbell
 } from "lucide-react";
 
 const fadeIn = {
@@ -139,48 +141,27 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Corporate Portal */}
-            <motion.div whileHover={{ y: -5 }} className="group">
-              <Card className="glass-dark p-8 h-full border-white/5 rounded-2xl relative overflow-hidden transition-all group-hover:border-primary/20">
-                <div className="h-10 w-10 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
-                  <ShieldCheck className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-2xl font-semibold mb-3">Corporate HR Portal</h3>
-                <p className="text-muted-foreground text-sm mb-6 leading-relaxed opacity-70">
-                  Manage institutional wellness programs with real-time employee tracking, enrollment automation, and consolidated digital invoicing.
-                </p>
-                <ul className="space-y-3 mb-8 text-muted-foreground text-[13px] opacity-60">
-                  <li className="flex items-center gap-2 font-medium"><ChevronRight className="w-4 h-4 text-primary/50" /> Utilization Tracking</li>
-                  <li className="flex items-center gap-2 font-medium"><ChevronRight className="w-4 h-4 text-primary/50" /> Enrollment Automation</li>
-                  <li className="flex items-center gap-2 font-medium"><ChevronRight className="w-4 h-4 text-primary/50" /> Data Analytics</li>
-                </ul>
-                <Button variant="link" asChild className="p-0 text-sm font-semibold group-hover:translate-x-1 transition-transform h-auto">
-                  <Link href="/auth">Access Portal <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                </Button>
-              </Card>
-            </motion.div>
-
-            {/* Partner Portal */}
-            <motion.div whileHover={{ y: -5 }} className="group">
-              <Card className="glass-dark p-8 h-full border-white/5 rounded-2xl relative overflow-hidden transition-all group-hover:border-primary/20">
-                <div className="h-10 w-10 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
-                  <BarChart3 className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-2xl font-semibold mb-3">Partner Dashboard</h3>
-                <p className="text-muted-foreground text-sm mb-6 leading-relaxed opacity-70">
-                  The ultimate hub for gym owners and facility managers. Track visitor activity, optimize operations, and reach more subscribers.
-                </p>
-                <ul className="space-y-3 mb-8 text-muted-foreground text-[13px] opacity-60">
-                  <li className="flex items-center gap-2 font-medium"><ChevronRight className="w-4 h-4 text-primary/50" /> Check-in Verification</li>
-                  <li className="flex items-center gap-2 font-medium"><ChevronRight className="w-4 h-4 text-primary/50" /> Visit Heatmaps</li>
-                  <li className="flex items-center gap-2 font-medium"><ChevronRight className="w-4 h-4 text-primary/50" /> Settlement Reports</li>
-                </ul>
-                <Button variant="link" asChild className="p-0 text-sm font-semibold group-hover:translate-x-1 transition-transform h-auto">
-                  <Link href="/auth">Access Portal <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                </Button>
-              </Card>
-            </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { name: "Corporate", icon: ShieldCheck, role: "corporate", desc: "Enterprise wellness management" },
+              { name: "Partners", icon: Dumbbell, role: "partner", desc: "Facility & visit operations" },
+              { name: "Coaches", icon: Zap, role: "coach", desc: "Training & client management" },
+              { name: "Nutritionist", icon: Apple, role: "apple", desc: "Dietary plans & outcomes" },
+            ].map((portal) => (
+              <motion.div key={portal.role} whileHover={{ y: -4 }} className="group">
+                <Link href={`/auth/login/${portal.role === 'apple' ? 'nutritionist' : portal.role}`}>
+                  <Card className="glass-dark p-6 h-full border-white/5 rounded-xl hover:border-primary/20 transition-all flex flex-col items-center text-center satin-card">
+                    <div className="h-10 w-10 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform border border-white/5 font-sans">
+                      <portal.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <h3 className="text-sm font-bold mb-1 tracking-tight font-sans">{portal.name}</h3>
+                    <p className="text-[10px] text-muted-foreground opacity-50 font-medium font-sans px-2">
+                      {portal.desc}
+                    </p>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

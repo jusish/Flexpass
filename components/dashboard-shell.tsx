@@ -38,7 +38,7 @@ interface SidebarItem {
 interface DashboardShellProps {
     children: React.ReactNode;
     items: SidebarItem[];
-    role: "Corporate" | "Partner" | "Admin";
+    role: "Corporate" | "Partner" | "Admin" | "Coach" | "Nutritionist";
 }
 
 export function DashboardShell({ children, items, role }: DashboardShellProps) {

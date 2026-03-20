@@ -92,63 +92,97 @@ const chartConfig = {
     vening: { label: "Evening Peak", color: "#8b5cf6" },
 } satisfies ChartConfig;
 
-export default function UtilizationPage() {
+export default function AnalyticsPage() {
     const [model, setModel] = React.useState<"subscription" | "utilization">("utilization");
+    const hasSubscription = false; // Mocking subscription status
 
     return (
-        <div className="space-y-8 pb-20">
+        <div className="space-y-10 pb-20 animate-in fade-in duration-500">
             {/* Model Switcher & Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div className="space-y-1">
-                    <h1 className="text-3xl font-black tracking-tighter text-white">Consolidated Analytics</h1>
-                    <p className="text-muted-foreground text-[11px] font-semibold tracking-wide opacity-50">Deep dive into organization-wide wellness participation and expenditure</p>
+                    <h1 className="text-3xl font-bold tracking-tight text-white">Company Statistics</h1>
+                    <p className="text-muted-foreground text-xs opacity-60">Track how your team is using their wellness benefits and how much it costs</p>
                 </div>
 
-                <div className="flex bg-black/40 p-1.5 border border-white/5 rounded-2xl">
+                <div className="flex bg-white/5 p-1 border border-white/10 rounded-xl">
                     <button
                         onClick={() => setModel("utilization")}
                         className={cn(
-                            "px-6 py-2.5 rounded-xl text-[10px] font-bold tracking-tight transition-all",
+                            "px-5 py-2 rounded-lg text-xs font-bold transition-all",
                             model === "utilization" ? "silver-gradient text-black" : "text-muted-foreground hover:text-white"
                         )}
                     >
-                        Utilization Model
+                        Utilization
                     </button>
                     <button
                         onClick={() => setModel("subscription")}
                         className={cn(
-                            "px-6 py-2.5 rounded-xl text-[10px] font-bold tracking-tight transition-all",
+                            "px-5 py-2 rounded-lg text-xs font-bold transition-all",
                             model === "subscription" ? "silver-gradient text-black" : "text-muted-foreground hover:text-white"
                         )}
                     >
-                        Tier Subscription
+                        Subscription
                     </button>
                 </div>
             </div>
 
-            <Tabs defaultValue="overview" className="space-y-8">
-                <TabsList className="bg-black/40 border border-white/5 p-1.5 h-16 rounded-2xl w-fit">
-                    <TabsTrigger value="overview" className="rounded-xl px-10 h-full text-[11px] font-black  tracking-widest data-[state=active]:bg-white/5 data-[state=active]:text-white transition-all">Overview</TabsTrigger>
-                    <TabsTrigger value="departments" className="rounded-xl px-10 h-full text-[11px] font-black  tracking-widest data-[state=active]:bg-white/5 data-[state=active]:text-white transition-all">Departmental</TabsTrigger>
-                    <TabsTrigger value="temporal" className="rounded-xl px-10 h-full text-[11px] font-black  tracking-widest data-[state=active]:bg-white/5 data-[state=active]:text-white transition-all">Attendance Flow</TabsTrigger>
-                    <TabsTrigger value="venues" className="rounded-xl px-10 h-full text-[11px] font-black  tracking-widest data-[state=active]:bg-white/5 data-[state=active]:text-white transition-all">Venue Analysis</TabsTrigger>
-                </TabsList>
+            {model === "subscription" && !hasSubscription ? (
+                <Card className="glass-dark border-white/5 rounded-3xl p-12 satin-card text-center space-y-6">
+                    <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto border border-white/10">
+                        <CreditCard className="w-8 h-8 text-secondary" />
+                    </div>
+                    <div className="space-y-2">
+                        <h2 className="text-2xl font-bold text-white">No Active Subscription</h2>
+                        <p className="text-muted-foreground text-sm max-w-md mx-auto opacity-60">
+                            You're currently on the pay-as-you-go model. Switch to a Tier Subscription to save up to 30% on employee wellness.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                        {[
+                            { name: "Silver", price: "RWF 25,000", users: "Up to 50", features: ["15 sessions/mo", "Basic Gyms", "Reporting"] },
+                            { name: "Gold", price: "RWF 45,000", users: "Up to 200", features: ["Unlimited sessions", "Premium Gyms", "Analytics+"] },
+                            { name: "Platinum", price: "RWF 85,000", users: "Unlimited", features: ["VIP Partners", "Private Coaches", "Dedicated Support"] },
+                        ].map((plan) => (
+                            <Card key={plan.name} className="bg-white/5 border-white/10 p-6 rounded-2xl text-left hover:border-white/20 transition-all cursor-pointer group">
+                                <h3 className="text-lg font-bold text-white mb-1">{plan.name}</h3>
+                                <p className="text-2xl font-black text-primary mb-4">{plan.price}<span className="text-[10px] text-muted-foreground font-normal"> /user</span></p>
+                                <ul className="space-y-2 mb-6">
+                                    {plan.features.map(f => (
+                                        <li key={f} className="text-[11px] text-muted-foreground flex items-center gap-2">
+                                            <div className="w-1 h-1 rounded-full bg-primary" /> {f}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <Button className="w-full bg-white/10 hover:bg-white/20 border-none group-hover:silver-gradient group-hover:text-black">Choose {plan.name}</Button>
+                            </Card>
+                        ))}
+                    </div>
+                </Card>
+            ) : (
+                <Tabs defaultValue="overview" className="space-y-10">
+                    <TabsList className="bg-white/5 border border-white/10 p-1 h-12 rounded-xl w-fit">
+                        <TabsTrigger value="overview" className="rounded-lg px-8 h-full text-xs font-bold tracking-wide data-[state=active]:bg-white/10 data-[state=active]:text-white">Overview</TabsTrigger>
+                        <TabsTrigger value="departments" className="rounded-lg px-8 h-full text-xs font-bold tracking-wide data-[state=active]:bg-white/10 data-[state=active]:text-white">By Department</TabsTrigger>
+                        <TabsTrigger value="temporal" className="rounded-lg px-8 h-full text-xs font-bold tracking-wide data-[state=active]:bg-white/10 data-[state=active]:text-white">Peak Hours</TabsTrigger>
+                        <TabsTrigger value="venues" className="rounded-lg px-8 h-full text-xs font-bold tracking-wide data-[state=active]:bg-white/10 data-[state=active]:text-white">Top Places</TabsTrigger>
+                    </TabsList>
 
-                <TabsContent value="overview" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <TabsContent value="overview" className="space-y-10 animate-in fade-in slide-in-from-bottom-2 duration-500">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                         {[
-                            { label: "Active Participation", value: "78%", sub: "342/450 employees", icon: Users, color: "text-primary" },
-                            { label: "Cost Per Session", value: "RWF 4,200", sub: "-12% from average", icon: Zap, color: "text-secondary" },
-                            { label: "Current Expenditure", value: model === "utilization" ? "RWF 5,964,000" : "RWF 4,500,000", sub: model === "utilization" ? "Pay-per-scan" : "Fixed Monthly", icon: Activity, color: "text-emerald-500" },
+                            { label: "Active Employees", value: "78%", sub: "342/450 people active", icon: Users, color: "text-primary" },
+                            { label: "Avg Session Cost", value: "RWF 4,200", sub: "Lower than last month", icon: Zap, color: "text-secondary" },
+                            { label: "Total Spent", value: model === "utilization" ? "RWF 5,964,000" : "RWF 4,500,000", sub: model === "utilization" ? "Pay-as-you-go" : "Subscription Plan", icon: Activity, color: "text-emerald-500" },
                             { label: "Total Sessions", value: "1,420", sub: "+24% growth", icon: TrendingUp, color: "text-blue-500" },
                         ].map((stat, i) => (
                             <Card key={i} className="glass-dark p-6 border-white/5 rounded-2xl satin-card group">
-                                <div className={`p-3 bg-white/5 rounded-xl w-fit mb-4 ${stat.color} border border-white/5 shadow-inner`}>
+                                <div className={`p-3 bg-white/5 rounded-xl w-fit mb-4 ${stat.color} border border-white/5`}>
                                     <stat.icon className="w-5 h-5" />
                                 </div>
-                                <h3 className="text-2xl font-black tracking-tighter text-white">{stat.value}</h3>
-                                <p className="text-[10px] font-bold text-muted-foreground tracking-wide mt-1 opacity-50">{stat.label}</p>
-                                <p className="text-[10px] text-muted-foreground opacity-30 mt-3 font-semibold flex items-center gap-2">
+                                <h3 className="text-2xl font-bold tracking-tight text-white">{stat.value}</h3>
+                                <p className="text-[10px] font-bold text-muted-foreground tracking-wider mt-1 opacity-60 uppercase">{stat.label}</p>
+                                <p className="text-[10px] text-muted-foreground opacity-40 mt-3 font-medium flex items-center gap-2">
                                     <span className="w-1 h-1 rounded-full bg-white/20" /> {stat.sub}
                                 </p>
                             </Card>
@@ -156,15 +190,15 @@ export default function UtilizationPage() {
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <Card className="glass-dark p-8 border-white/5 rounded-3xl relative overflow-hidden satin-card space-y-8">
+                        <Card className="glass-dark p-8 border-white/5 rounded-3xl satin-card space-y-8">
                             <div className="flex justify-between items-center">
                                 <div>
-                                    <h3 className="text-sm font-black uppercase tracking-widest text-white flex items-center gap-2">
-                                        <Activity className="w-4 h-4 text-primary" /> Utilization Velocity
+                                    <h3 className="text-sm font-bold tracking-tight text-white flex items-center gap-2">
+                                        <Activity className="w-4 h-4 text-primary" /> Visits Over Time
                                     </h3>
-                                    <p className="text-muted-foreground text-[10px] font-semibold opacity-40 mt-1 uppercase tracking-widest">Aggregate session growth index</p>
+                                    <p className="text-muted-foreground text-[10px] font-medium opacity-60 mt-1">Total growth in employee check-ins</p>
                                 </div>
-                                <Badge variant="outline" className="text-[9px] font-black tracking-widest border-white/10 opacity-60 px-2.5 py-1">REAL-TIME</Badge>
+                                <Badge variant="outline" className="text-[9px] font-bold tracking-widest border-white/10 opacity-60 px-2.5 py-1">LIVE</Badge>
                             </div>
                             <div className="h-[350px] w-full">
                                 <ChartContainer config={chartConfig} className="h-full w-full">
@@ -180,12 +214,12 @@ export default function UtilizationPage() {
                                             dataKey="month"
                                             axisLine={false}
                                             tickLine={false}
-                                            tick={{ fill: '#6E6E73', fontSize: 10, fontWeight: 700 }}
+                                            tick={{ fill: '#888', fontSize: 10, fontWeight: 600 }}
                                         />
                                         <YAxis
                                             axisLine={false}
                                             tickLine={false}
-                                            tick={{ fill: '#6E6E73', fontSize: 10, fontWeight: 700 }}
+                                            tick={{ fill: '#888', fontSize: 10, fontWeight: 600 }}
                                             tickFormatter={(val: number) => `${(val / 1000000).toFixed(1)}M`}
                                         />
                                         <ChartTooltip content={<ChartTooltipContent />} />
@@ -193,7 +227,7 @@ export default function UtilizationPage() {
                                             type="monotone"
                                             dataKey="cost"
                                             stroke="#10b981"
-                                            strokeWidth={4}
+                                            strokeWidth={3}
                                             fill="url(#colorCost)"
                                             fillOpacity={1}
                                         />
@@ -205,10 +239,10 @@ export default function UtilizationPage() {
                         <Card className="glass-dark p-8 border-white/5 rounded-3xl satin-card space-y-8">
                             <div className="flex justify-between items-center">
                                 <div>
-                                    <h3 className="text-sm font-black uppercase tracking-widest text-white">Consumption Ledger</h3>
-                                    <p className="text-muted-foreground text-[10px] font-semibold opacity-40 mt-1 uppercase tracking-widest">Live employee check-in attribution</p>
+                                    <h3 className="text-sm font-bold tracking-tight text-white">Recent Activity</h3>
+                                    <p className="text-muted-foreground text-[10px] font-medium opacity-60 mt-1">Latest employee check-ins across different venues</p>
                                 </div>
-                                <Button variant="ghost" size="sm" className="h-8 rounded-lg text-[9px] font-black uppercase tracking-widest opacity-40 hover:opacity-100">Live Audit</Button>
+                                <Button variant="ghost" size="sm" className="h-8 rounded-lg text-[9px] font-bold uppercase tracking-widest opacity-40 hover:opacity-100">See All</Button>
                             </div>
                             <div className="space-y-6">
                                 {[
@@ -220,27 +254,27 @@ export default function UtilizationPage() {
                                 ].map((log, i) => (
                                     <div key={i} className="flex items-center justify-between group">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center font-black text-[11px] group-hover:border-primary/20 transition-all">
+                                            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center font-bold text-[11px] group-hover:bg-primary group-hover:text-black group-hover:border-primary/20 transition-all">
                                                 {log.user.charAt(0)}
                                             </div>
                                             <div>
                                                 <h4 className="text-xs font-bold text-white tracking-tight">{log.user}</h4>
-                                                <p className="text-[10px] text-muted-foreground font-semibold opacity-40">{log.facility} • {log.time}</p>
+                                                <p className="text-[10px] text-muted-foreground font-medium opacity-40">{log.facility} • {log.time}</p>
                                             </div>
                                         </div>
                                         <div className="text-right">
                                             <p className={cn(
-                                                "text-[11px] font-black tracking-tighter",
-                                                log.cost > 0 ? "text-white" : "text-muted-foreground opacity-40"
+                                                "text-xs font-bold",
+                                                log.cost > 0 ? "text-white" : "text-emerald-400"
                                             )}>
-                                                {log.cost > 0 ? `${log.cost.toLocaleString()} RWF` : "Covered"}
+                                                {log.cost > 0 ? `RWF ${log.cost.toLocaleString()}` : "Included"}
                                             </p>
-                                            <p className="text-[8px] font-black uppercase tracking-widest text-primary/60">{log.model}</p>
+                                            <p className="text-[8px] font-bold uppercase tracking-widest text-primary/60">{log.model}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-                            <Button className="w-full mt-auto silver-gradient text-black font-bold h-10 rounded-xl text-[10px] uppercase tracking-widest">Detailed Monthly Audit</Button>
+                            <Button className="w-full mt-auto silver-gradient text-black font-bold h-11 rounded-xl text-[10px] uppercase tracking-widest">Download Monthly Report</Button>
                         </Card>
                     </div>
                 </TabsContent>
@@ -249,8 +283,8 @@ export default function UtilizationPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <Card className="glass-dark border-white/5 rounded-3xl p-8 satin-card space-y-8">
                             <div>
-                                <h3 className="text-sm font-black tracking-wide text-white uppercase">Departmental Allocation</h3>
-                                <p className="text-muted-foreground text-[10px] font-semibold opacity-40">Participation rate by organizational segment</p>
+                                <h3 className="text-sm font-bold tracking-tight text-white">Department Activity</h3>
+                                <p className="text-muted-foreground text-[10px] font-medium opacity-60">Check-ins grouped by organization department</p>
                             </div>
                             <div className="h-[350px]">
                                 <ChartContainer config={chartConfig} className="h-full w-full">
@@ -262,7 +296,7 @@ export default function UtilizationPage() {
                                             type="category"
                                             axisLine={false}
                                             tickLine={false}
-                                            tick={{ fill: '#6E6E73', fontSize: 10, fontWeight: 700 }}
+                                            tick={{ fill: '#888', fontSize: 10, fontWeight: 600 }}
                                         />
                                         <ChartTooltip content={<ChartTooltipContent />} />
                                         <Bar dataKey="visits" radius={[0, 4, 4, 0]} fill="#6366f1" barSize={32} />
@@ -273,15 +307,15 @@ export default function UtilizationPage() {
 
                         <Card className="glass-dark border-white/5 rounded-3xl overflow-hidden satin-card">
                             <div className="p-8 border-b border-white/5">
-                                <h3 className="text-sm font-black tracking-wide text-white uppercase">Consumption Ledger</h3>
+                                <h3 className="text-sm font-bold tracking-tight text-white">Activity Breakdown</h3>
                             </div>
                             <Table>
                                 <TableHeader className="bg-white/2 cursor-default">
                                     <TableRow className="hover:bg-transparent border-white/5">
-                                        <TableHead className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Dept</TableHead>
-                                        <TableHead className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground text-center">Sessions</TableHead>
-                                        <TableHead className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground text-center">Usage %</TableHead>
-                                        <TableHead className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground text-right">Cost (RWF)</TableHead>
+                                        <TableHead className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground h-12 pl-8">DEPT</TableHead>
+                                        <TableHead className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground text-center">SESSIONS</TableHead>
+                                        <TableHead className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground text-center">USAGE %</TableHead>
+                                        <TableHead className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground text-right pr-8">COST (RWF)</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
@@ -309,13 +343,13 @@ export default function UtilizationPage() {
                     <Card className="glass-dark border-white/5 rounded-3xl p-10 satin-card space-y-10">
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                             <div>
-                                <h3 className="text-sm font-black tracking-wide text-white uppercase">Temporal Presence Flow</h3>
-                                <p className="text-muted-foreground text-[10px] font-semibold opacity-40">Peak attendance windows by day of week</p>
+                                <h3 className="text-sm font-bold tracking-tight text-white">Peak Activity Hours</h3>
+                                <p className="text-muted-foreground text-[10px] font-medium opacity-60">Most popular times of the day for employee visits</p>
                             </div>
                             <div className="flex gap-2">
-                                <Badge className="bg-primary/10 text-primary border-primary/10 text-[9px] font-black uppercase">Morning</Badge>
-                                <Badge className="bg-secondary/10 text-secondary border-secondary/10 text-[9px] font-black uppercase">Lunch</Badge>
-                                <Badge className="bg-black/60 text-white border-white/10 text-[9px] font-black uppercase">Evening</Badge>
+                                <Badge className="bg-primary/10 text-primary border-primary/10 text-[9px] font-bold uppercase">Morning</Badge>
+                                <Badge className="bg-secondary/10 text-secondary border-secondary/10 text-[9px] font-bold uppercase">Lunch</Badge>
+                                <Badge className="bg-white/10 text-white border-white/10 text-[9px] font-bold uppercase">Evening</Badge>
                             </div>
                         </div>
 
@@ -347,7 +381,7 @@ export default function UtilizationPage() {
                 <TabsContent value="venues" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <Card className="glass-dark border-white/5 rounded-3xl p-10 satin-card flex flex-col items-center">
-                            <h3 className="text-sm font-black tracking-wide text-white uppercase mb-10 w-full">Node Affinity</h3>
+                            <h3 className="text-sm font-bold tracking-tight text-white mb-10 w-full">Top Preferred Venues</h3>
                             <div className="h-[350px] w-full">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
@@ -384,7 +418,7 @@ export default function UtilizationPage() {
 
                         <Card className="glass-dark border-white/5 rounded-3xl p-8 satin-card space-y-8 flex flex-col">
                             <div className="flex-1">
-                                <h3 className="text-sm font-black tracking-wide text-white uppercase mb-8">Venue Comparison (Cost Index)</h3>
+                                <h3 className="text-sm font-bold tracking-tight text-white mb-8">Cost by Location</h3>
                                 <div className="space-y-6">
                                     {facilityData.sort((a, b) => b.cost - a.cost).map((item, i) => (
                                         <div key={item.name} className="space-y-2">
@@ -413,6 +447,7 @@ export default function UtilizationPage() {
                     </div>
                 </TabsContent>
             </Tabs>
+            )}
         </div>
     );
 }

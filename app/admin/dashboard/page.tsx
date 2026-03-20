@@ -85,14 +85,19 @@ export default function AdminDashboard() {
             </div>
 
             {/* Platform Core Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                    { label: "Gross Platform Volume", value: "RWF 48.9M", trend: "+24.5%", sub: "Last 30 days", icon: Globe, color: "text-indigo-500" },
-                    { label: "Total Facility Visits", value: "7,420", trend: "+12.1%", sub: "Across all partners", icon: Activity, color: "text-emerald-500" },
-                    { label: "Partner Settlements", value: "RWF 32.4M", trend: "Pending", sub: "Monthly cycle", icon: CreditCard, color: "text-amber-500" },
-                    { label: "Sponsor Corporates", value: "42", trend: "Active", sub: "8 onboarding", icon: Building2, color: "text-rose-500" },
+                    { label: "Gross Platform Volume", value: "RWF 48.9M", trend: "+24.5%", sub: "Last 30 days", icon: Globe, color: "text-indigo-500", href: "/admin/analytics" },
+                    { label: "Total Facility Visits", value: "7,420", trend: "+12.1%", sub: "Across all partners", icon: Activity, color: "text-emerald-500", href: "/admin/analytics" },
+                    { label: "Partner Settlements", value: "RWF 32.4M", trend: "Pending", sub: "Monthly cycle", icon: CreditCard, color: "text-amber-500", href: "/admin/analytics" },
+                    { label: "Sponsor Corporates", value: "42", trend: "Active", sub: "8 onboarding", icon: Building2, color: "text-rose-500", href: "/admin/corporates" },
+                    { label: "Sponsor Retail", value: "1,240", trend: "+15.2%", sub: "Individual members", icon: Users, color: "text-sky-500", href: "/admin/analytics" },
                 ].map((stat, i) => (
-                    <Card key={i} className="glass-dark p-8 border-white/5 rounded-2xl satin-card relative overflow-hidden group">
+                    <Card 
+                        key={i} 
+                        className="glass-dark p-8 border-white/5 rounded-2xl satin-card relative overflow-hidden group cursor-pointer hover:border-white/10 transition-all"
+                        onClick={() => window.location.href = stat.href}
+                    >
                         <div className="flex justify-between items-center mb-6">
                             <div className={cn("p-3 bg-white/5 rounded-2xl border border-white/5 shadow-inner transition-transform group-hover:scale-110", stat.color)}>
                                 <stat.icon className="w-5 h-5" />
@@ -109,6 +114,44 @@ export default function AdminDashboard() {
                         <p className="text-[10px] text-muted-foreground opacity-30 mt-4 font-semibold">{stat.sub}</p>
                     </Card>
                 ))}
+
+                {/* Detailed Partners Card */}
+                <Card 
+                    className="glass-dark p-8 border-white/5 rounded-2xl satin-card relative overflow-hidden group cursor-pointer hover:border-white/10 transition-all flex flex-col justify-between"
+                    onClick={() => window.location.href = "/admin/partners"}
+                >
+                    <div>
+                        <div className="flex justify-between items-center mb-6">
+                            <div className="p-3 bg-white/5 rounded-2xl border border-white/5 shadow-inner transition-transform group-hover:scale-110 text-purple-500">
+                                <Zap className="w-5 h-5" />
+                            </div>
+                            <span className="text-[10px] font-black tracking-widest px-2.5 py-1 rounded-lg border text-emerald-500 border-emerald-500/20 bg-emerald-500/10">
+                                112 Active
+                            </span>
+                        </div>
+                        <p className="text-[10px] font-bold text-muted-foreground tracking-widest opacity-40 mb-1">SERVICE ECOSYSTEM</p>
+                        <h3 className="text-3xl font-black tracking-tighter text-white">134</h3>
+                    </div>
+
+                    <div className="mt-6 pt-6 border-t border-white/5">
+                        <p className="text-[9px] font-black tracking-widest text-muted-foreground opacity-30 mb-4 uppercase">Activity Breakdown</p>
+                        <div className="grid grid-cols-2 gap-4">
+                            {[
+                                { label: "Fitness", value: "45", color: "bg-indigo-500/10 text-indigo-400" },
+                                { label: "Swimming", value: "18", color: "bg-cyan-500/10 text-cyan-400" },
+                                { label: "Wellness", value: "12", color: "bg-rose-500/10 text-rose-400" },
+                                { label: "Sports", value: "37", color: "bg-amber-500/10 text-amber-400" },
+                            ].map((activity, idx) => (
+                                <div key={idx} className="flex items-center justify-between">
+                                    <span className="text-[10px] font-bold text-muted-foreground opacity-60">{activity.label}</span>
+                                    <Badge variant="outline" className={cn("text-[10px] font-black border-none px-2", activity.color)}>
+                                        {activity.value}
+                                    </Badge>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </Card>
             </div>
 
             {/* Financial Momentum & Sector Allocation */}

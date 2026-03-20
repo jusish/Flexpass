@@ -1,6 +1,6 @@
 import { addDays, subDays } from "date-fns";
 
-export type UserRole = "CORPORATE_ADMIN" | "PARTNER_ADMIN" | "END_USER";
+export type UserRole = "CORPORATE_ADMIN" | "PARTNER_ADMIN" | "COACH_ADMIN" | "NUTRITIONIST_ADMIN" | "END_USER";
 
 export interface User {
     id: string;

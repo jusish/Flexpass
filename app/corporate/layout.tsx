@@ -6,7 +6,7 @@ import { LayoutDashboard, Users, BarChart3, CreditCard, Settings, Target } from 
 const CORPORATE_ITEMS = [
     { title: "Dashboard", href: "/corporate/dashboard", icon: LayoutDashboard },
     { title: "Employees", href: "/corporate/employees", icon: Users },
-    { title: "Utilization", href: "/corporate/utilization", icon: BarChart3 },
+    { title: "Analytics", href: "/corporate/analytics", icon: BarChart3 },
     { title: "Billing", href: "/corporate/billing", icon: CreditCard },
     { title: "Settings", href: "/corporate/settings", icon: Settings },
 ];
