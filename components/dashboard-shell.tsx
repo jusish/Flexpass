@@ -199,7 +199,7 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                         </div>
                         <div className="h-8 w-px bg-white/5" />
                         {role === "Partner" && (
-                            <Button 
+                            <Button
                                 onClick={() => setIsCheckInOpen(true)}
                                 className="h-10 px-6 rounded-xl text-[10px] font-bold tracking-tight silver-gradient text-black hidden sm:flex"
                             >
@@ -209,7 +209,7 @@ export function DashboardShell({ children, items, role }: DashboardShellProps) {
                         {role === "Admin" && (
                             <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
                                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                <span className="text-[9px] font-black text-emerald-500 uppercase tracking-widest leading-none">System Global</span>
+                                <span className="text-[9px] font-black text-emerald-500  tracking-widest leading-none">System Global</span>
                             </div>
                         )}
                         <Button variant="ghost" size="icon" className="relative h-10 w-10 rounded-xl border border-white/10 glass-dark group">

@@ -83,13 +83,13 @@ export default function EmployeesPage() {
                     <p className="text-muted-foreground text-xs font-bold tracking-tight opacity-60">Manage and monitor wellness subscriptions for your team</p>
                 </div>
                 <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="glass border-white/5 h-10 rounded-xl text-[10px] font-bold uppercase tracking-widest opacity-60">
+                    <Button variant="outline" size="sm" className="glass border-white/5 h-10 rounded-xl text-[10px] font-bold  tracking-widest opacity-60">
                         <Download className="w-3.5 h-3.5 mr-2" /> Export
                     </Button>
                     <Button
                         onClick={() => setIsAddModalOpen(true)}
                         size="sm"
-                        className="h-10 rounded-xl px-4 font-black text-[10px] uppercase tracking-widest border-glow-silver silver-gradient text-black"
+                        className="h-10 rounded-xl px-4 font-black text-[10px]  tracking-widest border-glow-silver silver-gradient text-black"
                     >
                         <UserPlus className="w-3.5 h-3.5 mr-2" /> Enroll Employee
                     </Button>
@@ -111,7 +111,7 @@ export default function EmployeesPage() {
                     <div className="flex gap-2">
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="outline" className="h-10 px-4 glass border-white/10 rounded-xl text-[10px] font-bold uppercase tracking-widest opacity-60">
+                                <Button variant="outline" className="h-10 px-4 glass border-white/10 rounded-xl text-[10px] font-bold  tracking-widest opacity-60">
                                     <Filter className="w-3.5 h-3.5 mr-2 opacity-60" />
                                     Tier: {tierFilter || "All"}
                                 </Button>
@@ -131,7 +131,7 @@ export default function EmployeesPage() {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-white/5 text-secondary text-[9px] font-black uppercase tracking-widest bg-black/20">
+                            <tr className="border-b border-white/5 text-secondary text-[9px] font-black  tracking-widest bg-black/20">
                                 <th className="px-6 py-4">Employee Name</th>
                                 <th className="px-6 py-4 text-center">Usage</th>
                                 <th className="px-6 py-4">Tier</th>
@@ -161,12 +161,12 @@ export default function EmployeesPage() {
                                     <td className="px-6 py-4 text-center">
                                         <div className="inline-flex flex-col items-center">
                                             <span className="text-sm font-bold tracking-tight">{emp.visits}</span>
-                                            <span className="text-[8px] text-muted-foreground uppercase tracking-widest font-black opacity-30">Visits</span>
+                                            <span className="text-[8px] text-muted-foreground  tracking-widest font-black opacity-30">Visits</span>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className={cn(
-                                            "inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg border text-[9px] font-bold uppercase tracking-wider",
+                                            "inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg border text-[9px] font-bold  tracking-wider",
                                             emp.tier === "Platinum" ? "border-primary/20 text-primary bg-primary/5 shadow-[0_0_10px_rgba(197,199,201,0.05)]" : "border-white/5 text-muted-foreground bg-white/5 opacity-60"
                                         )}>
                                             {emp.tier === "Platinum" && <BadgeCheck className="w-3 h-3" />}
@@ -180,7 +180,7 @@ export default function EmployeesPage() {
                                     </td>
                                     <td className="px-6 py-4">
                                         <span className={cn(
-                                            "px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border",
+                                            "px-2.5 py-1 rounded-lg text-[9px] font-black  tracking-widest border",
                                             emp.status === "Active" ? "bg-emerald-500/5 text-emerald-500/70 border-emerald-500/10" :
                                                 emp.status === "Pending" ? "bg-amber-500/5 text-amber-500/70 border-amber-500/10" :
                                                     "bg-rose-500/5 text-rose-500/70 border-rose-500/10"
@@ -219,14 +219,14 @@ export default function EmployeesPage() {
                     {filteredEmployees.length === 0 && (
                         <div className="p-20 text-center">
                             <Users className="w-8 h-8 text-muted-foreground/10 mx-auto mb-3" />
-                            <p className="text-xs text-muted-foreground font-medium opacity-40 uppercase tracking-widest">No matching results found</p>
+                            <p className="text-xs text-muted-foreground font-medium opacity-40  tracking-widest">No matching results found</p>
                         </div>
                     )}
                 </div>
 
                 {/* Pagination */}
                 <div className="p-6 border-t border-white/5 flex items-center justify-between bg-black/10">
-                    <p className="text-[9px] text-muted-foreground font-black uppercase tracking-widest opacity-40">
+                    <p className="text-[9px] text-muted-foreground font-black  tracking-widest opacity-40">
                         Displaying <span className="text-primary">{filteredEmployees.length}</span> of <span className="text-primary">{employees.length}</span> Members
                     </p>
                     <div className="flex gap-2">

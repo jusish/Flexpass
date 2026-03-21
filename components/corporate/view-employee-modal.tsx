@@ -44,7 +44,7 @@ export function ViewEmployeeModal({ isOpen, onClose, employee }: ViewEmployeeMod
                                 <DialogTitle className="text-2xl font-bold">{employee.name}</DialogTitle>
                                 <div className="flex items-center gap-2 mt-1">
                                     <Badge className={cn(
-                                        "text-[10px] uppercase font-bold tracking-wider",
+                                        "text-[10px]  font-bold tracking-wider",
                                         employee.status === "Active" ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20" : "bg-rose-500/10 text-rose-500 border-rose-500/20"
                                     )}>
                                         {employee.status}
@@ -63,7 +63,7 @@ export function ViewEmployeeModal({ isOpen, onClose, employee }: ViewEmployeeMod
                             { label: "Department", value: employee.department, icon: Building2 },
                         ].map((item, i) => (
                             <div key={i} className="p-3 bg-white/5 rounded-xl border border-white/5">
-                                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-1 flex items-center gap-1.5 line-clamp-1">
+                                <p className="text-[10px] font-bold text-muted-foreground  tracking-wider mb-1 flex items-center gap-1.5 line-clamp-1">
                                     <item.icon className="w-3 h-3" /> {item.label}
                                 </p>
                                 <p className="text-sm font-semibold truncate">{item.value}</p>
@@ -72,28 +72,28 @@ export function ViewEmployeeModal({ isOpen, onClose, employee }: ViewEmployeeMod
                     </div>
 
                     <div className="mt-6 space-y-4">
-                        <h4 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider pl-1">Activity Overview</h4>
+                        <h4 className="text-[11px] font-bold text-muted-foreground  tracking-wider pl-1">Activity Overview</h4>
                         <div className="grid grid-cols-3 gap-3">
                             <div className="p-4 bg-primary/5 rounded-2xl border border-primary/10 text-center">
                                 <Activity className="w-5 h-5 text-primary mx-auto mb-2" />
                                 <p className="text-lg font-bold">{employee.visits}</p>
-                                <p className="text-[9px] font-medium text-muted-foreground uppercase">Tot. Visits</p>
+                                <p className="text-[9px] font-medium text-muted-foreground ">Tot. Visits</p>
                             </div>
                             <div className="p-4 bg-emerald-500/5 rounded-2xl border border-emerald-500/10 text-center">
                                 <History className="w-5 h-5 text-emerald-500 mx-auto mb-2" />
                                 <p className="text-lg font-bold">12</p>
-                                <p className="text-[9px] font-medium text-muted-foreground uppercase">This Month</p>
+                                <p className="text-[9px] font-medium text-muted-foreground ">This Month</p>
                             </div>
                             <div className="p-4 bg-amber-500/5 rounded-2xl border border-amber-500/10 text-center">
                                 <CreditCard className="w-5 h-5 text-amber-500 mx-auto mb-2" />
                                 <p className="text-lg font-bold">92%</p>
-                                <p className="text-[9px] font-medium text-muted-foreground uppercase">Usage ROI</p>
+                                <p className="text-[9px] font-medium text-muted-foreground ">Usage ROI</p>
                             </div>
                         </div>
                     </div>
 
                     <div className="mt-8 space-y-4">
-                        <h4 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider pl-1">Recent Visits</h4>
+                        <h4 className="text-[11px] font-bold text-muted-foreground  tracking-wider pl-1">Recent Visits</h4>
                         <div className="space-y-2">
                             {[
                                 { gym: "Waka Fitness", date: "Today, 08:32 AM", type: "Platinum Access" },
@@ -110,7 +110,7 @@ export function ViewEmployeeModal({ isOpen, onClose, employee }: ViewEmployeeMod
                                             <p className="text-[10px] text-muted-foreground font-medium">{visit.date}</p>
                                         </div>
                                     </div>
-                                    <span className="text-[9px] font-bold text-muted-foreground opacity-40 uppercase tracking-widest">{visit.type}</span>
+                                    <span className="text-[9px] font-bold text-muted-foreground opacity-40  tracking-widest">{visit.type}</span>
                                 </div>
                             ))}
                         </div>

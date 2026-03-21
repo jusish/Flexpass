@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-    Settings, 
-    User, 
-    Shield, 
-    Bell, 
-    Wallet, 
-    AtSign, 
-    Camera, 
-    Save, 
+import {
+    Settings,
+    User,
+    Shield,
+    Bell,
+    Wallet,
+    AtSign,
+    Camera,
+    Save,
     Lock,
     ExternalLink,
     Globe,
@@ -22,12 +22,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { 
-    Select, 
-    SelectContent, 
-    SelectItem, 
-    SelectTrigger, 
-    SelectValue 
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
@@ -55,7 +55,7 @@ export default function CoachSettings() {
                         <div className="flex items-center gap-6 border-b border-white/10 pb-8">
                             <div className="relative group">
                                 <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-bold text-xl text-muted-foreground overflow-hidden">
-                                     JP
+                                    JP
                                 </div>
                                 <div className="absolute inset-0 bg-black/60 rounded-2xl opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer">
                                     <Camera className="w-5 h-5 text-white" />
@@ -69,26 +69,26 @@ export default function CoachSettings() {
 
                         <div className="grid grid-cols-2 gap-8">
                             <div className="space-y-2.5">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-60 ml-1">Full Name</Label>
+                                <Label className="text-[11px] font-semibold  tracking-wider opacity-60 ml-1">Full Name</Label>
                                 <Input placeholder="Jean Pierre" className="bg-white/5 border-white/10 rounded-xl h-11 text-xs font-medium text-white px-5" />
                             </div>
                             <div className="space-y-2.5">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-60 ml-1">Email Address</Label>
+                                <Label className="text-[11px] font-semibold  tracking-wider opacity-60 ml-1">Email Address</Label>
                                 <Input placeholder="jp@flexpass.com" className="bg-white/5 border-white/10 rounded-xl h-11 text-xs font-medium text-white px-5" />
                             </div>
                         </div>
 
                         <div className="space-y-2.5">
-                             <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-60 ml-1">Professional Bio</Label>
-                             <Textarea 
-                                placeholder="Elite HIIT Specialist with focus on metabolic conditioning..." 
+                            <Label className="text-[11px] font-semibold  tracking-wider opacity-60 ml-1">Professional Bio</Label>
+                            <Textarea
+                                placeholder="Elite HIIT Specialist with focus on metabolic conditioning..."
                                 className="bg-white/5 border-white/10 rounded-xl min-h-[140px] text-xs font-medium text-white p-6 leading-relaxed"
-                             />
+                            />
                         </div>
 
                         <div className="grid grid-cols-2 gap-8">
                             <div className="space-y-2.5">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-60 ml-1">Specialization</Label>
+                                <Label className="text-[11px] font-semibold  tracking-wider opacity-60 ml-1">Specialization</Label>
                                 <Select defaultValue="hiit">
                                     <SelectTrigger className="h-11 bg-white/5 border-white/10 rounded-xl text-xs font-medium">
                                         <SelectValue placeholder="Select Category" />
@@ -101,24 +101,24 @@ export default function CoachSettings() {
                                 </Select>
                             </div>
                             <div className="space-y-2.5">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-60 ml-1">Work Location</Label>
+                                <Label className="text-[11px] font-semibold  tracking-wider opacity-60 ml-1">Work Location</Label>
                                 <Input placeholder="Kigali, Rwanda" className="bg-white/5 border-white/10 rounded-xl h-11 text-xs font-medium text-white px-5" />
                             </div>
                         </div>
                     </Card>
 
                     <Card className="glass-dark p-8 border-white/5 rounded-2xl satin-card space-y-8">
-                         <div className="flex items-center gap-3 border-b border-white/10 pb-6">
+                        <div className="flex items-center gap-3 border-b border-white/10 pb-6">
                             <Wallet className="w-5 h-5 text-indigo-400" />
-                            <h3 className="text-sm font-bold text-white tracking-wide uppercase">Rate Configuration</h3>
+                            <h3 className="text-sm font-bold text-white tracking-wide ">Rate Configuration</h3>
                         </div>
                         <div className="grid grid-cols-2 gap-8">
                             <div className="space-y-2.5">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-60 ml-1">Single Session (RWF)</Label>
+                                <Label className="text-[11px] font-semibold  tracking-wider opacity-60 ml-1">Single Session (RWF)</Label>
                                 <Input type="number" placeholder="15000" className="bg-white/5 border-white/10 rounded-xl h-11 text-xs font-medium text-white px-5" />
                             </div>
                             <div className="space-y-2.5">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-60 ml-1">Monthly Management (RWF)</Label>
+                                <Label className="text-[11px] font-semibold  tracking-wider opacity-60 ml-1">Monthly Management (RWF)</Label>
                                 <Input type="number" placeholder="120000" className="bg-white/5 border-white/10 rounded-xl h-11 text-xs font-medium text-white px-5" />
                             </div>
                         </div>
@@ -128,9 +128,9 @@ export default function CoachSettings() {
                 {/* Side Configs */}
                 <div className="space-y-8">
                     <Card className="glass-dark p-8 border-white/5 rounded-2xl satin-card space-y-8">
-                         <div className="flex items-center gap-3 border-b border-white/10 pb-6">
+                        <div className="flex items-center gap-3 border-b border-white/10 pb-6">
                             <Bell className="w-5 h-5 text-amber-500" />
-                            <h3 className="text-xs font-bold text-white tracking-wide uppercase">Preferences</h3>
+                            <h3 className="text-xs font-bold text-white tracking-wide ">Preferences</h3>
                         </div>
                         <div className="space-y-6">
                             {[
@@ -150,9 +150,9 @@ export default function CoachSettings() {
                     </Card>
 
                     <Card className="glass-dark p-8 border-white/5 rounded-2xl satin-card space-y-8">
-                         <div className="flex items-center gap-3 border-b border-white/10 pb-6">
+                        <div className="flex items-center gap-3 border-b border-white/10 pb-6">
                             <Lock className="w-5 h-5 text-rose-500" />
-                            <h3 className="text-xs font-bold text-white tracking-tight uppercase">Security</h3>
+                            <h3 className="text-xs font-bold text-white tracking-tight ">Security</h3>
                         </div>
                         <div className="space-y-4">
                             <Button variant="outline" className="w-full h-11 rounded-xl border-white/5 bg-white/5 text-xs font-bold hover:bg-white/10">

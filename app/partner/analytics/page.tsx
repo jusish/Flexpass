@@ -138,14 +138,14 @@ export default function AnalyticsPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <Card className="glass-dark p-8 border-white/5 rounded-3xl satin-card">
                             <div className="flex justify-between items-center mb-10">
-                                <h3 className="text-sm font-black tracking-wide text-white flex items-center gap-3 uppercase">
+                                <h3 className="text-sm font-black tracking-wide text-white flex items-center gap-3 ">
                                     <TrendingUp className="w-4 h-4 text-primary" /> Traffic Momentum
                                 </h3>
                                 <Badge variant="outline" className="bg-black/40 border-white/10 text-[9px] font-bold px-3 py-1">Weekly Volume</Badge>
                             </div>
 
                             <div className="h-[350px] w-full">
-                                <ChartContainer config={chartConfig} className="h-full w-full">
+                                <ChartContainer id="partner-traffic-momentum-chart" config={chartConfig} className="h-full w-full">
                                     <AreaChart data={VISITS_DATA} margin={{ left: -20, right: 10, bottom: 0 }}>
                                         <defs>
                                             <linearGradient id="visGradient" x1="0" y1="0" x2="0" y2="1">
@@ -169,7 +169,7 @@ export default function AnalyticsPage() {
                             </div>
                             <div className="space-y-2">
                                 <h3 className="text-3xl font-black tracking-tighter text-white">Peak Efficiency: 94%</h3>
-                                <p className="text-[11px] text-muted-foreground font-semibold opacity-60 uppercase tracking-widest">Facility Utilization Grade</p>
+                                <p className="text-[11px] text-muted-foreground font-semibold opacity-60  tracking-widest">Facility Utilization Grade</p>
                             </div>
                             <p className="text-[11px] text-muted-foreground font-medium opacity-40 max-w-xs">
                                 Your facility is operating at near-optimal capacity during morning and evening peaks.
@@ -182,9 +182,9 @@ export default function AnalyticsPage() {
                 <TabsContent value="revenue" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <Card className="glass-dark p-8 border-white/5 rounded-3xl satin-card space-y-8">
-                            <h3 className="text-sm font-black tracking-wide text-white uppercase">Revenue Attribution</h3>
+                            <h3 className="text-sm font-black tracking-wide text-white ">Revenue Attribution</h3>
                             <div className="h-[350px]">
-                                <ChartContainer config={chartConfig} className="h-full w-full">
+                                <ChartContainer id="partner-revenue-attribution-chart" config={chartConfig} className="h-full w-full">
                                     <BarChart data={TIER_DATA} layout="vertical" margin={{ left: 40 }}>
                                         <CartesianGrid horizontal={false} stroke="#ffffff05" />
                                         <XAxis type="number" hide />
@@ -198,7 +198,7 @@ export default function AnalyticsPage() {
 
                         <Card className="glass-dark border-white/5 rounded-3xl overflow-hidden satin-card">
                             <div className="p-8 border-b border-white/5">
-                                <h3 className="text-sm font-black tracking-wide text-white uppercase">Subscription Tier Impact</h3>
+                                <h3 className="text-sm font-black tracking-wide text-white ">Subscription Tier Impact</h3>
                             </div>
                             <Table>
                                 <TableHeader className="bg-white/2 cursor-default">
@@ -234,13 +234,13 @@ export default function AnalyticsPage() {
                     <Card className="glass-dark border-white/5 rounded-3xl p-10 satin-card space-y-10">
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                             <div>
-                                <h3 className="text-sm font-black tracking-wide text-white uppercase">Intraday Traffic Density</h3>
+                                <h3 className="text-sm font-black tracking-wide text-white ">Intraday Traffic Density</h3>
                                 <p className="text-muted-foreground text-[10px] font-semibold opacity-40">Load distribution by facility operating hours</p>
                             </div>
                         </div>
 
                         <div className="h-[400px]">
-                            <ChartContainer config={chartConfig} className="h-full w-full">
+                            <ChartContainer id="partner-intraday-traffic-chart" config={chartConfig} className="h-full w-full">
                                 <BarChart data={HOURLY_FLOW}>
                                     <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#ffffff05" />
                                     <XAxis dataKey="hour" axisLine={false} tickLine={false} tick={{ fontSize: 11, fontWeight: 700, fill: "#6E6E73" }} />
@@ -261,13 +261,13 @@ export default function AnalyticsPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <Card className="lg:col-span-2 glass-dark p-8 border-white/5 rounded-3xl satin-card space-y-8">
                             <div>
-                                <h3 className="text-sm font-black tracking-wide text-white uppercase flex items-center gap-2">
+                                <h3 className="text-sm font-black tracking-wide text-white  flex items-center gap-2">
                                     <Users className="w-4 h-4 text-primary" /> Retention Growth Strategy
                                 </h3>
                                 <p className="text-muted-foreground text-[10px] font-semibold opacity-40">New member acquisition vs recurring recurring visits</p>
                             </div>
                             <div className="h-[400px]">
-                                <ChartContainer config={chartConfig} className="h-full w-full">
+                                <ChartContainer id="partner-retention-growth-chart" config={chartConfig} className="h-full w-full">
                                     <AreaChart data={REVENUE_RETENTION} margin={{ left: -20 }}>
                                         <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fontWeight: 700, fontSize: 10, fill: "#6E6E73" }} />
                                         <YAxis axisLine={false} tickLine={false} tick={{ fontWeight: 700, fontSize: 10, fill: "#6E6E73" }} tickFormatter={(val: number) => `${(val / 1000000).toFixed(1)}M`} />
@@ -296,7 +296,7 @@ export default function AnalyticsPage() {
                                     </div>
                                 </Card>
                             ))}
-                            <Button className="w-full h-14 rounded-2xl border border-white/10 glass text-[11px] font-black uppercase tracking-widest opacity-60 hover:opacity-100 transition-all">
+                            <Button className="w-full h-14 rounded-2xl border border-white/10 glass text-[11px] font-black  tracking-widest opacity-60 hover:opacity-100 transition-all">
                                 Request Loyalty Deep-Dive
                             </Button>
                         </div>

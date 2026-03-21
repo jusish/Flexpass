@@ -1,19 +1,22 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-    Calendar, 
-    Clock, 
-    Plus, 
+import {
+    Calendar,
+    Clock,
+    Plus,
     Search,
     ChevronLeft,
     ChevronRight,
     MapPin,
     Users,
     Activity,
+    CheckCircle2,
+    Filter,
+    ArrowUpRight,
     HeartPulse,
-    ClipboardList,
-    ShieldCheck
+    Utensils,
+    Apple
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -28,207 +31,185 @@ import {
     DialogFooter,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { 
-    Select, 
-    SelectContent, 
-    SelectItem, 
-    SelectTrigger, 
-    SelectValue 
-} from "@/components/ui/select";
-import { motion } from "framer-motion";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { motion, AnimatePresence } from "framer-motion";
 
-const days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-const scheduleItems = [
-    { day: "MON", items: [{ time: "09:00 AM", name: "Marie Jeanne", location: "Global Med" }, { time: "11:30 AM", name: "Marc Twagira", location: "Waka HQ" }] },
-    { day: "WED", items: [{ time: "02:00 PM", name: "Alice Umutoni", location: "Clinic B" }] },
-    { day: "THU", items: [{ time: "04:00 PM", name: "Paul Kagabo", location: "Arena HP" }] },
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const SCHEDULE_DATA = [
+    { day: "Monday", items: [{ time: "09:00 AM", name: "Consultation", patient: "Alice Mukana", type: "Clinical" }, { time: "02:00 PM", name: "Meal Review", patient: "Group A", type: "General" }] },
+    { day: "Tuesday", items: [{ time: "11:00 AM", name: "Dietary Check", patient: "Marc Kagabo", type: "Clinical" }] },
+    { day: "Wednesday", items: [{ time: "09:00 AM", name: "Weight Check", patient: "Cédric Gasana", type: "Clinical" }] },
+    { day: "Thursday", items: [{ time: "10:00 AM", name: "Hydration Review", patient: "Dative Umutoni", type: "Clinical" }, { time: "03:30 PM", name: "Plan Update", patient: "Group B", type: "General" }] },
+    { day: "Friday", items: [{ time: "09:00 AM", name: "Consultation", patient: "Eric Shema", type: "Clinical" }] },
 ];
 
 export default function NutritionistSchedule() {
     const [isConsultModalOpen, setIsConsultModalOpen] = useState(false);
+    const [viewMode, setViewMode] = useState<"Weekly" | "Monthly">("Weekly");
 
     return (
-        <div className="space-y-10 animate-in fade-in duration-500">
-            {/* Header */}
+        <div className="space-y-8 animate-in fade-in duration-500 pb-20">
+            {/* Header Area */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div className="space-y-1">
-                    <h1 className="text-3xl font-bold tracking-tight text-white">Schedule</h1>
-                    <p className="text-muted-foreground text-xs opacity-60">Manage your consultations and professional availability</p>
+                <div>
+                    <h1 className="text-3xl font-bold tracking-tight text-white mb-2">Patient Schedule</h1>
+                    <p className="text-muted-foreground text-xs opacity-50 font-medium tracking-wide">
+                        Manage patient appointments and clinical availability
+                    </p>
                 </div>
-                <div className="flex gap-3">
-                    <Button 
+                <div className="flex gap-2">
+                    <Button
                         onClick={() => setIsConsultModalOpen(true)}
-                        className="h-11 px-6 rounded-xl text-xs font-bold tracking-wide silver-gradient text-black shadow-lg transition-all active:scale-95"
+                        className="h-10 px-5 rounded-xl text-xs font-bold silver-gradient text-black  tracking-widest"
                     >
                         <Plus className="w-4 h-4 mr-2" /> Book Consultation
                     </Button>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                {/* Calendar View */}
-                <Card className="lg:col-span-3 glass-dark p-8 border-white/5 rounded-3xl satin-card">
-                    <div className="flex items-center justify-between mb-10">
-                         <div className="flex items-center gap-5">
-                            <h3 className="text-xl font-bold text-white tracking-tight font-sans">March 2026</h3>
-                            <div className="flex gap-2">
-                                <Button variant="ghost" size="icon" className="h-9 w-9 rounded-lg border border-white/5 hover:bg-white/5">
-                                    <ChevronLeft className="w-4 h-4 text-white" />
-                                </Button>
-                                <Button variant="ghost" size="icon" className="h-9 w-9 rounded-lg border border-white/5 hover:bg-white/5">
-                                    <ChevronRight className="w-4 h-4 text-white" />
-                                </Button>
+            {/* Top Summaries */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                    { label: "Booked Sessions", val: "12 Sessions", sub: "For this week", icon: Calendar, color: "text-indigo-500" },
+                    { label: "Avg Duration", val: "45 Mins", sub: "Per consultation", icon: Clock, color: "text-emerald-500" },
+                    { label: "Attendance Rate", val: "94.2%", sub: "Successful visits", icon: Activity, color: "text-amber-500" },
+                ].map((stat, i) => (
+                    <Card key={i} className="glass-dark p-6 border-white/5 rounded-2xl satin-card">
+                        <div className="flex justify-between items-start mb-4">
+                            <div className={cn("p-2 rounded-lg bg-white/5 border border-white/5", stat.color)}>
+                                <stat.icon className="w-4 h-4" />
                             </div>
                         </div>
-                         <div className="flex bg-white/5 p-1 rounded-xl border border-white/5">
-                            <Button variant="ghost" className="h-9 px-5 rounded-lg text-[10px] font-bold text-white bg-white/10 tracking-wider">WEEKLY</Button>
-                            <Button variant="ghost" className="h-9 px-5 rounded-lg text-[10px] font-bold text-muted-foreground tracking-wider opacity-60 hover:opacity-100">MONTHLY</Button>
-                        </div>
-                    </div>
-
-                     <div className="grid grid-cols-7 gap-4">
-                        {days.map((day) => (
-                            <div key={day} className="space-y-5">
-                                <div className="text-center py-2 border-b border-white/5">
-                                    <span className="text-[10px] font-bold text-muted-foreground opacity-50 tracking-widest">{day}</span>
-                                </div>
-                                <div className="space-y-3 min-h-[450px]">
-                                    {scheduleItems.find(s => s.day === day)?.items.map((item, idx) => (
-                                        <motion.div 
-                                            key={idx}
-                                            whileHover={{ scale: 1.02, y: -2 }}
-                                            className="p-4 bg-white/5 border border-white/5 rounded-xl space-y-2.5 cursor-pointer group hover:border-primary/20 transition-all"
-                                        >
-                                            <div className="flex items-center justify-between">
-                                                <Badge variant="outline" className="text-[8px] font-bold border-none bg-emerald-500/10 text-emerald-400 uppercase px-1.5 py-0.5 rounded-md">{item.time}</Badge>
-                                                <HeartPulse className="w-3 h-3 text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[10px] font-bold text-white uppercase tracking-wider leading-tight">{item.name}</p>
-                                                <div className="flex items-center gap-1.5 mt-1 opacity-40">
-                                                    <MapPin className="w-2.5 h-2.5" />
-                                                    <p className="text-[9px] font-medium uppercase tracking-tight">{item.location}</p>
-                                                </div>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </Card>
-
-                 {/* Stats & Next */}
-                <div className="space-y-6">
-                    <Card className="glass-dark p-6 border-white/5 rounded-2xl satin-card">
-                         <h3 className="text-[10px] font-bold text-white uppercase tracking-widest mb-5 border-b border-white/10 pb-3">Next Consultation</h3>
-                         <div className="space-y-5">
-                            <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-400/20 flex items-center justify-center">
-                                    <Activity className="w-5 h-5 text-emerald-400" />
-                                </div>
-                                <div>
-                                    <p className="text-[11px] font-bold text-white tracking-wide">Marie Jeanne</p>
-                                    <p className="text-[10px] text-muted-foreground opacity-60 font-medium mt-0.5">Today • 09:00 AM</p>
-                                </div>
-                            </div>
-                             <div className="bg-white/5 p-4 rounded-xl border border-white/5 flex flex-col gap-1">
-                                <p className="text-[9px] font-bold text-muted-foreground opacity-40 uppercase tracking-tight">Location</p>
-                                <p className="text-[10px] font-bold text-white uppercase tracking-wide">Global Med Center</p>
-                            </div>
-                            <Button className="w-full h-11 rounded-xl text-[10px] font-bold uppercase tracking-widest silver-gradient text-black">START CONSULTATION</Button>
-                        </div>
+                        <p className="text-[10px] font-bold text-muted-foreground  opacity-40 mb-1 font-sans">{stat.label}</p>
+                        <h4 className="text-xl font-bold text-white mb-1">{stat.val}</h4>
+                        <p className="text-[9px] text-muted-foreground opacity-30 font-bold  tracking-widest">{stat.sub}</p>
                     </Card>
-
-                    <Card className="glass-dark p-6 border-white/5 rounded-2xl satin-card">
-                        <h3 className="text-[10px] font-bold text-white uppercase tracking-widest mb-5 border-b border-white/10 pb-3">Weekly Stats</h3>
-                        <div className="space-y-5">
-                             {[
-                                { label: "Weekly Sessions", val: "12 / week", icon: Activity },
-                                { label: "Client Growth", val: "Steady", icon: Users },
-                                { label: "Record Accuracy", val: "100%", icon: ShieldCheck },
-                             ].map((m, i) => (
-                                 <div key={i} className="flex items-center gap-4">
-                                    <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-                                        <m.icon className="w-4 h-4 text-emerald-400 opacity-60" />
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className="text-[9px] font-bold text-muted-foreground opacity-40 uppercase tracking-tight">{m.label}</p>
-                                        <p className="text-xs font-bold text-white uppercase tracking-wide">{m.val}</p>
-                                    </div>
-                                 </div>
-                             ))}
-                        </div>
-                    </Card>
-                </div>
+                ))}
             </div>
 
-            {/* Consultation Modal */}
+            {/* Calendar Grid Section */}
+            <Card className="glass-dark border-white/5 rounded-2xl p-6 sm:p-10">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
+                    <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-3">
+                            <h3 className="text-xl font-bold text-white">March 2026</h3>
+                        </div>
+                        <div className="flex gap-1.5">
+                            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl border border-white/5 bg-white/5 transition-all hover:bg-white/10">
+                                <ChevronLeft className="w-4 h-4" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl border border-white/5 bg-white/5 transition-all hover:bg-white/10">
+                                <ChevronRight className="w-4 h-4" />
+                            </Button>
+                        </div>
+                    </div>
+                    <div className="flex bg-black/40 p-1 rounded-xl border border-white/5 h-10 w-full md:w-auto overflow-hidden">
+                        {["Weekly", "Monthly"].map((mode) => (
+                            <button
+                                key={mode}
+                                onClick={() => setViewMode(mode as any)}
+                                className={cn(
+                                    "px-8 rounded-lg text-[10px] font-bold  tracking-widest transition-all",
+                                    viewMode === mode ? "bg-white/10 text-white" : "text-muted-foreground opacity-40 hover:opacity-100"
+                                )}
+                            >
+                                {mode}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                    {DAYS.map((day) => {
+                        const dayItems = SCHEDULE_DATA.find(s => s.day === day)?.items || [];
+                        return (
+                            <div key={day} className="space-y-4">
+                                <div className="text-center py-3 border-b border-white/5 mb-2 bg-white/2 rounded-t-xl">
+                                    <span className="text-[10px] font-bold text-muted-foreground  opacity-40 tracking-wider font-sans">{day.slice(0, 3)}</span>
+                                </div>
+                                <div className="min-h-[140px] space-y-3">
+                                    {dayItems.length > 0 ? dayItems.map((item, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="p-4 bg-white/5 border border-white/5 rounded-2xl group transition-all hover:bg-white/10 hover:border-white/10 cursor-pointer"
+                                        >
+                                            <div className="flex justify-between items-start mb-3">
+                                                <Badge variant="outline" className={cn(
+                                                    "text-[8px] font-bold border-none px-2 py-0.5 rounded-lg  tracking-tight font-sans",
+                                                    item.type === "Clinical" ? "bg-emerald-500/10 text-emerald-500" : "bg-white/10 text-white/40"
+                                                )}>{item.time}</Badge>
+                                            </div>
+                                            <p className="text-xs font-bold text-white mb-2 leading-snug">{item.name}</p>
+                                            <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-white/5">
+                                                <div className="flex items-center gap-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                                                    <Users className="w-3 h-3 text-indigo-400" />
+                                                    <p className="text-[9px] font-bold  tracking-tight truncate border-b border-white/10">{item.patient}</p>
+                                                </div>
+                                                <div className="mt-2 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-0 -translate-x-1">
+                                                    <span className="text-[8px] font-bold  text-emerald-500 tracking-widest">View Patient</span>
+                                                    <ArrowUpRight className="w-3 h-3 text-emerald-500" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )) : (
+                                        <div className="h-full min-h-[120px] w-full border border-dashed border-white/5 rounded-2xl flex items-center justify-center py-10 opacity-10">
+                                            <span className="text-[9px] font-bold  tracking-widest">Off Registry</span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </Card>
+
+            {/* Book Consultation Modal */}
             <Dialog open={isConsultModalOpen} onOpenChange={setIsConsultModalOpen}>
-                <DialogContent className="glass-dark border-white/10 sm:max-w-[500px]">
-                    <DialogHeader>
-                        <DialogTitle className="text-xl font-bold tracking-tight">Book Consultation</DialogTitle>
-                        <DialogDescription className="text-muted-foreground text-xs font-medium">
-                            Schedule a time and location for a client consultation.
-                        </DialogDescription>
-                    </DialogHeader>
+                <DialogContent className="glass-dark border-white/10 max-w-md rounded-3xl p-0 overflow-hidden shadow-2xl">
+                    <div className="p-8 pb-4 border-b border-white/5">
+                        <DialogHeader>
+                            <DialogTitle className="text-xl font-bold text-white">Schedule Appointment</DialogTitle>
+                            <DialogDescription className="text-xs text-muted-foreground font-medium mt-1">Book a new clinical session for your patient.</DialogDescription>
+                        </DialogHeader>
+                    </div>
 
-                     <div className="space-y-6 pt-6">
-                        <div className="grid grid-cols-2 gap-5">
-                             <div className="space-y-2">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-70 ml-1">Client Name</Label>
-                                <Select>
-                                    <SelectTrigger className="h-11 bg-white/5 border-white/10 rounded-xl text-xs font-medium">
-                                        <SelectValue placeholder="Select Client" />
-                                    </SelectTrigger>
-                                    <SelectContent className="glass border-white/10">
-                                        <SelectItem value="marie" className="text-xs">Marie Jeanne</SelectItem>
-                                        <SelectItem value="marc" className="text-xs">Marc Twagira</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                            <div className="space-y-2">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-70 ml-1">Location</Label>
-                                <Select>
-                                    <SelectTrigger className="h-11 bg-white/5 border-white/10 rounded-xl text-xs font-medium">
-                                        <SelectValue placeholder="Select Location" />
-                                    </SelectTrigger>
-                                    <SelectContent className="glass border-white/10">
-                                        <SelectItem value="global" className="text-xs">Global Med Center</SelectItem>
-                                        <SelectItem value="waka" className="text-xs">Waka Fitness HQ</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                    <div className="p-8 space-y-6">
+                        <div className="space-y-2">
+                            <label className="text-[9px] font-bold text-muted-foreground  opacity-40 ml-1">Patient Search</label>
+                            <div className="relative group">
+                                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground opacity-20 group-focus-within:opacity-100 transition-all" />
+                                <Input placeholder="Type patient name or identification..." className="h-12 bg-white/5 border-white/10 rounded-xl pl-11 text-xs font-bold  tracking-widest outline-none ring-0 focus-visible:ring-1 focus-visible:ring-indigo-500/30" />
                             </div>
                         </div>
 
-                         <div className="grid grid-cols-2 gap-5">
+                        <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-70 ml-1">Start Time</Label>
-                                <Input type="time" className="bg-white/5 border-white/10 rounded-xl h-11 text-xs font-medium px-4 w-full" />
+                                <label className="text-[9px] font-bold text-muted-foreground  opacity-40 ml-1">Effective Date</label>
+                                <Input type="date" className="bg-white/5 border-white/10 rounded-xl h-12 text-xs font-bold" />
                             </div>
-                             <div className="space-y-2">
-                                <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-70 ml-1">Duration</Label>
-                                <Input placeholder="45 MIN" className="bg-white/5 border-white/10 rounded-xl h-11 text-xs font-medium px-4 w-full uppercase" />
+                            <div className="space-y-2">
+                                <label className="text-[9px] font-bold text-muted-foreground  opacity-40 ml-1">Time Slot</label>
+                                <Input type="time" className="bg-white/5 border-white/10 rounded-xl h-12 text-xs font-bold" />
                             </div>
                         </div>
 
-                         <div className="bg-white/5 rounded-xl p-5 border border-white/5 space-y-3">
-                            <h4 className="text-[11px] font-bold text-white flex items-center gap-2">
-                                <ClipboardList className="w-4 h-4 text-emerald-400" /> Scheduling Policy
-                            </h4>
-                            <p className="text-[10px] text-muted-foreground font-medium leading-relaxed opacity-60">
-                                Sessions are logged for quality assurance. Cancellations should be made at least 2 hours in advance to avoid rescheduling fees.
+                        <div className="bg-indigo-500/5 rounded-2xl p-6 border border-indigo-500/10 flex items-center gap-5">
+                            <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-500 shadow-inner">
+                                <Apple className="w-5 h-5" />
+                            </div>
+                            <p className="text-[10px] text-indigo-500/70 font-medium leading-relaxed">
+                                Automated confirmation notifications will be dispatched across the FlexPass network once booked.
                             </p>
                         </div>
                     </div>
 
-                    <DialogFooter className="pt-6">
-                        <Button variant="ghost" onClick={() => setIsConsultModalOpen(false)} className="h-11 text-xs font-bold px-6">Cancel</Button>
-                        <Button onClick={() => setIsConsultModalOpen(false)} className="h-11 px-8 rounded-xl text-xs font-bold silver-gradient text-black">
-                            Save Appointment
+                    <div className="p-8 bg-white/2 border-t border-white/5 flex gap-4">
+                        <Button variant="ghost" onClick={() => setIsConsultModalOpen(false)} className="flex-1 h-12 text-xs font-bold  opacity-50 font-sans tracking-widest">Discard</Button>
+                        <Button onClick={() => setIsConsultModalOpen(false)} className="flex-1 h-12 rounded-xl text-xs font-bold  silver-gradient text-black font-sans tracking-widest">
+                            Confirm Appointment
                         </Button>
-                    </DialogFooter>
+                    </div>
                 </DialogContent>
             </Dialog>
         </div>

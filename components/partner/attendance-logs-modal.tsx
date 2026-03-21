@@ -33,7 +33,7 @@ export function AttendanceLogsModal({ isOpen, onClose, memberName }: AttendanceL
                     <DialogTitle className="text-2xl font-black tracking-tighter text-white">
                         Attendance Protocol
                     </DialogTitle>
-                    <DialogDescription className="text-[11px] font-black uppercase tracking-widest opacity-40">
+                    <DialogDescription className="text-[11px] font-black  tracking-widest opacity-40">
                         Historical access logs for {memberName}
                     </DialogDescription>
                 </DialogHeader>
@@ -52,11 +52,11 @@ export function AttendanceLogsModal({ isOpen, onClose, memberName }: AttendanceL
                                     </div>
                                     <div className="flex items-center gap-1.5 mt-1">
                                         <MapPin className="w-3 h-3 text-secondary opacity-40" />
-                                        <span className="text-[9px] text-muted-foreground font-black uppercase tracking-widest">{log.zone}</span>
+                                        <span className="text-[9px] text-muted-foreground font-black  tracking-widest">{log.zone}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/5 text-emerald-500/60 text-[8px] font-black uppercase tracking-widest border border-emerald-500/10">
+                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/5 text-emerald-500/60 text-[8px] font-black  tracking-widest border border-emerald-500/10">
                                 <CheckCircle2 className="w-3 h-3" /> {log.status}
                             </div>
                         </div>

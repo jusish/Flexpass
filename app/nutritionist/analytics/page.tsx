@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { 
-    TrendingUp, 
-    ArrowUpRight, 
-    Download, 
+import {
+    TrendingUp,
+    ArrowUpRight,
+    Download,
     Calendar,
     Zap,
     Users,
@@ -16,12 +16,12 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-    AreaChart, 
-    Area, 
-    XAxis, 
-    YAxis, 
-    CartesianGrid, 
+import {
+    AreaChart,
+    Area,
+    XAxis,
+    YAxis,
+    CartesianGrid,
     ResponsiveContainer,
     Tooltip,
     BarChart,
@@ -73,7 +73,7 @@ export default function NutritionistAnalytics() {
                     { label: "Total Revenue", val: "RWF 4.2M", trend: "+12.0%", sub: "Total program earnings", icon: Apple, color: "text-sky-500" },
                 ].map((stat, i) => (
                     <Card key={i} className="glass-dark p-6 border-white/5 rounded-2xl satin-card relative overflow-hidden group">
-                         <div className="flex justify-between items-start mb-4">
+                        <div className="flex justify-between items-start mb-4">
                             <div className={cn("p-2.5 rounded-xl bg-white/5 border border-white/5 shadow-inner transition-transform group-hover:scale-105", stat.color)}>
                                 <stat.icon className="w-4 h-4" />
                             </div>
@@ -82,7 +82,7 @@ export default function NutritionistAnalytics() {
                                 <span className="text-[10px] font-bold text-emerald-500 tracking-tight">{stat.trend}</span>
                             </div>
                         </div>
-                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40 uppercase mb-1">{stat.label}</p>
+                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40  mb-1">{stat.label}</p>
                         <h3 className="text-2xl font-bold tracking-tight text-white">{stat.val}</h3>
                         <p className="text-[10px] text-muted-foreground opacity-40 mt-3 font-medium">{stat.sub}</p>
                     </Card>
@@ -92,7 +92,7 @@ export default function NutritionistAnalytics() {
             {/* Charts Section */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <Card className="lg:col-span-2 glass-dark p-8 border-white/5 rounded-3xl satin-card space-y-10">
-                     <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center">
                         <div className="space-y-1">
                             <h3 className="text-sm font-bold tracking-tight text-white flex items-center gap-2">
                                 <HeartPulse className="w-4 h-4 text-emerald-400" /> Client Progress vs Adherence
@@ -100,7 +100,7 @@ export default function NutritionistAnalytics() {
                             <p className="text-[10px] font-medium text-muted-foreground opacity-60">Correlation between plan adherence and goal achievement</p>
                         </div>
                     </div>
-                    
+
                     <div className="h-[350px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={metabolicData} margin={{ left: -20, right: 10, top: 0 }}>
@@ -113,7 +113,7 @@ export default function NutritionistAnalytics() {
                                 <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="rgba(255,255,255,0.02)" />
                                 <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#6E6E73', fontSize: 11, fontWeight: 600 }} />
                                 <YAxis axisLine={false} tickLine={false} tick={{ fill: '#6E6E73', fontSize: 10, fontWeight: 600 }} />
-                                <Tooltip 
+                                <Tooltip
                                     contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '12px', border: 'none' }}
                                     itemStyle={{ color: '#fff', fontSize: '11px', fontWeight: 'bold' }}
                                 />
@@ -125,7 +125,7 @@ export default function NutritionistAnalytics() {
                 </Card>
 
                 <Card className="glass-dark p-8 border-white/5 rounded-3xl satin-card flex flex-col justify-between">
-                     <div className="space-y-2">
+                    <div className="space-y-2">
                         <h3 className="text-sm font-bold tracking-tight text-white mb-2">Program Effectiveness</h3>
                         <p className="text-[10px] font-medium text-muted-foreground opacity-60">Success rate across different nutritional plans</p>
                     </div>
@@ -134,12 +134,12 @@ export default function NutritionistAnalytics() {
                         {protocolStats.map((item, i) => (
                             <div key={i} className="space-y-3">
                                 <div className="flex justify-between items-end">
-                                    <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{item.name}</span>
+                                    <span className="text-[10px] font-bold text-white/40  tracking-widest">{item.name}</span>
                                     <span className="text-lg font-bold text-white">{item.value}%</span>
                                 </div>
                                 <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                                    <div 
-                                        className={cn("h-full rounded-full transition-all duration-1000", item.color)} 
+                                    <div
+                                        className={cn("h-full rounded-full transition-all duration-1000", item.color)}
                                         style={{ width: `${item.value}%` }}
                                     />
                                 </div>
@@ -147,7 +147,7 @@ export default function NutritionistAnalytics() {
                         ))}
                     </div>
 
-                    <Button variant="outline" className="h-12 rounded-xl border-white/10 bg-white/5 text-[10px] font-bold tracking-widest uppercase hover:bg-white/10">
+                    <Button variant="outline" className="h-12 rounded-xl border-white/10 bg-white/5 text-[10px] font-bold tracking-widest  hover:bg-white/10">
                         Detailed Audit
                     </Button>
                 </Card>

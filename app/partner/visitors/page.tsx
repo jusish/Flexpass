@@ -70,10 +70,10 @@ export default function VisitorsPage() {
         <div className="space-y-8 pb-20 text-white">
             <AddMemberModal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
             {selectedMember && (
-                <AttendanceLogsModal 
-                    isOpen={!!selectedMember} 
-                    onClose={() => setSelectedMember(null)} 
-                    memberName={selectedMember} 
+                <AttendanceLogsModal
+                    isOpen={!!selectedMember}
+                    onClose={() => setSelectedMember(null)}
+                    memberName={selectedMember}
                 />
             )}
 
@@ -82,7 +82,7 @@ export default function VisitorsPage() {
                     <h1 className="text-3xl font-black tracking-tighter text-glow-silver">Visitor Infrastructure</h1>
                     <p className="text-muted-foreground text-[11px] font-semibold tracking-wide opacity-50">Manage authenticated residents, enterprise partners, and ad-hoc guests</p>
                 </div>
-                <Button 
+                <Button
                     onClick={() => setIsAddModalOpen(true)}
                     className="h-11 px-6 rounded-xl text-[10px] font-bold tracking-tight silver-gradient text-black"
                 >
@@ -100,7 +100,7 @@ export default function VisitorsPage() {
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id as any)}
                                     className={cn(
-                                        "relative flex items-center gap-2 px-6 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all duration-300",
+                                        "relative flex items-center gap-2 px-6 py-2.5 rounded-xl text-[9px] font-black  tracking-widest transition-all duration-300",
                                         isActive ? "text-black" : "text-muted-foreground hover:text-white/60"
                                     )}
                                 >
@@ -134,7 +134,7 @@ export default function VisitorsPage() {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-white/5 text-muted-foreground text-[9px] font-black uppercase tracking-widest bg-black/40">
+                            <tr className="border-b border-white/5 text-muted-foreground text-[9px] font-black  tracking-widest bg-black/40">
                                 <th className="px-8 py-5">Profile Entity</th>
                                 {activeTab === "members" && <th className="px-8 py-5">Tier / Plan</th>}
                                 {activeTab === "corporate" && <th className="px-8 py-5">Organization</th>}
@@ -147,7 +147,7 @@ export default function VisitorsPage() {
                         <tbody className="divide-y divide-white/5">
                             <AnimatePresence mode="popLayout">
                                 {activeTab === "members" && MY_MEMBERS.map((v) => (
-                                    <motion.tr 
+                                    <motion.tr
                                         key={v.id}
                                         layout
                                         initial={{ opacity: 0 }}
@@ -167,7 +167,7 @@ export default function VisitorsPage() {
                                             </div>
                                         </td>
                                         <td className="px-8 py-6">
-                                            <Badge variant="outline" className="text-[9px] font-black uppercase tracking-widest border-white/10 bg-white/5 text-white">{v.plan}</Badge>
+                                            <Badge variant="outline" className="text-[9px] font-black  tracking-widest border-white/10 bg-white/5 text-white">{v.plan}</Badge>
                                         </td>
                                         <td className="px-8 py-6">
                                             <div className="flex flex-col">
@@ -177,7 +177,7 @@ export default function VisitorsPage() {
                                         </td>
                                         <td className="px-8 py-6">
                                             <Badge className={cn(
-                                                "text-[9px] font-black uppercase tracking-widest",
+                                                "text-[9px] font-black  tracking-widest",
                                                 v.status === "Active" ? "bg-emerald-500/10 text-emerald-500" : "bg-amber-500/10 text-amber-500"
                                             )}>{v.status}</Badge>
                                         </td>
@@ -189,8 +189,8 @@ export default function VisitorsPage() {
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end" className="bg-black/90 border-white/10 backdrop-blur-xl satin-card min-w-[160px]">
-                                                    <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest opacity-40">Protocol Actions</DropdownMenuLabel>
-                                                    <DropdownMenuItem 
+                                                    <DropdownMenuLabel className="text-[10px] font-black  tracking-widest opacity-40">Protocol Actions</DropdownMenuLabel>
+                                                    <DropdownMenuItem
                                                         onClick={() => setSelectedMember(v.name)}
                                                         className="text-[11px] font-bold text-white hover:bg-white/10 cursor-pointer"
                                                     >
@@ -210,7 +210,7 @@ export default function VisitorsPage() {
                                 ))}
 
                                 {activeTab === "corporate" && CORPORATE_MEMBERS.map((v) => (
-                                    <motion.tr 
+                                    <motion.tr
                                         key={v.id}
                                         layout
                                         initial={{ opacity: 0 }}
@@ -234,7 +234,7 @@ export default function VisitorsPage() {
                                             </div>
                                         </td>
                                         <td className="px-8 py-6">
-                                            <Badge className="bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest">{v.plan}</Badge>
+                                            <Badge className="bg-primary/10 text-primary text-[9px] font-black  tracking-widest">{v.plan}</Badge>
                                         </td>
                                         <td className="px-8 py-6 text-right">
                                             <DropdownMenu>
@@ -244,7 +244,7 @@ export default function VisitorsPage() {
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end" className="bg-black/90 border-white/10 backdrop-blur-xl satin-card">
-                                                    <DropdownMenuItem 
+                                                    <DropdownMenuItem
                                                         onClick={() => setSelectedMember(v.name)}
                                                         className="text-[11px] font-bold text-white hover:bg-white/10 cursor-pointer"
                                                     >
@@ -257,7 +257,7 @@ export default function VisitorsPage() {
                                 ))}
 
                                 {activeTab === "walkins" && WALK_INS.map((v) => (
-                                    <motion.tr 
+                                    <motion.tr
                                         key={v.id}
                                         layout
                                         initial={{ opacity: 0 }}
@@ -276,7 +276,7 @@ export default function VisitorsPage() {
                                         <td className="px-8 py-6 text-[11px] font-black">{v.amount}</td>
                                         <td className="px-8 py-6 text-[11px] font-bold text-muted-foreground">{v.date}</td>
                                         <td className="px-8 py-6">
-                                            <Badge className="bg-emerald-500/10 text-emerald-500 text-[9px] font-black uppercase tracking-widest">{v.status}</Badge>
+                                            <Badge className="bg-emerald-500/10 text-emerald-500 text-[9px] font-black  tracking-widest">{v.status}</Badge>
                                         </td>
                                         <td className="px-8 py-6 text-right">
                                             <DropdownMenu>
@@ -286,7 +286,7 @@ export default function VisitorsPage() {
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end" className="bg-black/90 border-white/10 backdrop-blur-xl satin-card">
-                                                    <DropdownMenuItem 
+                                                    <DropdownMenuItem
                                                         onClick={() => setSelectedMember(v.name)}
                                                         className="text-[11px] font-bold text-white hover:bg-white/10 cursor-pointer"
                                                     >

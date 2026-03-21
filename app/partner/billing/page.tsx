@@ -25,7 +25,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { 
+import {
     Dialog,
     DialogContent,
     DialogHeader,
@@ -93,27 +93,27 @@ export default function PartnerBillingPage() {
             <Card className="glass-dark border-white/5 rounded-2xl overflow-hidden satin-card">
                 <div className="p-8 border-b border-white/5 bg-black/40 flex flex-col md:flex-row gap-6 justify-between items-center">
                     <div className="flex items-center gap-2 p-1 bg-black/40 border border-white/5 rounded-xl">
-                        <Button 
+                        <Button
                             onClick={() => setActiveFilter("all")}
                             variant={activeFilter === "all" ? "default" : "ghost"}
                             className={cn(
-                                "h-9 px-6 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all",
+                                "h-9 px-6 rounded-lg text-[9px] font-black  tracking-widest transition-all",
                                 activeFilter === "all" ? "silver-gradient text-black" : "text-muted-foreground"
                             )}
                         >All Bills</Button>
-                        <Button 
+                        <Button
                             onClick={() => setActiveFilter("subscription")}
                             variant={activeFilter === "subscription" ? "default" : "ghost"}
                             className={cn(
-                                "h-9 px-6 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all",
+                                "h-9 px-6 rounded-lg text-[9px] font-black  tracking-widest transition-all",
                                 activeFilter === "subscription" ? "silver-gradient text-black" : "text-muted-foreground"
                             )}
                         >Subscriptions</Button>
-                        <Button 
+                        <Button
                             onClick={() => setActiveFilter("walkin")}
                             variant={activeFilter === "walkin" ? "default" : "ghost"}
                             className={cn(
-                                "h-9 px-6 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all",
+                                "h-9 px-6 rounded-lg text-[9px] font-black  tracking-widest transition-all",
                                 activeFilter === "walkin" ? "silver-gradient text-black" : "text-muted-foreground"
                             )}
                         >Walk-ins</Button>
@@ -133,7 +133,7 @@ export default function PartnerBillingPage() {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-white/5 text-muted-foreground text-[9px] font-black uppercase tracking-widest bg-black/40">
+                            <tr className="border-b border-white/5 text-muted-foreground text-[9px] font-black  tracking-widest bg-black/40">
                                 <th className="px-8 py-5">Instrument</th>
                                 <th className="px-8 py-5">Guest Identification</th>
                                 <th className="px-8 py-5">Service Period</th>
@@ -145,7 +145,7 @@ export default function PartnerBillingPage() {
                         <tbody className="divide-y divide-white/5">
                             <AnimatePresence mode="popLayout">
                                 {filteredBills.map((bill) => (
-                                    <motion.tr 
+                                    <motion.tr
                                         key={bill.id}
                                         layout
                                         initial={{ opacity: 0 }}
@@ -156,7 +156,7 @@ export default function PartnerBillingPage() {
                                         <td className="px-8 py-6">
                                             <div className="flex items-center gap-3">
                                                 <FileText className="w-4 h-4 text-primary opacity-40" />
-                                                <span className="font-bold text-[12px] text-white uppercase tracking-tight">{bill.id}</span>
+                                                <span className="font-bold text-[12px] text-white  tracking-tight">{bill.id}</span>
                                             </div>
                                         </td>
                                         <td className="px-8 py-6">
@@ -170,7 +170,7 @@ export default function PartnerBillingPage() {
                                         <td className="px-8 py-6">
                                             <div className="flex flex-col">
                                                 <Badge variant="outline" className={cn(
-                                                    "w-fit bg-black/40 text-[9px] font-black uppercase tracking-widest px-3 py-1 mb-1",
+                                                    "w-fit bg-black/40 text-[9px] font-black  tracking-widest px-3 py-1 mb-1",
                                                     bill.status === "Paid" ? "border-emerald-500/20 text-emerald-500" : "border-amber-500/20 text-amber-500"
                                                 )}>
                                                     {bill.status}
@@ -179,9 +179,9 @@ export default function PartnerBillingPage() {
                                             </div>
                                         </td>
                                         <td className="px-8 py-6 text-right">
-                                            <Button 
+                                            <Button
                                                 onClick={() => setSelectedBill(bill)}
-                                                variant="ghost" 
+                                                variant="ghost"
                                                 className="h-9 gap-2 pl-4 pr-3 rounded-lg hover:bg-white/5 text-[10px] font-bold tracking-tight border border-transparent hover:border-white/5"
                                             >
                                                 View <ArrowRight className="w-3.5 h-3.5" />
@@ -196,10 +196,10 @@ export default function PartnerBillingPage() {
             </Card>
 
             {selectedBill && (
-                <BillDetailModal 
-                    bill={selectedBill} 
-                    isOpen={!!selectedBill} 
-                    onClose={() => setSelectedBill(null)} 
+                <BillDetailModal
+                    bill={selectedBill}
+                    isOpen={!!selectedBill}
+                    onClose={() => setSelectedBill(null)}
                 />
             )}
         </div>
@@ -211,7 +211,7 @@ function BillDetailModal({ bill, isOpen, onClose }: { bill: typeof BILLS[0], isO
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="max-w-xl bg-black/90 border-white/10 backdrop-blur-2xl satin-card text-white">
                 <DialogHeader className="border-b border-white/5 pb-6">
-                    <DialogTitle className="text-2xl font-black tracking-tighter uppercase">Bill Statement</DialogTitle>
+                    <DialogTitle className="text-2xl font-black tracking-tighter ">Bill Statement</DialogTitle>
                     <DialogDescription className="text-[10px] font-semibold tracking-wide opacity-40">
                         Record ID: {bill.id} • Issued to {bill.guest}
                     </DialogDescription>
@@ -220,20 +220,20 @@ function BillDetailModal({ bill, isOpen, onClose }: { bill: typeof BILLS[0], isO
                 <div className="py-8 space-y-8">
                     <div className="grid grid-cols-2 gap-8">
                         <div className="space-y-1">
-                            <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-40">Guest Category</p>
+                            <p className="text-[9px] font-black  tracking-widest text-muted-foreground opacity-40">Guest Category</p>
                             <div className="flex items-center gap-2">
                                 <UsersIcon className="w-4 h-4 text-primary" />
                                 <span className="text-[12px] font-black text-white">{bill.type}</span>
                             </div>
                         </div>
                         <div className="space-y-1 text-right">
-                            <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-40">Period / Timestamp</p>
+                            <p className="text-[9px] font-black  tracking-widest text-muted-foreground opacity-40">Period / Timestamp</p>
                             <span className="text-[12px] font-black text-white">{bill.period}</span>
                         </div>
                     </div>
 
                     <div className="bg-white/5 rounded-2xl border border-white/5 p-6 space-y-4">
-                        <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-40">
+                        <div className="flex justify-between items-center text-[10px] font-black  tracking-widest text-muted-foreground opacity-40">
                             <span>Service Description</span>
                             <span>Yield</span>
                         </div>
@@ -248,15 +248,15 @@ function BillDetailModal({ bill, isOpen, onClose }: { bill: typeof BILLS[0], isO
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-1">
-                            <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-40">Settlement Method</p>
-                            <Badge variant="outline" className="bg-white/5 border-white/10 text-[10px] font-black uppercase tracking-widest px-3 py-1 text-white">
+                            <p className="text-[9px] font-black  tracking-widest text-muted-foreground opacity-40">Settlement Method</p>
+                            <Badge variant="outline" className="bg-white/5 border-white/10 text-[10px] font-black  tracking-widest px-3 py-1 text-white">
                                 {bill.method}
                             </Badge>
                         </div>
                         <div className="space-y-1 text-right">
-                            <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground opacity-40">Status Verification</p>
+                            <p className="text-[9px] font-black  tracking-widest text-muted-foreground opacity-40">Status Verification</p>
                             <Badge className={cn(
-                                "text-[10px] font-black uppercase tracking-widest px-3 py-1",
+                                "text-[10px] font-black  tracking-widest px-3 py-1",
                                 bill.status === "Paid" ? "bg-emerald-500/10 text-emerald-500" : "bg-amber-500/10 text-amber-500"
                             )}>
                                 {bill.status}
@@ -267,14 +267,14 @@ function BillDetailModal({ bill, isOpen, onClose }: { bill: typeof BILLS[0], isO
 
                 <DialogFooter className="border-t border-white/5 pt-6 gap-3 sm:flex-row flex-col">
                     <div className="grid grid-cols-2 gap-3 w-full sm:w-auto sm:flex-1">
-                        <Button variant="outline" className="glass border-white/10 rounded-xl h-11 text-[9px] font-black uppercase tracking-widest text-white hover:bg-white/5">
+                        <Button variant="outline" className="glass border-white/10 rounded-xl h-11 text-[9px] font-black  tracking-widest text-white hover:bg-white/5">
                             <Printer className="w-3.5 h-3.5 mr-2" /> Receipt
                         </Button>
-                        <Button variant="outline" className="glass border-white/10 rounded-xl h-11 text-[9px] font-black uppercase tracking-widest text-white hover:bg-white/5">
+                        <Button variant="outline" className="glass border-white/10 rounded-xl h-11 text-[9px] font-black  tracking-widest text-white hover:bg-white/5">
                             <Download className="w-3.5 h-3.5 mr-2" /> Export
                         </Button>
                     </div>
-                    <Button variant="ghost" onClick={onClose} className="text-muted-foreground hover:text-white text-[9px] font-black uppercase tracking-widest h-11">
+                    <Button variant="ghost" onClick={onClose} className="text-muted-foreground hover:text-white text-[9px] font-black  tracking-widest h-11">
                         Close Audit
                     </Button>
                 </DialogFooter>

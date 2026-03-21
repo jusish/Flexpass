@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-    Users, 
-    Zap, 
-    TrendingUp, 
-    Wallet, 
+import {
+    Users,
+    Zap,
+    TrendingUp,
+    Wallet,
     Calendar,
     ArrowUpRight,
     ArrowDownRight,
@@ -23,20 +23,20 @@ import {
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableHead, 
-    TableHeader, 
-    TableRow 
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
 } from "@/components/ui/table";
-import { 
-    AreaChart, 
-    Area, 
-    XAxis, 
-    YAxis, 
-    CartesianGrid, 
+import {
+    AreaChart,
+    Area,
+    XAxis,
+    YAxis,
+    CartesianGrid,
     ResponsiveContainer,
     Tooltip,
     BarChart,
@@ -62,38 +62,38 @@ const metabolicData = [
 ];
 
 const consultations = [
-    { 
+    {
         id: "CON-001",
-        client: "Marie Jeanne", 
-        program: "Keto Intensive", 
-        facility: "Global Med Center", 
+        client: "Marie Jeanne",
+        program: "Keto Intensive",
+        facility: "Global Med Center",
         time: "09:00 AM",
         status: "Confirmed",
         yield: 15000
     },
-    { 
+    {
         id: "CON-002",
-        client: "Marc Twagira", 
-        program: "Performance Diet", 
-        facility: "Waka Fitness HQ", 
+        client: "Marc Twagira",
+        program: "Performance Diet",
+        facility: "Waka Fitness HQ",
         time: "11:30 AM",
         status: "Active",
         yield: 12000
     },
-    { 
+    {
         id: "CON-003",
-        client: "Alice Umutoni", 
-        program: "Weight Protocol", 
-        facility: "Private Clinic B", 
+        client: "Alice Umutoni",
+        program: "Weight Protocol",
+        facility: "Private Clinic B",
         time: "02:00 PM",
         status: "Pending",
         yield: 18000
     },
-    { 
+    {
         id: "CON-004",
-        client: "Paul Kagabo", 
-        program: "Elite Athlete Plan", 
-        facility: "Arena High Performance", 
+        client: "Paul Kagabo",
+        program: "Elite Athlete Plan",
+        facility: "Arena High Performance",
         time: "04:00 PM",
         status: "Ready",
         yield: 25000
@@ -139,7 +139,7 @@ export default function NutritionistDashboard() {
                             </div>
                             <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full tracking-wider">{stat.trend}</span>
                         </div>
-                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40 uppercase mb-1">{stat.label}</p>
+                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40  mb-1">{stat.label}</p>
                         <h3 className="text-2xl font-bold tracking-tight text-white">{stat.val}</h3>
                         <p className="text-[10px] text-muted-foreground opacity-40 mt-3 font-medium">{stat.sub}</p>
                     </Card>
@@ -155,9 +155,9 @@ export default function NutritionistDashboard() {
                         </h3>
                         <p className="text-[11px] font-medium text-muted-foreground opacity-50">Tracking client compliance against practice growth</p>
                     </div>
-                    
+
                     <div className="h-[350px] w-full">
-                        <ChartContainer config={chartConfig} className="h-full w-full">
+                        <ChartContainer id="nutritionist-revenue-adherence-chart" config={chartConfig} className="h-full w-full">
                             <AreaChart data={metabolicData} margin={{ left: -10, right: 10, top: 0 }}>
                                 <defs>
                                     <linearGradient id="colorAdh" x1="0" y1="0" x2="0" y2="1">
@@ -198,17 +198,17 @@ export default function NutritionistDashboard() {
                                     <span className="text-lg font-bold text-white">{item.val}%</span>
                                 </div>
                                 <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                                    <motion.div 
+                                    <motion.div
                                         initial={{ width: 0 }}
                                         animate={{ width: `${item.val}%` }}
-                                        className={cn("h-full", item.color)} 
+                                        className={cn("h-full", item.color)}
                                     />
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    <Button variant="outline" className="h-12 rounded-xl border-white/5 bg-white/5 text-[10px] font-bold tracking-widest uppercase hover:bg-white/10">
+                    <Button variant="outline" className="h-12 rounded-xl border-white/5 bg-white/5 text-[10px] font-bold tracking-widest  hover:bg-white/10">
                         View Details
                     </Button>
                 </Card>
@@ -217,17 +217,17 @@ export default function NutritionistDashboard() {
             {/* Upcoming Consultations */}
             <div className="space-y-5">
                 <div className="flex items-center justify-between px-2">
-                    <h3 className="text-[11px] font-bold tracking-widest text-white uppercase opacity-40">Upcoming Consultations</h3>
+                    <h3 className="text-[11px] font-bold tracking-widest text-white  opacity-40">Upcoming Consultations</h3>
                 </div>
                 <Card className="glass-dark border-white/5 rounded-2xl overflow-hidden satin-card">
                     <Table>
                         <TableHeader>
                             <TableRow className="border-white/5 hover:bg-transparent bg-white/5">
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 uppercase">Client</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase">Program</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase">Status</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase text-right">Yield</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 uppercase">Protocol ID</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 ">Client</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 ">Program</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 ">Status</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14  text-right">Yield</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 ">Protocol ID</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -252,10 +252,10 @@ export default function NutritionistDashboard() {
                                     </TableCell>
                                     <TableCell>
                                         <Badge variant="outline" className={cn(
-                                            "text-[9px] font-bold tracking-wide px-2.5 py-1 rounded-lg border-none uppercase",
+                                            "text-[9px] font-bold tracking-wide px-2.5 py-1 rounded-lg border-none ",
                                             con.status === "Confirmed" ? "bg-indigo-500/10 text-indigo-400" :
-                                            con.status === "Active" ? "bg-emerald-500/10 text-emerald-400" :
-                                            con.status === "Ready" ? "bg-sky-500/10 text-sky-400" : "bg-white/5 text-muted-foreground"
+                                                con.status === "Active" ? "bg-emerald-500/10 text-emerald-400" :
+                                                    con.status === "Ready" ? "bg-sky-500/10 text-sky-400" : "bg-white/5 text-muted-foreground"
                                         )}>
                                             {con.status}
                                         </Badge>
@@ -265,7 +265,7 @@ export default function NutritionistDashboard() {
                                         <p className="text-[9px] font-bold text-emerald-500 opacity-60 tracking-tight mt-0.5">Paid</p>
                                     </TableCell>
                                     <TableCell className="text-right pr-8">
-                                        <span className="text-[10px] font-bold text-white/20 uppercase tracking-widest group-hover:text-white/40 transition-colors">{con.id}</span>
+                                        <span className="text-[10px] font-bold text-white/20  tracking-widest group-hover:text-white/40 transition-colors">{con.id}</span>
                                     </TableCell>
                                 </TableRow>
                             ))}

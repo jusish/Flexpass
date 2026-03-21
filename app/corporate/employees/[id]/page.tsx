@@ -2,16 +2,16 @@
 
 import React, { useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { 
-    ChevronLeft, 
-    Calendar, 
-    Activity, 
-    Zap, 
-    TrendingUp, 
-    MapPin, 
-    Clock, 
-    HeartPulse, 
-    BadgeCheck, 
+import {
+    ChevronLeft,
+    Calendar,
+    Activity,
+    Zap,
+    TrendingUp,
+    MapPin,
+    Clock,
+    HeartPulse,
+    BadgeCheck,
     User,
     ArrowUpRight,
     Search,
@@ -22,13 +22,13 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-    AreaChart, 
-    Area, 
-    XAxis, 
-    YAxis, 
-    CartesianGrid, 
-    ResponsiveContainer, 
+import {
+    AreaChart,
+    Area,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    ResponsiveContainer,
     Tooltip,
     BarChart,
     Bar,
@@ -36,19 +36,19 @@ import {
     PieChart,
     Pie
 } from "recharts";
-import { 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableHead, 
-    TableHeader, 
-    TableRow 
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
 } from "@/components/ui/table";
-import { 
-    ChartContainer, 
-    ChartTooltip, 
-    ChartTooltipContent, 
-    ChartConfig 
+import {
+    ChartContainer,
+    ChartTooltip,
+    ChartTooltipContent,
+    ChartConfig
 } from "@/components/ui/chart";
 import { cn } from "@/lib/utils";
 import { useMockStore } from "@/lib/store";
@@ -87,7 +87,7 @@ export default function EmployeeDetailsPage() {
     const params = useParams();
     const router = useRouter();
     const { employees } = useMockStore();
-    
+
     const employee = useMemo(() => {
         return employees.find(e => e.id === params.id) || employees[0];
     }, [params.id, employees]);
@@ -99,9 +99,9 @@ export default function EmployeeDetailsPage() {
             {/* Header / Breadcrumbs */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
-                    <Button 
-                        variant="ghost" 
-                        size="icon" 
+                    <Button
+                        variant="ghost"
+                        size="icon"
                         onClick={() => router.back()}
                         className="h-10 w-10 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10"
                     >
@@ -111,14 +111,14 @@ export default function EmployeeDetailsPage() {
                         <div className="flex items-center gap-3 mb-1">
                             <h1 className="text-3xl font-bold tracking-tight text-white">{employee.name}</h1>
                             <Badge className={cn(
-                                "text-[10px] font-bold uppercase border-none",
+                                "text-[10px] font-bold  border-none",
                                 employee.status === "Active" ? "bg-emerald-500/10 text-emerald-400" : "bg-white/5 text-white/40"
                             )}>
                                 {employee.status}
                             </Badge>
                         </div>
                         <p className="text-muted-foreground text-xs font-medium opacity-60 flex items-center gap-2">
-                           {employee.department} • {employee.email}
+                            {employee.department} • {employee.email}
                         </p>
                     </div>
                 </div>
@@ -146,7 +146,7 @@ export default function EmployeeDetailsPage() {
                                 <stat.icon className="w-4 h-4" />
                             </div>
                         </div>
-                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40 uppercase mb-1">{stat.label}</p>
+                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40  mb-1">{stat.label}</p>
                         <h3 className="text-2xl font-bold tracking-tight text-white">{stat.val}</h3>
                         <p className="text-[10px] text-muted-foreground opacity-40 mt-3 font-medium">{stat.sub}</p>
                     </Card>
@@ -175,19 +175,19 @@ export default function EmployeeDetailsPage() {
                                 <ArrowUpRight className="w-4 h-4 text-emerald-400 opacity-40" />
                             </div>
                             <div className="h-[300px]">
-                                <ChartContainer config={chartConfig} className="h-full w-full">
+                                <ChartContainer id="employee-weekly-activity-chart" config={chartConfig} className="h-full w-full">
                                     <BarChart data={activityData}>
                                         <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="rgba(255,255,255,0.02)" />
-                                        <XAxis 
-                                            dataKey="day" 
-                                            axisLine={false} 
-                                            tickLine={false} 
-                                            tick={{ fill: '#888', fontSize: 11, fontWeight: 600 }} 
+                                        <XAxis
+                                            dataKey="day"
+                                            axisLine={false}
+                                            tickLine={false}
+                                            tick={{ fill: '#888', fontSize: 11, fontWeight: 600 }}
                                         />
-                                        <YAxis 
-                                            axisLine={false} 
-                                            tickLine={false} 
-                                            tick={{ fill: '#888', fontSize: 10, fontWeight: 600 }} 
+                                        <YAxis
+                                            axisLine={false}
+                                            tickLine={false}
+                                            tick={{ fill: '#888', fontSize: 10, fontWeight: 600 }}
                                         />
                                         <ChartTooltip content={<ChartTooltipContent />} />
                                         <Bar dataKey="sessions" radius={[4, 4, 0, 0]} fill="#6366f1" barSize={40} />
@@ -218,7 +218,7 @@ export default function EmployeeDetailsPage() {
                                                 <Cell key={`cell-${index}`} fill={entry.fill} stroke="rgba(0,0,0,0.5)" strokeWidth={4} />
                                             ))}
                                         </Pie>
-                                        <Tooltip 
+                                        <Tooltip
                                             contentStyle={{ backgroundColor: '#000', border: 'none', borderRadius: '12px', fontSize: '10px' }}
                                             itemStyle={{ color: '#fff' }}
                                         />
@@ -243,15 +243,15 @@ export default function EmployeeDetailsPage() {
                     <Card className="glass-dark border-white/5 rounded-3xl overflow-hidden satin-card">
                         <div className="p-8 border-b border-white/5 flex items-center justify-between">
                             <h3 className="text-sm font-bold tracking-tight text-white">Recent Visit History</h3>
-                            <Button variant="ghost" className="text-[10px] font-bold uppercase tracking-widest opacity-40 hover:opacity-100">See All</Button>
+                            <Button variant="ghost" className="text-[10px] font-bold  tracking-widest opacity-40 hover:opacity-100">See All</Button>
                         </div>
                         <Table>
                             <TableHeader>
                                 <TableRow className="border-white/5 hover:bg-transparent bg-white/5">
-                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 uppercase">Venue & Activity</TableHead>
-                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase">Date & Time</TableHead>
-                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-center uppercase">Status</TableHead>
-                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 uppercase">Cost Allocated</TableHead>
+                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 ">Venue & Activity</TableHead>
+                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 ">Date & Time</TableHead>
+                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-center ">Status</TableHead>
+                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 ">Cost Allocated</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -263,7 +263,7 @@ export default function EmployeeDetailsPage() {
                                                     <Clock className="w-4 h-4 text-emerald-400 opacity-60" />
                                                 </div>
                                                 <div>
-                                                    <h4 className="text-xs font-bold text-white uppercase tracking-tight">{v.venue}</h4>
+                                                    <h4 className="text-xs font-bold text-white  tracking-tight">{v.venue}</h4>
                                                     <p className="text-[10px] text-muted-foreground opacity-40 font-medium">{v.activity}</p>
                                                 </div>
                                             </div>
@@ -273,13 +273,13 @@ export default function EmployeeDetailsPage() {
                                             <p className="text-[10px] text-muted-foreground opacity-40 font-medium">{v.time}</p>
                                         </TableCell>
                                         <TableCell className="text-center">
-                                            <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-none text-[9px] font-bold px-2 py-0.5 rounded-lg uppercase">
+                                            <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-none text-[9px] font-bold px-2 py-0.5 rounded-lg ">
                                                 {v.status}
                                             </Badge>
                                         </TableCell>
                                         <TableCell className="text-right pr-8">
                                             <p className="text-xs font-bold text-white">RWF {v.cost.toLocaleString()}</p>
-                                            <p className="text-[9px] text-muted-foreground opacity-40 font-medium uppercase tracking-tight">Utilization</p>
+                                            <p className="text-[9px] text-muted-foreground opacity-40 font-medium  tracking-tight">Utilization</p>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -297,7 +297,7 @@ export default function EmployeeDetailsPage() {
                             { label: "Remaining Budget", val: "RWF 85,000", sub: "This month's limit", icon: TrendingUp, color: "text-indigo-400" },
                         ].map((stat, i) => (
                             <Card key={i} className="glass-dark p-6 border-white/5 rounded-2xl satin-card">
-                                <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40 uppercase mb-1">{stat.label}</p>
+                                <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40  mb-1">{stat.label}</p>
                                 <h3 className="text-2xl font-bold text-white">{stat.val}</h3>
                                 <div className="flex items-center gap-2 mt-3">
                                     <div className={cn("p-1.5 rounded-lg bg-white/5 border border-white/5", stat.color)}>
@@ -315,7 +315,7 @@ export default function EmployeeDetailsPage() {
                             <Badge variant="outline" className="text-[9px] font-bold border-white/10 opacity-60">2026 FISCAL YEAR</Badge>
                         </div>
                         <div className="h-[300px]">
-                            <ChartContainer config={chartConfig} className="h-full w-full">
+                            <ChartContainer id="employee-monthly-expenditure-chart" config={chartConfig} className="h-full w-full">
                                 <AreaChart data={[
                                     { month: "Jan", cost: 85000 },
                                     { month: "Feb", cost: 125000 },
@@ -386,7 +386,7 @@ export default function EmployeeDetailsPage() {
                                     </div>
                                 ))}
                             </div>
-                            <Button className="w-full h-10 rounded-xl bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:bg-white/10">View All Coaches</Button>
+                            <Button className="w-full h-10 rounded-xl bg-white/5 border border-white/10 text-[10px] font-bold  tracking-widest hover:bg-white/10">View All Coaches</Button>
                         </Card>
                     </div>
                 </TabsContent>
@@ -403,11 +403,11 @@ export default function EmployeeDetailsPage() {
                         <Table>
                             <TableHeader>
                                 <TableRow className="border-white/5 hover:bg-transparent bg-white/5">
-                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 uppercase">Stay ID</TableHead>
-                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase">Venue</TableHead>
-                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase">Activity</TableHead>
-                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase">Duration</TableHead>
-                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 uppercase">Allocation</TableHead>
+                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 ">Stay ID</TableHead>
+                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 ">Venue</TableHead>
+                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 ">Activity</TableHead>
+                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 ">Duration</TableHead>
+                                    <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 ">Allocation</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -415,7 +415,7 @@ export default function EmployeeDetailsPage() {
                                     <TableRow key={i} className="border-white/5 hover:bg-white/5 transition-all group">
                                         <TableCell className="pl-8 py-6 text-[11px] font-bold text-white/30">{v.id}</TableCell>
                                         <TableCell>
-                                            <h4 className="text-xs font-bold text-white uppercase">{v.venue}</h4>
+                                            <h4 className="text-xs font-bold text-white ">{v.venue}</h4>
                                             <p className="text-[9px] text-muted-foreground opacity-40 font-medium">{v.date}</p>
                                         </TableCell>
                                         <TableCell>

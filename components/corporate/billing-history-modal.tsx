@@ -65,7 +65,7 @@ export function BillingHistoryModal({ isOpen, onClose }: BillingHistoryModalProp
                                     <div className="flex items-center gap-1.5 justify-end mt-1">
                                         {getStatusIcon(inv.status)}
                                         <span className={cn(
-                                            "text-[9px] font-bold uppercase tracking-wider",
+                                            "text-[9px] font-bold  tracking-wider",
                                             inv.status === "Paid" ? "text-emerald-500/80" :
                                                 inv.status === "Pending" ? "text-amber-500/80" : "text-rose-500/80"
                                         )}>
@@ -91,7 +91,7 @@ export function BillingHistoryModal({ isOpen, onClose }: BillingHistoryModalProp
                             <p className="text-xs font-bold text-primary">Need a custom report?</p>
                             <p className="text-[10px] text-muted-foreground font-medium">Generate a consolidated PDF for your tax audits.</p>
                         </div>
-                        <Button className="h-9 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest border-glow">Request PDF</Button>
+                        <Button className="h-9 px-4 rounded-xl text-[10px] font-black  tracking-widest border-glow">Request PDF</Button>
                     </div>
                 </div>
             </DialogContent>

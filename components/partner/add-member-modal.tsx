@@ -94,10 +94,10 @@ export function AddMemberModal({ isOpen, onClose }: AddMemberModalProps) {
                 </div>
 
                 <DialogFooter>
-                    <Button variant="ghost" onClick={onClose} className="h-12 border-glow-silver text-muted-foreground text-[10px] font-black uppercase tracking-widest">
+                    <Button variant="ghost" onClick={onClose} className="h-12 border-glow-silver text-muted-foreground text-[10px] font-black  tracking-widest">
                         Discard
                     </Button>
-                    <Button className="h-12 px-8 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] border-glow-silver silver-gradient text-black">
+                    <Button className="h-12 px-8 rounded-xl text-[10px] font-black  tracking-[0.2em] border-glow-silver silver-gradient text-black">
                         Activate Membership
                     </Button>
                 </DialogFooter>

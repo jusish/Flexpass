@@ -1,212 +1,187 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-    Users, 
-    Zap, 
-    TrendingUp, 
-    Plus, 
-    Download, 
-    Search, 
+import {
+    Search,
     Filter,
-    ShieldCheck,
-    Mail,
-    Phone,
-    MoreVertical,
-    CheckCircle2,
-    XCircle,
+    Plus,
+    Star,
+    Users,
+    TrendingUp,
+    Award,
     Clock,
-    UserPlus,
-    HeartPulse,
+    MoreVertical,
+    ArrowUpRight,
     Apple,
-    Globe
+    HeartPulse,
+    Activity,
+    Zap,
+    Briefcase,
+    ShieldCheck,
+    CreditCard,
+    Layers,
+    SlidersHorizontal,
+    Box
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableHead, 
-    TableHeader, 
-    TableRow 
-} from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
-    DialogFooter,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
+} from "@/components/ui/select";
+import { useMockStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { DateRangeFilter } from "@/components/admin/date-filter";
+import { DataFilterModal } from "@/components/admin/data-filter-modal";
 
-const nutritionistsData = [
-    { id: "NUT-001", name: "Dr. Sarah L.", specialty: "Clinical Nutrition", programs: 24, rating: 4.9, status: "Active", revenue: 1240000, joined: "Oct 2025" },
-    { id: "NUT-002", name: "Marc K.", specialty: "Sport Nutritionist", programs: 18, rating: 4.8, status: "Active", revenue: 680000, joined: "Jan 2026" },
-];
+export default function NutritionistsAdmin() {
+    const { nutritionists } = useMockStore();
+    const [search, setSearch] = useState("");
 
-export default function AdminNutritionists() {
-    const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+    const filteredNutritionists = nutritionists.filter(n =>
+        n.name.toLowerCase().includes(search.toLowerCase()) ||
+        n.specialty.toLowerCase().includes(search.toLowerCase())
+    );
 
     return (
-        <div className="space-y-10 pb-20">
-            {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div className="space-y-1">
-                    <h1 className="text-4xl font-black tracking-tighter text-white">Nutritionist Global Network</h1>
-                    <p className="text-muted-foreground text-[11px] font-semibold opacity-50 uppercase tracking-widest mt-1">Strategic Wellness Officers & Clinical Performance nodes</p>
+        <div className="space-y-10 animate-in fade-in duration-500 pb-20">
+            {/* Header Area */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <h1 className="text-4xl font-black tracking-tighter text-white ">Clinical Network</h1>
+                    <p className="text-muted-foreground text-[11px] font-semibold opacity-50  tracking-[0.2em] mt-1">
+                        Metabolic Clinicians • Nutritional Supervision Nodes • Clinical Cadre
+                    </p>
                 </div>
                 <div className="flex gap-3">
-                    <Button variant="outline" className="glass border-white/5 h-12 px-6 rounded-2xl text-[10px] font-black tracking-widest opacity-60 hover:opacity-100 transition-all uppercase">
-                        <Download className="w-4 h-4 mr-2" /> Global Audit
+                    <Button variant="outline" className="h-12 px-6 border-white/5 bg-white/5 text-[10px] font-black tracking-widest opacity-60 hover:opacity-100 transition-all rounded-2xl ">
+                        Export metabolic audit
                     </Button>
-                    <Button 
-                        onClick={() => setIsInviteModalOpen(true)}
-                        className="silver-gradient text-black h-12 px-8 rounded-2xl text-[10px] font-black tracking-widest transition-all shadow-xl shadow-white/5 uppercase"
-                    >
-                        <UserPlus className="w-4 h-4 mr-2" /> Invite Officer
+                    <Button className="h-12 px-8 rounded-2xl text-[10px] font-black tracking-widest silver-gradient text-black  active:scale-95 shadow-xl shadow-white/5">
+                        Onboard clinical nutritionist
                     </Button>
                 </div>
             </div>
 
-            {/* Global Insight Grid */}
+            {/* Micro Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {[
-                    { label: "Clinical Staff", value: "24 Nodes", trend: "High Impact", icon: Globe, color: "text-emerald-500" },
-                    { label: "Plan Yield (MTD)", value: "RWF 3.8M", trend: "Steady Flow", icon: TrendingUp, color: "text-indigo-500" },
-                    { label: "Active Programs", value: "112", trend: "+5% Weekly", icon: Apple, color: "text-amber-500" },
-                    { label: "Audit Flags", value: "0 Protocols", trend: "None detected", icon: ShieldCheck, color: "text-sky-500" },
+                    { label: "Verified Clinicians", val: nutritionists.length, sub: "Metabolic supervision units", icon: HeartPulse, color: "text-rose-500" },
+                    { label: "Aggregate Yield", val: `RWF ${(nutritionists.reduce((acc, n) => acc + n.revenue, 0) / 1000000).toFixed(1)}M`, sub: "Monthly network revenue", icon: CreditCard, color: "text-emerald-500" },
+                    { label: "Compliance Index", val: "94.8%", sub: "Global network adherence", icon: Activity, color: "text-sky-500" },
+                    { label: "Patient Nodes", val: "1.8k", sub: "Active clinical oversight", icon: Users, color: "text-indigo-500" },
                 ].map((stat, i) => (
-                    <Card key={i} className="glass-dark p-6 border-white/5 rounded-2xl satin-card group">
+                    <Card key={i} className="glass-dark p-6 border-white/5 rounded-2xl satin-card group hover:scale-[1.02] transition-transform">
                         <div className="flex justify-between items-center mb-4">
-                            <div className={cn("p-2.5 bg-white/5 border border-white/5 rounded-xl transition-transform group-hover:scale-110", stat.color)}>
+                            <div className={cn("p-2.5 rounded-xl bg-white/5 border border-white/5 transition-transform group-hover:scale-110 shadow-inner", stat.color)}>
                                 <stat.icon className="w-4 h-4" />
                             </div>
                         </div>
-                        <p className="text-[9px] font-bold text-muted-foreground tracking-widest opacity-30 uppercase mb-1">{stat.label}</p>
-                        <h3 className="text-2xl font-black tracking-tighter text-white">{stat.value}</h3>
-                        <p className="text-[9px] text-muted-foreground opacity-30 mt-3 font-semibold uppercase">{stat.trend}</p>
+                        <p className="text-[9px] font-bold text-muted-foreground  opacity-30 tracking-widest mb-1">{stat.label}</p>
+                        <h3 className="text-2xl font-black text-white tracking-tighter tabular-nums">{stat.val}</h3>
+                        <p className="text-[9px] font-bold text-muted-foreground opacity-30  tracking-widest mt-2">{stat.sub}</p>
                     </Card>
                 ))}
             </div>
 
-            {/* Table */}
-            <div className="space-y-6">
-                <div className="relative group w-full md:w-96">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground opacity-40 group-focus-within:opacity-100 transition-all" />
-                    <Input 
-                        placeholder="Search officer by name, ID or clinical protocol..." 
-                        className="h-12 bg-black/40 border-white/5 rounded-2xl pl-12 text-[11px] font-bold focus:ring-1 focus:ring-white/10 transition-all font-sans tracking-wide"
-                    />
-                </div>
-
-                <Card className="glass-dark border-white/5 rounded-3xl overflow-hidden satin-card">
-                    <Table>
-                        <TableHeader>
-                            <TableRow className="border-white/5 hover:bg-transparent bg-white/2">
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 pl-10 uppercase">Identity Node</TableHead>
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 uppercase">Clinical Domain</TableHead>
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 uppercase text-center">Programs</TableHead>
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 uppercase text-right">Aggregate Yield</TableHead>
-                                <TableHead className="text-[10px] font-black tracking-widest text-muted-foreground h-16 text-right pr-10 uppercase">Global Status</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {nutritionistsData.map((nut, i) => (
-                                <TableRow key={i} className="border-white/5 hover:bg-white/5 transition-all group">
-                                    <TableCell className="pl-10 py-6">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center font-black text-[10px] text-emerald-500 shadow-inner uppercase">
-                                                {nut.name.slice(0, 2)}
-                                            </div>
-                                            <div>
-                                                <h4 className="text-[11px] font-black text-white uppercase tracking-widest italic">{nut.name}</h4>
-                                                <p className="text-[9px] text-muted-foreground font-black opacity-30 tracking-widest uppercase">{nut.id} • Joined {nut.joined}</p>
-                                            </div>
-                                        </div>
-                                    </TableCell>
-                                    <TableCell>
-                                        <p className="text-[10px] font-bold text-muted-foreground opacity-60 tracking-widest uppercase">{nut.specialty}</p>
-                                    </TableCell>
-                                    <TableCell className="text-center font-black text-xs text-white">
-                                        {nut.programs}
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <p className="text-xs font-black text-white italic tracking-tighter">RWF {nut.revenue.toLocaleString()}</p>
-                                        <Badge variant="outline" className="text-[7px] font-black border-white/5 mt-1 opacity-40 uppercase">Metabolic Compliance Verified</Badge>
-                                    </TableCell>
-                                    <TableCell className="text-right pr-10">
-                                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/5 bg-white/2">
-                                            <div className={cn(
-                                                "w-1 h-1 rounded-full",
-                                                nut.status === "Active" ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "bg-amber-500"
-                                            )} />
-                                            <span className={cn(
-                                                "text-[9px] font-black tracking-widest uppercase",
-                                                nut.status === "Active" ? "text-emerald-500" : "text-amber-500"
-                                            )}>{nut.status}</span>
-                                        </div>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Card>
-            </div>
-
-            {/* Invite Modal */}
-            <Dialog open={isInviteModalOpen} onOpenChange={setIsInviteModalOpen}>
-                <DialogContent className="max-w-xl bg-black/95 border-white/10 backdrop-blur-3xl rounded-[32px] satin-card sm:p-10">
-                    <DialogHeader>
-                        <DialogTitle className="text-2xl font-black tracking-tighter text-white uppercase italic">
-                            Invite Wellness Officer
-                        </DialogTitle>
-                        <DialogDescription className="text-[10px] font-bold text-muted-foreground opacity-50 uppercase tracking-widest">
-                            Authorize new clinical node for metabolic protocol distribution
-                        </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="py-8 space-y-8">
-                        <div className="grid grid-cols-2 gap-6">
-                            <div className="space-y-3">
-                                <Label className="text-[10px] font-black tracking-widest text-muted-foreground opacity-40 uppercase ml-1">Officer Identity</Label>
-                                <Input placeholder="e.g. Dr. Sarah" className="bg-white/5 border-white/10 rounded-2xl h-14 text-xs font-bold text-white px-6 w-full" />
-                            </div>
-                            <div className="space-y-3">
-                                <Label className="text-[10px] font-black tracking-widest text-muted-foreground opacity-40 uppercase ml-1">Secure Email</Label>
-                                <Input placeholder="sarah@clinic.com" className="bg-white/5 border-white/10 rounded-2xl h-14 text-xs font-bold text-white px-6 w-full" />
-                            </div>
-                        </div>
-
-                        <div className="space-y-3">
-                            <Label className="text-[10px] font-black tracking-widest text-muted-foreground opacity-40 uppercase ml-1">Clinical Specialization</Label>
-                            <Input placeholder="e.g. Metabolic Strategy / Pediatric Nutrition" className="bg-white/5 border-white/10 rounded-2xl h-14 text-xs font-bold text-white px-6 w-full" />
-                        </div>
-
-                        <div className="bg-white/5 rounded-[20px] p-6 border border-white/5 space-y-3">
-                            <h4 className="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
-                                <ShieldCheck className="w-4 h-4 text-emerald-500" /> Administrative Protocol
-                            </h4>
-                            <p className="text-[9px] text-muted-foreground font-semibold opacity-60 leading-relaxed uppercase tracking-wider italic">
-                                Registration will initiate identity verification flow. Access to sensitive metabolic datasets will be restricted until full node authorization is established.
-                            </p>
-                        </div>
+            {/* Clinician Registry */}
+            <Card className="glass-dark border-white/5 rounded-[2.5rem] overflow-hidden satin-card shadow-2xl">
+                <div className="p-8 border-b border-white/5 bg-white/2 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="space-y-1">
+                        <h3 className="text-sm font-black tracking-widest text-white  flex items-center gap-2">
+                            Clinician Registry
+                        </h3>
+                        <p className="text-[10px] text-muted-foreground font-semibold opacity-40  tracking-wider">Governing {nutritionists.length} metabolic professionals</p>
                     </div>
 
-                    <DialogFooter className="gap-4 sm:gap-0">
-                        <Button variant="ghost" onClick={() => setIsInviteModalOpen(false)} className="h-14 flex-1 text-muted-foreground text-[10px] font-black uppercase tracking-widest border border-white/5 rounded-2xl">
-                            ABORT
-                        </Button>
-                        <Button onClick={() => setIsInviteModalOpen(false)} className="h-14 flex-2 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] silver-gradient text-black shadow-2xl shadow-white/5">
-                            DISPATCH INVITE
-                        </Button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
+                    <div className="flex flex-wrap items-center gap-3">
+                        <div className="relative group w-64 md:w-80">
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground opacity-30 group-focus-within:text-indigo-400 group-focus-within:opacity-100 transition-all" />
+                            <Input
+                                placeholder="Identify clinician by name or focus area..."
+                                className="h-10 bg-white/5 border-white/10 rounded-xl pl-12 text-[10px] font-black focus:ring-1 focus:ring-white/10 transition-all  opacity-60 focus:opacity-100 tracking-widest"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </div>
+
+                        <DataFilterModal title="Clinical Filter" description="Configure the medical professional and metabolic registry parameters for extraction.">
+                            <div className="space-y-6">
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black tracking-widest text-muted-foreground  opacity-40 ml-1">Archive period</label>
+                                    <DateRangeFilter />
+                                </div>
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black tracking-widest text-muted-foreground  opacity-40 ml-1">Clinical taxonomy</label>
+                                    <Select defaultValue="all">
+                                        <SelectTrigger className="h-12 bg-white/5 border-white/10 rounded-xl text-[10px] font-bold px-4">
+                                            <SelectValue placeholder="Focus Area" />
+                                        </SelectTrigger>
+                                        <SelectContent className="glass-dark border-white/10 rounded-xl">
+                                            <SelectItem value="all" className="text-[10px] font-bold">All Clinical Areas</SelectItem>
+                                            <SelectItem value="weight" className="text-[10px] font-bold">Weight Regulation</SelectItem>
+                                            <SelectItem value="sports" className="text-[10px] font-bold">Sports Metabolism</SelectItem>
+                                            <SelectItem value="clinical" className="text-[10px] font-bold">Therapeutic Nutrition</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+                        </DataFilterModal>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-collapse">
+                    {filteredNutritionists.map((nutri) => (
+                        <Link
+                            key={nutri.id}
+                            href={`/admin/nutritionists/${nutri.id}`}
+                            className="p-8 border-b border-r border-white/5 hover:bg-white/4 transition-all group relative overflow-hidden flex flex-col justify-between"                      >
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-[50px] group-hover:bg-indigo-500/10 transition-all" />
+                            <div className="relative z-10">
+                                <div className="flex items-start justify-between mb-8">
+                                    <Avatar className="h-14 w-14 border-2 border-white/10 p-0.5 ring-4 ring-white/5 shadow-2xl transition-transform group-hover:scale-110">
+                                        <AvatarImage src={nutri.avatar} />
+                                        <AvatarFallback className="bg-white/5 font-black text-xs">{nutri.name.charAt(0)}</AvatarFallback>
+                                    </Avatar>
+                                    <div className="flex flex-col items-end gap-2">
+                                        <Badge className="bg-emerald-500/10 text-emerald-500 border-none text-[8px] font-black px-3 py-1  rounded-lg shadow-sm tracking-widest">Clinician Unit</Badge>
+                                        <div className="flex items-center gap-1.5 bg-white/5 px-2 py-1 rounded-lg border border-white/5">
+                                            <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+                                            <span className="text-[9px] font-black text-white tabular-nums">4.9</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-black text-white mb-2 tracking-tighter  group-hover:text-glow-silver transition-all">{nutri.name}</h3>
+                                <p className="text-[10px] font-black text-muted-foreground opacity-30 flex items-center gap-2  tracking-widest">
+                                    <Briefcase className="w-3.5 h-3.5 text-indigo-400 group-hover:scale-110 transition-transform" /> {nutri.specialty} Specialist
+                                </p>
+
+                                <div className="grid grid-cols-2 gap-6 mt-10 pt-8 border-t border-white/5">
+                                    <div className="space-y-1">
+                                        <p className="text-[9px] font-black text-muted-foreground  opacity-20 tracking-[0.2em]">Patient Flux</p>
+                                        <p className="text-sm font-black text-white tabular-nums">{nutri.activeClients} Units</p>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <p className="text-[9px] font-black text-muted-foreground  opacity-20 tracking-[0.2em]">Net Outcome</p>
+                                        <p className="text-sm font-black text-emerald-500 tabular-nums">{nutri.adherenceRate}%</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <Button variant="ghost" className="w-full h-11 mt-10 rounded-xl text-[10px] font-black border border-white/10 bg-white/2 text-muted-foreground opacity-40 hover:opacity-100 hover:text-white transition-all  tracking-widest">
+                                INSPECT CLINICAL PROFILE <ArrowUpRight className="w-3.5 h-3.5 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                            </Button>
+                        </Link>
+                    ))}
+                </div>
+            </Card>
         </div>
     );
 }

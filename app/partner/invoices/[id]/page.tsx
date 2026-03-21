@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { 
-    Download, 
-    Printer, 
-    AlertTriangle, 
+import {
+    Download,
+    Printer,
+    AlertTriangle,
     ChevronLeft,
     CheckCircle2,
     Clock,
@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
+import {
     Dialog,
     DialogContent,
     DialogHeader,
@@ -61,16 +61,16 @@ export default function InvoiceDetailPage() {
     return (
         <div className="space-y-8 pb-20">
             <div className="flex items-center gap-4">
-                <Button 
+                <Button
                     onClick={() => router.back()}
-                    variant="ghost" 
+                    variant="ghost"
                     className="h-10 w-10 p-0 rounded-xl glass border-white/10"
                 >
                     <ChevronLeft className="w-5 h-5 text-white" />
                 </Button>
                 <div>
                     <h1 className="text-2xl font-black tracking-tighter text-white">Audit Statement</h1>
-                    <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest opacity-40">Reference: {params.id || MOCK_INVOICE.id}</p>
+                    <p className="text-[10px] text-muted-foreground font-black  tracking-widest opacity-40">Reference: {params.id || MOCK_INVOICE.id}</p>
                 </div>
             </div>
 
@@ -84,29 +84,29 @@ export default function InvoiceDetailPage() {
                                     <FileText className="w-8 h-8 text-primary" />
                                 </div>
                                 <div>
-                                    <h2 className="text-xl font-black text-white tracking-tighter uppercase">{MOCK_INVOICE.id}</h2>
-                                    <p className="text-[10px] text-muted-foreground font-semibold tracking-widest opacity-40 uppercase">Billed to: Waka Fitness Terminal</p>
+                                    <h2 className="text-xl font-black text-white tracking-tighter ">{MOCK_INVOICE.id}</h2>
+                                    <p className="text-[10px] text-muted-foreground font-semibold tracking-widest opacity-40 ">Billed to: Waka Fitness Terminal</p>
                                 </div>
                             </div>
                             <div className="text-right space-y-2">
                                 <Badge className={cn(
-                                    "px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest",
+                                    "px-4 py-1.5 rounded-lg text-[10px] font-black  tracking-widest",
                                     MOCK_INVOICE.status === "Paid" ? "bg-emerald-500/10 text-emerald-500" : "bg-amber-500/10 text-amber-500"
                                 )}>
                                     {MOCK_INVOICE.status}
                                 </Badge>
-                                <p className="text-[10px] text-muted-foreground font-medium opacity-40 uppercase tracking-widest">Period: {MOCK_INVOICE.period}</p>
+                                <p className="text-[10px] text-muted-foreground font-medium opacity-40  tracking-widest">Period: {MOCK_INVOICE.period}</p>
                             </div>
                         </div>
 
                         <div className="p-10 space-y-10">
                             {/* Summary Table */}
                             <div className="space-y-4">
-                                <h3 className="text-[11px] font-black uppercase tracking-widest text-glow-silver opacity-60">Ledger Summary</h3>
+                                <h3 className="text-[11px] font-black  tracking-widest text-glow-silver opacity-60">Ledger Summary</h3>
                                 <div className="border border-white/5 rounded-2xl overflow-hidden">
                                     <table className="w-full text-left">
                                         <thead className="bg-white/5">
-                                            <tr className="text-[9px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+                                            <tr className="text-[9px] font-black  tracking-[0.2em] text-muted-foreground">
                                                 <th className="px-6 py-4">Item Logic</th>
                                                 <th className="px-6 py-4 text-center">Qty</th>
                                                 <th className="px-6 py-4">Unit Rate</th>
@@ -125,7 +125,7 @@ export default function InvoiceDetailPage() {
                                         </tbody>
                                         <tfoot className="bg-black/60">
                                             <tr className="text-[13px] font-black text-white">
-                                                <td colSpan={3} className="px-6 py-6 text-right uppercase tracking-widest opacity-40">Consolidated Settlement</td>
+                                                <td colSpan={3} className="px-6 py-6 text-right  tracking-widest opacity-40">Consolidated Settlement</td>
                                                 <td className="px-6 py-6 text-right text-glow-silver text-2xl">{MOCK_INVOICE.grandTotal}</td>
                                             </tr>
                                         </tfoot>
@@ -135,26 +135,26 @@ export default function InvoiceDetailPage() {
 
                             {/* Scan History Section */}
                             <div className="space-y-4">
-                                <h3 className="text-[11px] font-black uppercase tracking-widest text-glow-silver opacity-60">Linked Check-in Payload</h3>
+                                <h3 className="text-[11px] font-black  tracking-widest text-glow-silver opacity-60">Linked Check-in Payload</h3>
                                 <div className="space-y-3">
                                     {MOCK_INVOICE.scans.map((scan, i) => (
                                         <div key={i} className="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-all">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-8 h-8 rounded-lg bg-black/40 flex items-center justify-center font-black text-[10px] border border-white/5">
-                                                    #{i+1}
+                                                    #{i + 1}
                                                 </div>
                                                 <div>
                                                     <p className="text-[11px] font-black text-white">{scan.guest}</p>
-                                                    <p className="text-[9px] text-muted-foreground opacity-40 font-bold tracking-tight uppercase">{scan.date}</p>
+                                                    <p className="text-[9px] text-muted-foreground opacity-40 font-bold tracking-tight ">{scan.date}</p>
                                                 </div>
                                             </div>
                                             <div className="text-right">
                                                 <p className="text-[11px] font-black text-primary">{scan.cost}</p>
-                                                <p className="text-[8px] text-muted-foreground font-black uppercase tracking-widest opacity-20">Unit Cost</p>
+                                                <p className="text-[8px] text-muted-foreground font-black  tracking-widest opacity-20">Unit Cost</p>
                                             </div>
                                         </div>
                                     ))}
-                                    <Button variant="ghost" className="w-full text-[9px] font-black uppercase tracking-[0.2em] opacity-40 hover:opacity-100 h-10">
+                                    <Button variant="ghost" className="w-full text-[9px] font-black  tracking-[0.2em] opacity-40 hover:opacity-100 h-10">
                                         View All 84 Linked Sessions <ArrowRight className="w-3 h-3 ml-2" />
                                     </Button>
                                 </div>
@@ -167,17 +167,17 @@ export default function InvoiceDetailPage() {
                 <div className="lg:col-span-4 space-y-6">
                     <Card className="glass-dark border-white/5 rounded-3xl p-8 satin-card space-y-6">
                         <div className="space-y-4">
-                            <h4 className="text-[10px] font-black uppercase tracking-widest text-white/40">Timeline Data</h4>
+                            <h4 className="text-[10px] font-black  tracking-widest text-white/40">Timeline Data</h4>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-1">
-                                    <p className="text-[9px] font-black uppercase tracking-widest opacity-30">Issue Date</p>
+                                    <p className="text-[9px] font-black  tracking-widest opacity-30">Issue Date</p>
                                     <div className="flex items-center gap-2">
                                         <Calendar className="w-3 h-3 text-primary opacity-40" />
                                         <p className="text-[11px] font-black text-white">{MOCK_INVOICE.issueDate}</p>
                                     </div>
                                 </div>
                                 <div className="space-y-1 text-right">
-                                    <p className="text-[9px] font-black uppercase tracking-widest opacity-30">Due Date</p>
+                                    <p className="text-[9px] font-black  tracking-widest opacity-30">Due Date</p>
                                     <div className="flex items-center gap-2 justify-end">
                                         <Clock className="w-3 h-3 text-amber-500 opacity-40" />
                                         <p className="text-[11px] font-black text-white">{MOCK_INVOICE.dueDate}</p>
@@ -187,10 +187,10 @@ export default function InvoiceDetailPage() {
                         </div>
 
                         <div className="space-y-3 pt-6 border-t border-white/5">
-                            <Button className="w-full h-12 rounded-xl silver-gradient text-black text-[10px] font-black uppercase tracking-[0.2em]">
+                            <Button className="w-full h-12 rounded-xl silver-gradient text-black text-[10px] font-black  tracking-[0.2em]">
                                 <Download className="w-4 h-4 mr-2" /> Download Statement
                             </Button>
-                            <Button variant="outline" className="w-full h-12 rounded-xl glass border-white/10 text-[10px] font-black uppercase tracking-widest">
+                            <Button variant="outline" className="w-full h-12 rounded-xl glass border-white/10 text-[10px] font-black  tracking-widest">
                                 <Printer className="w-4 h-4 mr-2" /> Print PDF
                             </Button>
                         </div>
@@ -200,14 +200,14 @@ export default function InvoiceDetailPage() {
                         <div className="w-12 h-12 rounded-full bg-rose-500/10 flex items-center justify-center mb-2">
                             <AlertTriangle className="w-6 h-6 text-rose-500" />
                         </div>
-                        <h4 className="text-[11px] font-black uppercase tracking-widest text-rose-500">Conflict protocol</h4>
+                        <h4 className="text-[11px] font-black  tracking-widest text-rose-500">Conflict protocol</h4>
                         <p className="text-[10px] text-muted-foreground/60 leading-relaxed font-medium">
                             Discrepancy detected in scan calculation? Initiate a formal reconciliation report to our financial node.
                         </p>
-                        <Button 
+                        <Button
                             onClick={() => setIsReportModalOpen(true)}
-                            variant="ghost" 
-                            className="w-full h-11 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 text-[10px] uppercase tracking-widest border border-rose-500/5 hover:border-rose-500/20 transition-all font-bold"
+                            variant="ghost"
+                            className="w-full h-11 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 text-[10px]  tracking-widest border border-rose-500/5 hover:border-rose-500/20 transition-all font-bold"
                         >
                             Report Calculation Error
                         </Button>
@@ -215,9 +215,9 @@ export default function InvoiceDetailPage() {
                 </div>
             </div>
 
-            <ReportConflictModal 
-                isOpen={isReportModalOpen} 
-                onClose={() => setIsReportModalOpen(false)} 
+            <ReportConflictModal
+                isOpen={isReportModalOpen}
+                onClose={() => setIsReportModalOpen(false)}
                 invoiceId={MOCK_INVOICE.id}
             />
         </div>
@@ -264,10 +264,10 @@ function ReportConflictModal({ isOpen, onClose, invoiceId }: { isOpen: boolean, 
                                     <label className="text-[10px] font-bold text-muted-foreground tracking-wide opacity-50 ml-1">Error Category</label>
                                     <div className="grid grid-cols-2 gap-2">
                                         {["Mismatch Count", "Unit Price", "Duplicate Entry", "Other"].map((cat) => (
-                                            <Button 
+                                            <Button
                                                 key={cat}
-                                                variant="outline" 
-                                                className="h-10 text-[9px] font-black uppercase tracking-widest glass border-white/5 hover:border-primary/20"
+                                                variant="outline"
+                                                className="h-10 text-[9px] font-black  tracking-widest glass border-white/5 hover:border-primary/20"
                                             >
                                                 {cat}
                                             </Button>
@@ -277,7 +277,7 @@ function ReportConflictModal({ isOpen, onClose, invoiceId }: { isOpen: boolean, 
 
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-bold text-muted-foreground tracking-wide opacity-50 ml-1">Context / Evidence</label>
-                                    <textarea 
+                                    <textarea
                                         value={reason}
                                         onChange={(e) => setReason(e.target.value)}
                                         placeholder="Explain the discrepancy..."
@@ -287,12 +287,12 @@ function ReportConflictModal({ isOpen, onClose, invoiceId }: { isOpen: boolean, 
                             </div>
 
                             <DialogFooter className="gap-3 sm:flex-row flex-col">
-                                <Button variant="ghost" onClick={handleClose} className="text-muted-foreground hover:text-white text-[10px] font-black uppercase tracking-widest h-11">
+                                <Button variant="ghost" onClick={handleClose} className="text-muted-foreground hover:text-white text-[10px] font-black  tracking-widest h-11">
                                     Cancel
                                 </Button>
-                                <Button 
+                                <Button
                                     onClick={handleSubmit}
-                                    className="silver-gradient text-black h-11 px-8 rounded-xl text-[10px] font-black uppercase tracking-widest flex-1"
+                                    className="silver-gradient text-black h-11 px-8 rounded-xl text-[10px] font-black  tracking-widest flex-1"
                                 >
                                     <Send className="w-4 h-4 mr-2" /> Send Protocol
                                 </Button>
@@ -314,9 +314,9 @@ function ReportConflictModal({ isOpen, onClose, invoiceId }: { isOpen: boolean, 
                                     Our financial node has received your reconciliation request. We will review the scan payload and respond within 24 hours.
                                 </p>
                             </div>
-                            <Button 
+                            <Button
                                 onClick={handleClose}
-                                className="glass-dark border-white/10 hover:bg-white/5 text-white h-11 px-10 rounded-xl text-[10px] font-black uppercase tracking-widest"
+                                className="glass-dark border-white/10 hover:bg-white/5 text-white h-11 px-10 rounded-xl text-[10px] font-black  tracking-widest"
                             >
                                 Acknowledge
                             </Button>

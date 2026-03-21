@@ -5,7 +5,6 @@ import {
     LayoutDashboard, 
     Users, 
     Calendar, 
-    Zap, 
     TrendingUp, 
     Settings, 
     MapPin,

@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import {
     Button,
 } from "@/components/ui/button";
-import { 
-    FileText, 
-    Calendar, 
+import {
+    FileText,
+    Calendar,
     ArrowRight,
     Search,
     Filter,
@@ -68,10 +68,10 @@ export default function PartnerInvoicesPage() {
                     <h3 className="text-sm font-black tracking-wide text-glow-silver">Invoice Archive</h3>
                     <div className="flex flex-1 max-w-sm relative group">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary opacity-40" />
-                        <Input 
+                        <Input
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Find invoice by ref..." 
+                            placeholder="Find invoice by ref..."
                             className="pl-12 bg-black/60 border-white/10 rounded-xl h-11 text-[11px] font-medium tracking-tight"
                         />
                     </div>
@@ -80,7 +80,7 @@ export default function PartnerInvoicesPage() {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-white/5 text-muted-foreground text-[9px] font-black uppercase tracking-widest bg-black/40">
+                            <tr className="border-b border-white/5 text-muted-foreground text-[9px] font-black  tracking-widest bg-black/40">
                                 <th className="px-8 py-5">Instrument ID</th>
                                 <th className="px-8 py-5">Cycle Period</th>
                                 <th className="px-8 py-5">Scan Volume</th>
@@ -95,7 +95,7 @@ export default function PartnerInvoicesPage() {
                                     <td className="px-8 py-6">
                                         <div className="flex items-center gap-3">
                                             <FileText className="w-4 h-4 text-primary opacity-40 group-hover:opacity-100 transition-opacity" />
-                                            <span className="font-bold text-[12px] text-white uppercase tracking-tight">{inv.id}</span>
+                                            <span className="font-bold text-[12px] text-white  tracking-tight">{inv.id}</span>
                                         </div>
                                     </td>
                                     <td className="px-8 py-6 text-[11px] font-bold text-muted-foreground">{inv.period}</td>
@@ -103,16 +103,16 @@ export default function PartnerInvoicesPage() {
                                     <td className="px-8 py-6 text-[13px] font-black text-white">{inv.amount}</td>
                                     <td className="px-8 py-6">
                                         <Badge variant="outline" className={cn(
-                                            "bg-black/40 text-[9px] font-black uppercase tracking-widest px-3 py-1",
+                                            "bg-black/40 text-[9px] font-black  tracking-widest px-3 py-1",
                                             inv.status === "Paid" ? "border-emerald-500/20 text-emerald-500" : "border-amber-500/20 text-amber-500"
                                         )}>
                                             {inv.status}
                                         </Badge>
                                     </td>
                                     <td className="px-8 py-6 text-right">
-                                        <Button 
+                                        <Button
                                             onClick={() => router.push(`/partner/invoices/${inv.id}`)}
-                                            variant="ghost" 
+                                            variant="ghost"
                                             className="h-9 gap-2 pl-4 pr-3 rounded-lg hover:bg-white/5 text-[10px] font-bold tracking-tight border border-transparent hover:border-white/5"
                                         >
                                             View Audit <ArrowRight className="w-3.5 h-3.5" />

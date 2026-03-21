@@ -62,7 +62,7 @@ export default function BillingPage() {
         if (id === activePlan) return;
         setIsUpdating(id);
         setTimeout(() => {
-            updatePlan(id.charAt(0).toUpperCase() + id.slice(1) as any);
+            updatePlan(id.charAt(0).to() + id.slice(1) as any);
             setIsUpdating(null);
             toast.success(`Subscription Updated`, { description: `You are now on the ${id} tier.` });
         }, 1200);
@@ -84,9 +84,9 @@ export default function BillingPage() {
                             <BadgeCheck className="w-6 h-6" />
                         </div>
                         <div>
-                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5 opacity-60">Current ACTIVE PLAN</p>
+                            <p className="text-[10px] font-bold text-muted-foreground  tracking-wider mb-0.5 opacity-60">Current ACTIVE PLAN</p>
                             <div className="flex items-center gap-2">
-                                <h2 className="text-xl font-bold uppercase tracking-wide">{activePlan} Access</h2>
+                                <h2 className="text-xl font-bold  tracking-wide">{activePlan} Access</h2>
                                 <Badge className="bg-primary/10 text-primary border-primary/20 text-[9px] font-bold">RENEWING APR 15</Badge>
                             </div>
                         </div>
@@ -94,18 +94,18 @@ export default function BillingPage() {
 
                     <div className="flex gap-8 border-l border-white/10 pl-8 h-10 max-md:hidden items-center">
                         <div>
-                            <p className="text-[9px] font-bold text-muted-foreground uppercase opacity-40">Monthly Spend</p>
+                            <p className="text-[9px] font-bold text-muted-foreground  opacity-40">Monthly Spend</p>
                             <p className="text-sm font-bold">RWF {activePlan === 'gold' ? '1.25M' : activePlan === 'silver' ? '450K' : '3.5M'}</p>
                         </div>
                         <div>
-                            <p className="text-[9px] font-bold text-muted-foreground uppercase opacity-40">Active Seats</p>
+                            <p className="text-[9px] font-bold text-muted-foreground  opacity-40">Active Seats</p>
                             <p className="text-sm font-bold">142 / {activePlan === 'platinum' ? '∞' : activePlan === 'gold' ? '200' : '50'}</p>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-3">
                         <div className="text-right hidden sm:block">
-                            <p className="text-[9px] font-bold text-muted-foreground uppercase opacity-40">Balance</p>
+                            <p className="text-[9px] font-bold text-muted-foreground  opacity-40">Balance</p>
                             <p className="text-xs font-bold text-primary">No overdue</p>
                         </div>
                         <Button variant="outline" className="h-9 px-4 glass border-white/10 rounded-xl text-xs font-bold">Manage Payment</Button>
@@ -124,9 +124,9 @@ export default function BillingPage() {
                         )}
                     >
                         {plan.popular && (
-                            <Badge className="absolute top-4 right-4 bg-primary text-white text-[9px] font-black uppercase rounded-full">Recommended</Badge>
+                            <Badge className="absolute top-4 right-4 bg-primary text-white text-[9px] font-black  rounded-full">Recommended</Badge>
                         )}
-                        <h3 className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-4 opacity-50">{plan.name}</h3>
+                        <h3 className="text-xs font-black  tracking-widest text-muted-foreground mb-4 opacity-50">{plan.name}</h3>
                         <div className="flex items-baseline gap-1 mb-2">
                             <span className="text-2xl font-bold">RWF {plan.price}</span>
                             <span className="text-[10px] text-muted-foreground font-medium">{plan.period}</span>
@@ -146,7 +146,7 @@ export default function BillingPage() {
                             onClick={() => handleUpgrade(plan.id)}
                             disabled={activePlan === plan.id || isUpdating === plan.id}
                             className={cn(
-                                "w-full h-10 rounded-xl text-xs font-bold uppercase tracking-wider",
+                                "w-full h-10 rounded-xl text-xs font-bold  tracking-wider",
                                 activePlan === plan.id ? "bg-white/5 border-none cursor-default" : "border-glow"
                             )}
                         >
@@ -187,7 +187,7 @@ export default function BillingPage() {
                                 <div className="flex items-center gap-4">
                                     <div className="text-right">
                                         <p className="text-xs font-bold">{inv.amount}</p>
-                                        <p className={cn("text-[8px] font-black uppercase tracking-widest leading-none",
+                                        <p className={cn("text-[8px] font-black  tracking-widest leading-none",
                                             inv.status === "Paid" ? "text-primary" :
                                                 inv.status === "Pending" ? "text-amber-500/70" : "text-rose-500/70"
                                         )}>{inv.status}</p>
@@ -204,7 +204,7 @@ export default function BillingPage() {
                             <ShieldCheck className="w-5 h-5 border-glow-silver" />
                         </div>
                         <div>
-                            <h4 className="text-sm font-bold mb-1 uppercase tracking-wide text-glow-silver">Secure Billing</h4>
+                            <h4 className="text-sm font-bold mb-1  tracking-wide text-glow-silver">Secure Billing</h4>
                             <p className="text-[11px] text-muted-foreground leading-relaxed font-medium">Official and transparent invoicing with high-level payment security.</p>
                         </div>
                     </Card>
@@ -213,7 +213,7 @@ export default function BillingPage() {
                             <p className="text-xs font-bold text-transparent bg-clip-text silver-gradient">Annual Savings</p>
                             <p className="text-[10px] text-muted-foreground font-medium">Switch to yearly and save up to 20% total cost.</p>
                         </div>
-                        <Button className="h-9 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest border-glow-silver silver-gradient text-black">Upgrade Early</Button>
+                        <Button className="h-9 px-4 rounded-xl text-[10px] font-black  tracking-widest border-glow-silver silver-gradient text-black">Upgrade Early</Button>
                     </div>
                 </div>
             </div>

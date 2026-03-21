@@ -95,7 +95,7 @@ export default function SettingsPage() {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={cn(
-                                "relative flex items-center gap-3 px-8 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300",
+                                "relative flex items-center gap-3 px-8 py-3.5 rounded-xl text-[10px] font-black  tracking-widest transition-all duration-300",
                                 isActive ? "text-black" : "text-muted-foreground hover:text-white/60"
                             )}
                         >
@@ -137,7 +137,7 @@ export default function SettingsPage() {
                                                 Update your organization's core profile and identity.
                                             </p>
                                         </div>
-                                        <Button variant="outline" className="w-full h-10 rounded-xl glass border-white/10 text-[10px] font-black uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">Change Logo</Button>
+                                        <Button variant="outline" className="w-full h-10 rounded-xl glass border-white/10 text-[10px] font-black  tracking-widest opacity-60 hover:opacity-100 transition-opacity">Change Logo</Button>
                                     </div>
                                     <div className="lg:col-span-8 space-y-6">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -185,34 +185,34 @@ export default function SettingsPage() {
                         >
                             <Card className="glass-dark border-white/5 rounded-2xl p-8 satin-card space-y-12">
                                 <div className="space-y-1">
-                                    <h3 className="text-sm font-black tracking-wide text-white uppercase">Commercial Engagement Model</h3>
-                                    <p className="text-muted-foreground text-[10px] font-semibold opacity-40 uppercase tracking-widest">Select how your organization is billed for wellness access</p>
+                                    <h3 className="text-sm font-black tracking-wide text-white ">Commercial Engagement Model</h3>
+                                    <p className="text-muted-foreground text-[10px] font-semibold opacity-40  tracking-widest">Select how your organization is billed for wellness access</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {[
-                                        { 
-                                            id: "subscription", 
-                                            title: "Tier Subscription", 
+                                        {
+                                            id: "subscription",
+                                            title: "Tier Subscription",
                                             desc: "Fixed monthly fee per employee based on selected tier. Predictable budgeting with no session caps.",
                                             icon: Sparkles,
-                                            active: true 
+                                            active: true
                                         },
-                                        { 
-                                            id: "utilization", 
-                                            title: "Metered Utilization", 
+                                        {
+                                            id: "utilization",
+                                            title: "Metered Utilization",
                                             desc: "Pay only for actual gym visits. Rates calculated based on partner pricing with a 1.2x service multiplier.",
                                             icon: Activity,
-                                            active: false 
+                                            active: false
                                         }
                                     ].map((model) => (
-                                        <button 
+                                        <button
                                             key={model.id}
                                             onClick={() => toast.info(`Model Request Sent`, { description: `Request to switch to ${model.title} has been logged for review.` })}
                                             className={cn(
                                                 "relative p-6 rounded-2xl border text-left transition-all duration-300 group satin-card",
-                                                model.active 
-                                                    ? "bg-primary/5 border-primary/20 shadow-[0_0_20px_rgba(197,199,201,0.05)]" 
+                                                model.active
+                                                    ? "bg-primary/5 border-primary/20 shadow-[0_0_20px_rgba(197,199,201,0.05)]"
                                                     : "bg-black/40 border-white/5 hover:border-white/10"
                                             )}
                                         >
@@ -223,13 +223,13 @@ export default function SettingsPage() {
                                                 )}>
                                                     <model.icon className="w-5 h-5" />
                                                 </div>
-                                                {model.active && <div className="text-[8px] font-black uppercase tracking-[0.2em] bg-primary/20 text-primary px-2.5 py-1 rounded-full border border-primary/20">Active Protocol</div>}
+                                                {model.active && <div className="text-[8px] font-black  tracking-[0.2em] bg-primary/20 text-primary px-2.5 py-1 rounded-full border border-primary/20">Active Protocol</div>}
                                             </div>
-                                            <h4 className={cn("text-xs font-black uppercase tracking-widest mb-2 transition-colors", model.active ? "text-white" : "text-muted-foreground")}>{model.title}</h4>
+                                            <h4 className={cn("text-xs font-black  tracking-widest mb-2 transition-colors", model.active ? "text-white" : "text-muted-foreground")}>{model.title}</h4>
                                             <p className="text-[10px] text-muted-foreground font-medium opacity-60 leading-relaxed mb-4">{model.desc}</p>
                                             <div className="flex items-center gap-2">
                                                 <div className={cn("w-1.5 h-1.5 rounded-full", model.active ? "bg-primary animate-pulse" : "bg-white/10")} />
-                                                <span className="text-[9px] font-bold uppercase tracking-widest opacity-40">{model.active ? "Currently Enforced" : "Protocol Standby"}</span>
+                                                <span className="text-[9px] font-bold  tracking-widest opacity-40">{model.active ? "Currently Enforced" : "Protocol Standby"}</span>
                                             </div>
                                         </button>
                                     ))}
@@ -262,15 +262,15 @@ export default function SettingsPage() {
                                             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                                                 <CreditCard className="w-5 h-5 text-primary" />
                                             </div>
-                                            <h4 className="text-[11px] font-black uppercase tracking-widest text-white">Payment Gateway</h4>
+                                            <h4 className="text-[11px] font-black  tracking-widest text-white">Payment Gateway</h4>
                                         </div>
                                         <div className="space-y-4">
                                             <div className="flex items-center justify-between">
-                                                <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest opacity-40">Auto-Debit Protocols</span>
+                                                <span className="text-[10px] text-muted-foreground font-bold  tracking-widest opacity-40">Auto-Debit Protocols</span>
                                                 <Switch checked />
                                             </div>
                                             <div className="flex items-center justify-between">
-                                                <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest opacity-40">Late Fee Penalties</span>
+                                                <span className="text-[10px] text-muted-foreground font-bold  tracking-widest opacity-40">Late Fee Penalties</span>
                                                 <Switch checked />
                                             </div>
                                         </div>
@@ -374,10 +374,10 @@ export default function SettingsPage() {
                                             <CheckCircle2 className="w-6 h-6" />
                                         </div>
                                         <div className="space-y-1.5">
-                                            <h4 className="text-xs font-black uppercase tracking-widest">Multi-Factor Auth</h4>
+                                            <h4 className="text-xs font-black  tracking-widest">Multi-Factor Auth</h4>
                                             <p className="text-[10px] text-muted-foreground leading-relaxed font-medium opacity-60">Account protected by verification via phone ••56.</p>
                                         </div>
-                                        <Button variant="outline" className="w-fit h-9 px-4 rounded-xl glass border-white/10 text-[9px] font-black uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">Manage MFA Keys</Button>
+                                        <Button variant="outline" className="w-fit h-9 px-4 rounded-xl glass border-white/10 text-[9px] font-black  tracking-widest opacity-60 hover:opacity-100 transition-opacity">Manage MFA Keys</Button>
                                     </div>
                                 </div>
                                 <div className="pt-8 flex justify-end">

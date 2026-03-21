@@ -41,18 +41,18 @@ export default function PartnerDashboard() {
 
                     <div className="relative z-10">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="px-3 py-1 bg-white/5 border border-white/10 rounded-full font-black text-[8px] text-primary uppercase tracking-[0.2em] w-fit">
+                            <div className="px-3 py-1 bg-white/5 border border-white/10 rounded-full font-black text-[8px] text-primary  tracking-[0.2em] w-fit">
                                 Terminal Alpha-01
                             </div>
                         </div>
                         <h1 className="text-4xl font-black tracking-tighter mb-2 text-glow-silver text-white">Welcome, Waka Fitness</h1>
-                        <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest mb-10 opacity-40">System ready • Encrypted verification terminal</p>
+                        <p className="text-muted-foreground text-[10px] font-black  tracking-widest mb-10 opacity-40">System ready • Encrypted verification terminal</p>
 
                         <Button
                             onClick={handleScan}
                             disabled={scanning}
                             size="lg"
-                            className="h-14 px-10 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] border-glow-silver silver-gradient text-black transition-all hover:scale-[1.02] shadow-[0_0_30px_rgba(197,199,201,0.15)] group"
+                            className="h-14 px-10 rounded-xl text-[10px] font-black  tracking-[0.2em] border-glow-silver silver-gradient text-black transition-all hover:scale-[1.02] shadow-[0_0_30px_rgba(197,199,201,0.15)] group"
                         >
                             {scanning ? (
                                 <>Syncing Protocols... <div className="ml-3 w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" /></>
@@ -70,10 +70,10 @@ export default function PartnerDashboard() {
                         <div className="inline-flex p-4 bg-black/40 rounded-2xl mb-4 border border-white/10 shadow-inner">
                             <CreditCard className="w-6 h-6 text-primary border-glow-silver" />
                         </div>
-                        <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2 opacity-40">Next Settlement</p>
+                        <p className="text-[10px] font-black text-muted-foreground  tracking-widest mb-2 opacity-40">Next Settlement</p>
                         <p className="text-3xl font-black mb-1 text-glow-silver">RWF 1.2M</p>
                         <p className="text-[10px] text-muted-foreground opacity-30 mb-6 font-bold">Scheduled • 15 MAR 2026</p>
-                        <Button variant="outline" className="w-full h-11 rounded-xl glass border-white/10 text-[9px] font-black uppercase tracking-[0.2em] opacity-60 hover:opacity-100 transition-opacity">
+                        <Button variant="outline" className="w-full h-11 rounded-xl glass border-white/10 text-[9px] font-black  tracking-[0.2em] opacity-60 hover:opacity-100 transition-opacity">
                             View Statements
                         </Button>
                     </div>
@@ -92,7 +92,7 @@ export default function PartnerDashboard() {
                             <stat.icon className="w-5 h-5" />
                         </div>
                         <div>
-                            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest opacity-40">{stat.label}</p>
+                            <p className="text-[10px] font-black text-muted-foreground  tracking-widest opacity-40">{stat.label}</p>
                             <p className="text-2xl font-black tracking-tighter text-glow-silver">{stat.value}</p>
                         </div>
                     </Card>
@@ -104,12 +104,12 @@ export default function PartnerDashboard() {
                 <Card className="glass-dark p-8 border-white/5 rounded-2xl satin-card">
                     <div className="flex justify-between items-center mb-10">
                         <div>
-                            <h3 className="text-sm font-black uppercase tracking-widest flex items-center gap-3 text-glow-silver">
+                            <h3 className="text-sm font-black  tracking-widest flex items-center gap-3 text-glow-silver">
                                 <History className="text-primary w-4 h-4" /> Entry Logs
                             </h3>
-                            <p className="text-muted-foreground text-[10px] font-medium opacity-40 mt-1 uppercase tracking-widest">Real-time verification stream</p>
+                            <p className="text-muted-foreground text-[10px] font-medium opacity-40 mt-1  tracking-widest">Real-time verification stream</p>
                         </div>
-                        <div className="px-3 py-1 bg-black/40 border border-white/10 rounded-lg font-black text-[8px] text-primary uppercase tracking-[0.2em] animate-pulse">
+                        <div className="px-3 py-1 bg-black/40 border border-white/10 rounded-lg font-black text-[8px] text-primary  tracking-[0.2em] animate-pulse">
                             ACTIVE
                         </div>
                     </div>
@@ -128,19 +128,19 @@ export default function PartnerDashboard() {
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-[13px] tracking-tight">{item.user}</h4>
-                                        <p className="text-[10px] text-muted-foreground font-black uppercase tracking-tighter opacity-30 group-hover:opacity-60 transition-opacity">
+                                        <p className="text-[10px] text-muted-foreground font-black  tracking-tighter opacity-30 group-hover:opacity-60 transition-opacity">
                                             {item.time} <span className="mx-1.5 opacity-30">•</span> {item.tier}
                                         </p>
                                     </div>
                                 </div>
-                                <div className={`font-black text-[9px] uppercase tracking-widest px-2.5 py-1 rounded-md border border-white/5 ${item.statusColor}`}>
+                                <div className={`font-black text-[9px]  tracking-widest px-2.5 py-1 rounded-md border border-white/5 ${item.statusColor}`}>
                                     {item.action}
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    <Button variant="ghost" className="w-full mt-10 h-11 rounded-xl glass border-white/10 text-[9px] font-black uppercase tracking-widest opacity-60 hover:opacity-100 transition-all">
+                    <Button variant="ghost" className="w-full mt-10 h-11 rounded-xl glass border-white/10 text-[9px] font-black  tracking-widest opacity-60 hover:opacity-100 transition-all">
                         Audit All Sessions
                     </Button>
                 </Card>
@@ -150,13 +150,13 @@ export default function PartnerDashboard() {
                     <div className="absolute inset-0 silver-gradient opacity-5" />
                     <div className="relative z-10 h-full flex flex-col">
                         <div className="mb-10">
-                            <h3 className="text-sm font-black uppercase tracking-widest mb-1 text-glow-silver">Partner Outreach</h3>
-                            <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest opacity-40">Targeted member promotions</p>
+                            <h3 className="text-sm font-black  tracking-widest mb-1 text-glow-silver">Partner Outreach</h3>
+                            <p className="text-muted-foreground text-[10px] font-black  tracking-widest opacity-40">Targeted member promotions</p>
                         </div>
 
                         <div className="flex-1 flex flex-col gap-5 justify-center text-center p-10 border-2 border-dashed border-white/5 rounded-3xl bg-black/40">
-                            <p className="text-muted-foreground text-[11px] font-bold uppercase tracking-widest opacity-30">No Active Campaigns</p>
-                            <Button size="sm" className="rounded-xl h-11 px-8 font-black text-[10px] uppercase tracking-widest border-glow-silver silver-gradient text-black mx-auto">
+                            <p className="text-muted-foreground text-[11px] font-bold  tracking-widest opacity-30">No Active Campaigns</p>
+                            <Button size="sm" className="rounded-xl h-11 px-8 font-black text-[10px]  tracking-widest border-glow-silver silver-gradient text-black mx-auto">
                                 Initialize Offer
                             </Button>
                         </div>
@@ -168,7 +168,7 @@ export default function PartnerDashboard() {
                                     <Zap className="text-primary w-5 h-5 fill-current border-glow-silver" />
                                 </div>
                                 <div>
-                                    <h4 className="font-black text-[10px] uppercase tracking-[0.2em] text-glow-silver">Strategic Insight</h4>
+                                    <h4 className="font-black text-[10px]  tracking-[0.2em] text-glow-silver">Strategic Insight</h4>
                                     <p className="text-[10px] text-muted-foreground opacity-60 leading-relaxed font-bold">Flash sales increase visits by 40% on weekends</p>
                                 </div>
                             </div>

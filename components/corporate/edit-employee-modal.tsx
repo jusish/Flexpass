@@ -84,7 +84,7 @@ export function EditEmployeeModal({ isOpen, onClose, employee }: EditEmployeeMod
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4 pt-4">
                     <div className="space-y-2">
-                        <Label htmlFor="edit-name" className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Full Name</Label>
+                        <Label htmlFor="edit-name" className="text-[11px] font-semibold  tracking-wider opacity-70">Full Name</Label>
                         <Input
                             id="edit-name"
                             className="bg-white/5 border-white/10 rounded-xl h-10 text-xs font-medium"
@@ -94,7 +94,7 @@ export function EditEmployeeModal({ isOpen, onClose, employee }: EditEmployeeMod
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="edit-email" className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Email Address</Label>
+                        <Label htmlFor="edit-email" className="text-[11px] font-semibold  tracking-wider opacity-70">Email Address</Label>
                         <Input
                             id="edit-email"
                             type="email"
@@ -106,7 +106,7 @@ export function EditEmployeeModal({ isOpen, onClose, employee }: EditEmployeeMod
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <Label htmlFor="edit-tier" className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Access Tier</Label>
+                            <Label htmlFor="edit-tier" className="text-[11px] font-semibold  tracking-wider opacity-70">Access Tier</Label>
                             <Select value={tier} onValueChange={(v: any) => setTier(v)}>
                                 <SelectTrigger id="edit-tier" className="bg-white/5 border-white/10 rounded-xl h-10 text-xs font-medium">
                                     <SelectValue />
@@ -123,7 +123,7 @@ export function EditEmployeeModal({ isOpen, onClose, employee }: EditEmployeeMod
                             </Select>
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="edit-status" className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Account Status</Label>
+                            <Label htmlFor="edit-status" className="text-[11px] font-semibold  tracking-wider opacity-70">Account Status</Label>
                             <Select value={status} onValueChange={(v: any) => setStatus(v)}>
                                 <SelectTrigger id="edit-status" className="bg-white/5 border-white/10 rounded-xl h-10 text-xs font-medium">
                                     <SelectValue />
@@ -137,7 +137,7 @@ export function EditEmployeeModal({ isOpen, onClose, employee }: EditEmployeeMod
                         </div>
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="edit-dept" className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Department</Label>
+                        <Label htmlFor="edit-dept" className="text-[11px] font-semibold  tracking-wider opacity-70">Department</Label>
                         <Input
                             id="edit-dept"
                             className="bg-white/5 border-white/10 rounded-xl h-10 text-xs font-medium"

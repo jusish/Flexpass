@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-    MapPin, 
-    Search, 
-    Filter, 
-    Plus, 
-    Download, 
-    MoreVertical, 
-    Zap, 
-    TrendingUp, 
+import {
+    MapPin,
+    Search,
+    Filter,
+    Plus,
+    Download,
+    MoreVertical,
+    Zap,
+    TrendingUp,
     ArrowUpRight,
     Building2,
     ShieldCheck,
@@ -19,13 +19,13 @@ import {
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableHead, 
-    TableHeader, 
-    TableRow 
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import {
@@ -61,7 +61,7 @@ export default function CoachPartners() {
                     <Button variant="outline" className="h-11 px-6 border-white/5 bg-white/5 text-xs font-semibold tracking-wide rounded-xl hover:bg-white/10 hover:border-white/20">
                         <Globe className="w-4 h-4 mr-2" /> Map View
                     </Button>
-                    <Button 
+                    <Button
                         onClick={() => setIsLinkModalOpen(true)}
                         className="h-11 px-6 rounded-xl text-xs font-bold tracking-wide silver-gradient text-black shadow-lg transition-all active:scale-95"
                     >
@@ -83,7 +83,7 @@ export default function CoachPartners() {
                                 <stat.icon className="w-5 h-5" />
                             </div>
                         </div>
-                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40 uppercase mb-1">{stat.label}</p>
+                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40  mb-1">{stat.label}</p>
                         <h3 className="text-2xl font-bold tracking-tight text-white">{stat.val}</h3>
                         <p className="text-[10px] text-muted-foreground opacity-40 mt-3 font-medium">{stat.sub}</p>
                     </Card>
@@ -94,8 +94,8 @@ export default function CoachPartners() {
             <div className="space-y-5">
                 <div className="relative group w-full md:w-80">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground opacity-50 group-focus-within:opacity-100 transition-opacity" />
-                    <Input 
-                        placeholder="Search partners..." 
+                    <Input
+                        placeholder="Search partners..."
                         className="h-11 bg-white/5 border-white/5 rounded-xl pl-11 text-xs font-medium focus:ring-1 focus:ring-primary/20 transition-all font-sans"
                     />
                 </div>
@@ -104,11 +104,11 @@ export default function CoachPartners() {
                     <Table>
                         <TableHeader>
                             <TableRow className="border-white/5 hover:bg-transparent bg-white/5">
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 uppercase">Facility Name</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase">Category</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase">Location</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-center uppercase">Classes</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 uppercase">Status</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 ">Facility Name</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 ">Category</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 ">Location</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-center ">Classes</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 ">Status</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -142,13 +142,13 @@ export default function CoachPartners() {
                                         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/5 bg-white/5">
                                             <div className={cn(
                                                 "w-1 h-1 rounded-full",
-                                                node.status === "Active Node" ? "bg-emerald-500" : 
-                                                node.status === "Pending Audit" ? "bg-amber-500" : "bg-rose-500"
+                                                node.status === "Active Node" ? "bg-emerald-500" :
+                                                    node.status === "Pending Audit" ? "bg-amber-500" : "bg-rose-500"
                                             )} />
                                             <span className={cn(
-                                                "text-[10px] font-bold tracking-wide uppercase",
+                                                "text-[10px] font-bold tracking-wide ",
                                                 node.status === "Active Node" ? "text-emerald-500" :
-                                                node.status === "Pending Audit" ? "text-amber-500" : "text-rose-500"
+                                                    node.status === "Pending Audit" ? "text-amber-500" : "text-rose-500"
                                             )}>{node.status === "Active Node" ? "Active" : node.status === "Pending Audit" ? "Pending" : "Hidden"}</span>
                                         </div>
                                     </TableCell>
@@ -171,10 +171,10 @@ export default function CoachPartners() {
 
                     <div className="space-y-5 pt-4">
                         <div className="space-y-2">
-                            <Label className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Search Facility</Label>
+                            <Label className="text-[11px] font-semibold  tracking-wider opacity-70">Search Facility</Label>
                             <Input placeholder="Enter facility name or ID..." className="bg-white/5 border-white/10 rounded-xl h-11 text-xs font-medium" />
                         </div>
-                        
+
                         <div className="bg-white/5 rounded-xl p-6 border border-white/5 space-y-3">
                             <h4 className="text-[11px] font-bold text-white flex items-center gap-2">
                                 <ShieldCheck className="w-4 h-4 text-indigo-400" /> Connecting Protocol

@@ -78,7 +78,7 @@ export default function LandingPage() {
             variants={stagger}
             className="flex flex-col items-center text-center"
           >
-            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-white/5 text-primary text-[10px] font-semibold uppercase tracking-wide mb-6">
+            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-white/5 text-primary text-[10px] font-semibold  tracking-wide mb-6">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></span>
@@ -125,7 +125,7 @@ export default function LandingPage() {
               className="glass p-6 rounded-2xl text-center border border-white/5"
             >
               <div className="text-2xl md:text-3xl font-semibold text-primary/80 mb-1">{stat.value}</div>
-              <div className="text-[10px] uppercase tracking-wide text-muted-foreground font-semibold opacity-60">{stat.label}</div>
+              <div className="text-[10px]  tracking-wide text-muted-foreground font-semibold opacity-60">{stat.label}</div>
             </motion.div>
           ))}
         </div>

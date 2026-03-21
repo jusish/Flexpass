@@ -50,8 +50,8 @@ export default function CheckInsPage() {
                     <Button variant="outline" size="sm" className="glass border-white/5 h-11 px-6 rounded-xl text-[9px] font-bold tracking-tight opacity-60 hover:opacity-100 transition-opacity">
                         <Download className="w-3.5 h-3.5 mr-2 opacity-60" /> Export Archive
                     </Button>
-                    <Button 
-                        size="sm" 
+                    <Button
+                        size="sm"
                         onClick={() => setIsCheckInModalOpen(true)}
                         className="h-11 px-8 rounded-xl text-[10px] font-bold tracking-tight silver-gradient text-black shadow-[0_0_20px_rgba(197,199,201,0.2)]"
                     >
@@ -79,8 +79,8 @@ export default function CheckInsPage() {
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-white/5 text-[9px] font-black uppercase tracking-widest bg-black/40 text-white">
-                                <th className="px-8 py-5">Identity</th> 
+                            <tr className="border-b border-white/5 text-[9px] font-black  tracking-widest bg-black/40 text-white">
+                                <th className="px-8 py-5">Identity</th>
                                 <th className="px-8 py-5">Access Tier</th>
                                 <th className="px-8 py-5">Facility Zone</th>
                                 <th className="px-8 py-5 text-center">Timestamp</th>
@@ -103,14 +103,14 @@ export default function CheckInsPage() {
                                         </div>
                                     </td>
                                     <td className="px-8 py-6">
-                                        <span className="text-[9px] font-black uppercase tracking-tighter text-primary px-3 py-1 rounded-md bg-black/40 border border-white/5 group-hover:border-primary/20 transition-all">
+                                        <span className="text-[9px] font-black  tracking-tighter text-primary px-3 py-1 rounded-md bg-black/40 border border-white/5 group-hover:border-primary/20 transition-all">
                                             {log.tier}
                                         </span>
                                     </td>
                                     <td className="px-8 py-6">
                                         <div className="flex items-center gap-2">
                                             <div className="w-1.5 h-1.5 rounded-full bg-secondary/40" />
-                                            <span className="text-[10px] text-muted-foreground font-bold tracking-tight uppercase">
+                                            <span className="text-[10px] text-muted-foreground font-bold tracking-tight ">
                                                 {log.facility}
                                             </span>
                                         </div>
@@ -124,7 +124,7 @@ export default function CheckInsPage() {
                                         </div>
                                     </td>
                                     <td className="px-8 py-6">
-                                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/5 text-emerald-500/80 text-[10px] font-black uppercase tracking-widest border border-emerald-500/10">
+                                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/5 text-emerald-500/80 text-[10px] font-black  tracking-widest border border-emerald-500/10">
                                             <CheckCircle2 className="w-3.5 h-3.5" /> SECURE
                                         </div>
                                     </td>

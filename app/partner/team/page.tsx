@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-    Users, 
-    Zap, 
-    ShieldCheck, 
-    MoreVertical, 
+import {
+    Users,
+    Zap,
+    ShieldCheck,
+    MoreVertical,
     Search,
     UserPlus,
     Activity,
@@ -18,13 +18,13 @@ import {
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableHead, 
-    TableHeader, 
-    TableRow 
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import {
@@ -53,12 +53,12 @@ export default function PartnerTeam() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div className="space-y-1">
                     <h1 className="text-4xl font-black tracking-tighter text-white">Instructional Team</h1>
-                    <p className="text-muted-foreground text-[11px] font-semibold opacity-50 uppercase tracking-widest mt-1">Authorized Independent Nodes serving this facility</p>
+                    <p className="text-muted-foreground text-[11px] font-semibold opacity-50  tracking-widest mt-1">Authorized Independent Nodes serving this facility</p>
                 </div>
                 <div className="flex gap-3">
-                    <Button 
+                    <Button
                         onClick={() => setIsLinkModalOpen(true)}
-                        className="silver-gradient text-black h-12 px-8 rounded-2xl text-[10px] font-black tracking-widest transition-all shadow-xl shadow-white/5 uppercase"
+                        className="silver-gradient text-black h-12 px-8 rounded-2xl text-[10px] font-black tracking-widest transition-all shadow-xl shadow-white/5 "
                     >
                         <UserPlus className="w-4 h-4 mr-2" /> Connect Professional
                     </Button>
@@ -78,7 +78,7 @@ export default function PartnerTeam() {
                                 <stat.icon className="w-4 h-4" />
                             </div>
                         </div>
-                        <p className="text-[9px] font-bold text-muted-foreground tracking-widest opacity-30 uppercase mb-1">{stat.label}</p>
+                        <p className="text-[9px] font-bold text-muted-foreground tracking-widest opacity-30  mb-1">{stat.label}</p>
                         <h3 className="text-2xl font-black tracking-tighter text-white">{stat.value}</h3>
                         <p className="text-[9px] text-muted-foreground opacity-30 mt-3 font-semibold">{stat.trend}</p>
                     </Card>
@@ -89,8 +89,8 @@ export default function PartnerTeam() {
             <div className="space-y-6">
                 <div className="relative group w-full md:w-96">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground opacity-40 group-focus-within:opacity-100 transition-all" />
-                    <Input 
-                        placeholder="Filter team by name, specialty or type..." 
+                    <Input
+                        placeholder="Filter team by name, specialty or type..."
                         className="h-12 bg-black/40 border-white/5 rounded-2xl pl-12 text-[11px] font-bold focus:ring-1 focus:ring-white/10 transition-all font-sans tracking-wide"
                     />
                 </div>
@@ -99,10 +99,10 @@ export default function PartnerTeam() {
                     <Table>
                         <TableHeader>
                             <TableRow className="border-white/5 hover:bg-transparent bg-white/2">
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 pl-10 uppercase">Member Identity</TableHead>
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 uppercase">Clinical/Sport Role</TableHead>
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 uppercase text-center">Unit Load</TableHead>
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 uppercase text-right pr-10">Service Index</TableHead>
+                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 pl-10 ">Member Identity</TableHead>
+                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 ">Clinical/Sport Role</TableHead>
+                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16  text-center">Unit Load</TableHead>
+                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16  text-right pr-10">Service Index</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -114,16 +114,16 @@ export default function PartnerTeam() {
                                                 {member.type === "Coach" ? <ShieldCheck className="w-4 h-4 text-indigo-500" /> : <HeartPulse className="w-4 h-4 text-emerald-500" />}
                                             </div>
                                             <div>
-                                                <h4 className="text-[11px] font-black text-white uppercase tracking-widest">{member.name}</h4>
-                                                <p className="text-[9px] text-muted-foreground font-black opacity-30 tracking-widest uppercase">{member.id} • {member.type.toUpperCase()}</p>
+                                                <h4 className="text-[11px] font-black text-white  tracking-widest">{member.name}</h4>
+                                                <p className="text-[9px] text-muted-foreground font-black opacity-30 tracking-widest ">{member.id} • {member.type.to()}</p>
                                             </div>
                                         </div>
                                     </TableCell>
                                     <TableCell>
-                                        <p className="text-[10px] font-bold text-white tracking-widest uppercase">{member.role}</p>
+                                        <p className="text-[10px] font-bold text-white tracking-widest ">{member.role}</p>
                                     </TableCell>
                                     <TableCell className="text-center font-black text-xs text-white">
-                                        {member.sessions} <span className="text-[8px] opacity-30 tracking-widest uppercase ml-1">UNITS / WK</span>
+                                        {member.sessions} <span className="text-[8px] opacity-30 tracking-widest  ml-1">UNITS / WK</span>
                                     </TableCell>
                                     <TableCell className="text-right pr-10">
                                         <div className="flex items-center justify-end gap-2 text-white font-black text-xs">
@@ -145,32 +145,32 @@ export default function PartnerTeam() {
                         <DialogTitle className="text-2xl font-black tracking-tighter text-white">
                             Link Professional Node
                         </DialogTitle>
-                        <DialogDescription className="text-[10px] font-bold text-muted-foreground opacity-50 uppercase tracking-widest">
+                        <DialogDescription className="text-[10px] font-bold text-muted-foreground opacity-50  tracking-widest">
                             Authorized connection to independent flexpass service providers
                         </DialogDescription>
                     </DialogHeader>
 
                     <div className="py-8 space-y-6">
                         <div className="space-y-3">
-                            <Label className="text-[10px] font-black tracking-widest text-muted-foreground opacity-40 uppercase ml-1 font-sans">Provider Identity / ID</Label>
+                            <Label className="text-[10px] font-black tracking-widest text-muted-foreground opacity-40  ml-1 font-sans">Provider Identity / ID</Label>
                             <Input placeholder="Enter Professional ID or Registered Email..." className="bg-white/5 border-white/10 rounded-2xl h-14 text-xs font-bold text-white px-6 w-full" />
                         </div>
 
                         <div className="bg-white/5 rounded-[20px] p-6 border border-white/5 space-y-3">
-                            <h4 className="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
+                            <h4 className="text-[10px] font-black text-white  tracking-widest flex items-center gap-2">
                                 <Zap className="w-4 h-4 text-indigo-500" /> Connection Protocol
                             </h4>
-                            <p className="text-[9px] text-muted-foreground font-semibold opacity-60 leading-relaxed uppercase tracking-wider">
+                            <p className="text-[9px] text-muted-foreground font-semibold opacity-60 leading-relaxed  tracking-wider">
                                 By inviting a professional, you are authorizing them to schedule sessions using your facility nodes. All revenue distribution will be managed by the Flexpass Central Ledger.
                             </p>
                         </div>
                     </div>
 
                     <DialogFooter className="gap-4 sm:gap-0">
-                        <Button variant="ghost" onClick={() => setIsLinkModalOpen(false)} className="h-14 flex-1 text-muted-foreground text-[10px] font-black uppercase tracking-widest border border-white/5 rounded-2xl">
+                        <Button variant="ghost" onClick={() => setIsLinkModalOpen(false)} className="h-14 flex-1 text-muted-foreground text-[10px] font-black  tracking-widest border border-white/5 rounded-2xl">
                             ABORT
                         </Button>
-                        <Button onClick={() => setIsLinkModalOpen(false)} className="h-14 flex-2 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] silver-gradient text-black shadow-2xl shadow-white/5">
+                        <Button onClick={() => setIsLinkModalOpen(false)} className="h-14 flex-2 rounded-2xl text-[10px] font-black  tracking-[0.2em] silver-gradient text-black shadow-2xl shadow-white/5">
                             SEND CONNECTION REQUEST
                         </Button>
                     </DialogFooter>

@@ -74,7 +74,7 @@ export function AddEmployeeModal({ isOpen, onClose }: AddEmployeeModalProps) {
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4 pt-4">
                     <div className="space-y-2">
-                        <Label htmlFor="name" className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Full Name</Label>
+                        <Label htmlFor="name" className="text-[11px] font-semibold  tracking-wider opacity-70">Full Name</Label>
                         <Input
                             id="name"
                             placeholder="e.g. Jean Damascene"
@@ -85,7 +85,7 @@ export function AddEmployeeModal({ isOpen, onClose }: AddEmployeeModalProps) {
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="email" className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Email Address</Label>
+                        <Label htmlFor="email" className="text-[11px] font-semibold  tracking-wider opacity-70">Email Address</Label>
                         <Input
                             id="email"
                             type="email"
@@ -98,7 +98,7 @@ export function AddEmployeeModal({ isOpen, onClose }: AddEmployeeModalProps) {
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <Label htmlFor="tier" className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Access Tier</Label>
+                            <Label htmlFor="tier" className="text-[11px] font-semibold  tracking-wider opacity-70">Access Tier</Label>
                             <Select value={tier} onValueChange={(v: any) => setTier(v)}>
                                 <SelectTrigger className="bg-white/5 border-white/10 rounded-xl h-10 text-xs font-medium">
                                     <SelectValue placeholder="Select Tier" />
@@ -115,7 +115,7 @@ export function AddEmployeeModal({ isOpen, onClose }: AddEmployeeModalProps) {
                             </Select>
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="dept" className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Department</Label>
+                            <Label htmlFor="dept" className="text-[11px] font-semibold  tracking-wider opacity-70">Department</Label>
                             <Input
                                 id="dept"
                                 placeholder="e.g. IT"

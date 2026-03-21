@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-    Users, 
-    Zap, 
-    TrendingUp, 
-    Wallet, 
+import {
+    Users,
+    Zap,
+    TrendingUp,
+    Wallet,
     Calendar,
     ArrowUpRight,
     ArrowDownRight,
@@ -22,20 +22,20 @@ import {
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableHead, 
-    TableHeader, 
-    TableRow 
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
 } from "@/components/ui/table";
-import { 
-    AreaChart, 
-    Area, 
-    XAxis, 
-    YAxis, 
-    CartesianGrid, 
+import {
+    AreaChart,
+    Area,
+    XAxis,
+    YAxis,
+    CartesianGrid,
     ResponsiveContainer,
     Tooltip,
     BarChart,
@@ -61,41 +61,41 @@ const performanceData = [
 ];
 
 const sessions = [
-    { 
+    {
         id: "SES-001",
-        name: "Morning Blast HIITS", 
-        partner: "Waka Fitness HQ", 
-        users: 12, 
+        name: "Morning Blast HIITS",
+        partner: "Waka Fitness HQ",
+        users: 12,
         time: "08:00 AM",
         status: "Active",
         yield: 24000,
         type: "Session"
     },
-    { 
+    {
         id: "SES-002",
-        name: "Strength Protocol", 
-        partner: "Cercle Sportif", 
-        users: 8, 
+        name: "Strength Protocol",
+        partner: "Cercle Sportif",
+        users: 8,
         time: "10:30 AM",
         status: "Confirmed",
         yield: 16000,
         type: "Class"
     },
-    { 
+    {
         id: "SES-003",
-        name: "Power Yoga Flow", 
-        partner: "Mindful Zen", 
-        users: 15, 
+        name: "Power Yoga Flow",
+        partner: "Mindful Zen",
+        users: 15,
         time: "02:00 PM",
         status: "Ready",
         yield: 15000,
         type: "Session"
     },
-    { 
+    {
         id: "SES-004",
-        name: "Evening Cardio Burn", 
-        partner: "Waka Fitness HQ", 
-        users: 6, 
+        name: "Evening Cardio Burn",
+        partner: "Waka Fitness HQ",
+        users: 6,
         time: "05:00 PM",
         status: "Active",
         yield: 12000,
@@ -140,9 +140,9 @@ export default function CoachDashboard() {
                             <div className={cn("p-2.5 rounded-xl bg-white/5 border border-white/5 shadow-inner transition-transform group-hover:scale-105", stat.color)}>
                                 <stat.icon className="w-5 h-5" />
                             </div>
-                            <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-lg tracking-wide uppercase">{stat.trend}</span>
+                            <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-lg tracking-wide ">{stat.trend}</span>
                         </div>
-                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40 uppercase mb-1">{stat.label}</p>
+                        <p className="text-[10px] font-bold text-muted-foreground tracking-wider opacity-40  mb-1">{stat.label}</p>
                         <h3 className="text-2xl font-bold tracking-tight text-white">{stat.val}</h3>
                         <p className="text-[10px] text-muted-foreground opacity-40 mt-3 font-medium">{stat.sub}</p>
                     </Card>
@@ -154,15 +154,15 @@ export default function CoachDashboard() {
                 <Card className="lg:col-span-2 glass-dark p-8 border-white/5 rounded-3xl satin-card space-y-10">
                     <div className="flex justify-between items-center">
                         <div className="space-y-1">
-                            <h3 className="text-sm font-bold tracking-wide text-white uppercase flex items-center gap-2">
+                            <h3 className="text-sm font-bold tracking-wide text-white  flex items-center gap-2">
                                 <TrendingUp className="w-4 h-4 text-indigo-500" /> Financial Performance
                             </h3>
                             <p className="text-[11px] font-medium text-muted-foreground opacity-50">Gross Revenue vs Session Volume benchmarks</p>
                         </div>
                     </div>
-                    
+
                     <div className="h-[350px] w-full">
-                        <ChartContainer config={chartConfig} className="h-full w-full">
+                        <ChartContainer id="coach-performance-chart" config={chartConfig} className="h-full w-full">
                             <AreaChart data={performanceData} margin={{ left: -20, right: 10, top: 0 }}>
                                 <defs>
                                     <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
@@ -182,7 +182,7 @@ export default function CoachDashboard() {
 
                 <Card className="glass-dark p-8 border-white/5 rounded-3xl satin-card flex flex-col justify-between">
                     <div className="space-y-1">
-                        <h3 className="text-sm font-bold tracking-wide text-white uppercase flex items-center gap-2">
+                        <h3 className="text-sm font-bold tracking-wide text-white  flex items-center gap-2">
                             <Users className="w-4 h-4 text-indigo-400" /> Member Distribution
                         </h3>
                         <p className="text-[11px] font-medium text-muted-foreground opacity-50">Active members across facilities</p>
@@ -196,21 +196,21 @@ export default function CoachDashboard() {
                         ].map((item, i) => (
                             <div key={i} className="space-y-2.5">
                                 <div className="flex justify-between items-end">
-                                    <span className="text-[10px] font-bold text-white/50 uppercase tracking-wider">{item.name}</span>
+                                    <span className="text-[10px] font-bold text-white/50  tracking-wider">{item.name}</span>
                                     <span className="text-base font-bold text-white">{item.val}%</span>
                                 </div>
                                 <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                                    <motion.div 
+                                    <motion.div
                                         initial={{ width: 0 }}
                                         animate={{ width: `${item.val}%` }}
-                                        className={cn("h-full", item.color)} 
+                                        className={cn("h-full", item.color)}
                                     />
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    <Button variant="outline" className="h-12 rounded-xl border-white/5 bg-white/5 text-xs font-bold tracking-wide uppercase hover:bg-white/10">
+                    <Button variant="outline" className="h-12 rounded-xl border-white/5 bg-white/5 text-xs font-bold tracking-wide  hover:bg-white/10">
                         View Detailed Report
                     </Button>
                 </Card>
@@ -219,7 +219,7 @@ export default function CoachDashboard() {
             {/* Ingress Logs / Upcoming Sessions */}
             <div className="space-y-5">
                 <div className="flex items-center justify-between pl-1">
-                    <h3 className="text-[10px] font-bold tracking-widest text-white/50 uppercase">Session Registry</h3>
+                    <h3 className="text-[10px] font-bold tracking-widest text-white/50 ">Session Registry</h3>
                     <Button variant="ghost" className="h-8 text-[10px] font-bold text-primary px-3 rounded-lg hover:bg-primary/5">
                         View All
                     </Button>
@@ -228,11 +228,11 @@ export default function CoachDashboard() {
                     <Table>
                         <TableHeader>
                             <TableRow className="border-white/5 hover:bg-transparent bg-white/5">
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 uppercase">Session Name</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase">Facility</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase text-center">Attendance</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 uppercase text-right">Net Yield</TableHead>
-                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 uppercase">ID</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 pl-8 ">Session Name</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 ">Facility</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14  text-center">Attendance</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14  text-right">Net Yield</TableHead>
+                                <TableHead className="text-[10px] font-bold tracking-widest text-muted-foreground h-14 text-right pr-8 ">ID</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -261,9 +261,9 @@ export default function CoachDashboard() {
                                     <TableCell className="text-center text-xs font-bold text-white">{session.users} / 20</TableCell>
                                     <TableCell className="text-right">
                                         <p className="text-xs font-bold text-white">RWF {session.yield.toLocaleString()}</p>
-                                        <p className="text-[9px] font-bold text-indigo-400 uppercase tracking-wide mt-1">Net Payout</p>
+                                        <p className="text-[9px] font-bold text-indigo-400  tracking-wide mt-1">Net Payout</p>
                                     </TableCell>
-                                    <TableCell className="text-right pr-8 text-[10px] font-bold text-muted-foreground opacity-20 uppercase tracking-widest group-hover:opacity-100 transition-opacity">
+                                    <TableCell className="text-right pr-8 text-[10px] font-bold text-muted-foreground opacity-20  tracking-widest group-hover:opacity-100 transition-opacity">
                                         {session.id}
                                     </TableCell>
                                 </TableRow>

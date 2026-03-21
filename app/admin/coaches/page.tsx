@@ -1,211 +1,187 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-    Users, 
-    Zap, 
-    TrendingUp, 
-    Plus, 
-    Download, 
-    Search, 
+import {
+    Search,
     Filter,
-    ShieldCheck,
-    Mail,
-    Phone,
-    MoreVertical,
-    CheckCircle2,
-    XCircle,
+    Plus,
+    Star,
+    Users,
+    TrendingUp,
+    Award,
     Clock,
-    UserPlus,
-    Dumbbell
+    MoreVertical,
+    ArrowUpRight,
+    History,
+    Activity,
+    Zap,
+    Briefcase,
+    ShieldCheck,
+    CreditCard,
+    Layers,
+    SlidersHorizontal,
+    Box
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableHead, 
-    TableHeader, 
-    TableRow 
-} from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
-    DialogFooter,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
+} from "@/components/ui/select";
+import { useMockStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { DateRangeFilter } from "@/components/admin/date-filter";
+import { DataFilterModal } from "@/components/admin/data-filter-modal";
 
-const coachesData = [
-    { id: "COA-001", name: "Jean Pierre", specialty: "HIIT & Strength", sessions: 142, rating: 4.9, status: "Active", revenue: 840000, joined: "Oct 2025" },
-    { id: "COA-002", name: "Sarah Mutoni", specialty: "Yoga Flow", sessions: 88, rating: 4.8, status: "Active", revenue: 420000, joined: "Nov 2025" },
-    { id: "COA-003", name: "David Kalisa", specialty: "Boxing", sessions: 0, rating: 0, status: "Pending Invite", revenue: 0, joined: "Mar 2026" },
-];
+export default function CoachesAdmin() {
+    const { coaches } = useMockStore();
+    const [search, setSearch] = useState("");
 
-export default function AdminCoaches() {
-    const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+    const filteredCoaches = coaches.filter(c =>
+        c.name.toLowerCase().includes(search.toLowerCase()) ||
+        c.specialty.toLowerCase().includes(search.toLowerCase())
+    );
 
     return (
-        <div className="space-y-10 pb-20">
+        <div className="space-y-10 animate-in fade-in duration-500 pb-20">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div className="space-y-1">
-                    <h1 className="text-4xl font-black tracking-tighter text-white">Coach Network</h1>
-                    <p className="text-muted-foreground text-[11px] font-semibold opacity-50 uppercase tracking-widest mt-1">Independent Professional Node Registry & Yield Audit</p>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <h1 className="text-4xl font-black tracking-tighter text-white ">Coach Network</h1>
+                    <p className="text-muted-foreground text-[11px] font-semibold opacity-50  tracking-[0.2em] mt-1">
+                        Professional Cadre • Performance Node Distribution • Specialized Units
+                    </p>
                 </div>
                 <div className="flex gap-3">
-                    <Button variant="outline" className="glass border-white/5 h-12 px-6 rounded-2xl text-[10px] font-black tracking-widest opacity-60 hover:opacity-100 transition-all uppercase">
-                        <Download className="w-4 h-4 mr-2" /> Global Audit
+                    <Button variant="outline" className="h-12 px-6 border-white/5 bg-white/5 text-[10px] font-black tracking-widest opacity-60 hover:opacity-100 transition-all rounded-2xl ">
+                        Export network audit
                     </Button>
-                    <Button 
-                        onClick={() => setIsInviteModalOpen(true)}
-                        className="silver-gradient text-black h-12 px-8 rounded-2xl text-[10px] font-black tracking-widest transition-all shadow-xl shadow-white/5 uppercase"
-                    >
-                        <UserPlus className="w-4 h-4 mr-2" /> Invite Professional
+                    <Button className="h-12 px-8 rounded-2xl text-[10px] font-black tracking-widest silver-gradient text-black  active:scale-95 shadow-xl shadow-white/5">
+                        Onboard clinical professional
                     </Button>
                 </div>
             </div>
 
-            {/* Global Insight Grid */}
+            {/* Micro Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {[
-                    { label: "Active Professionals", value: "42", trend: "Master Level", icon: ShieldCheck, color: "text-indigo-500" },
-                    { label: "Session Capacity", value: "1.2k / mo", trend: "High Load", icon: Zap, color: "text-emerald-500" },
-                    { label: "Network Yield", value: "RWF 12.4M", trend: "+15% MoM", icon: TrendingUp, color: "text-amber-500" },
-                    { label: "Pending nodes", value: "8", trend: "Verifying credentials", icon: Clock, color: "text-sky-500" },
+                    { label: "Active Professionals", val: coaches.length, sub: "Verified clinical units", icon: Users, color: "text-indigo-500" },
+                    { label: "Aggregate Yield", val: `RWF ${(coaches.reduce((acc, c) => acc + c.revenue, 0) / 1000000).toFixed(1)}M`, sub: "Monthly network revenue", icon: CreditCard, color: "text-emerald-500" },
+                    { label: "Performance Index", val: "4.9/5.0", sub: "Global network rating", icon: Star, color: "text-amber-500" },
+                    { label: "Utilization Flow", val: "88.4%", sub: "Network session load", icon: Activity, color: "text-sky-500" },
                 ].map((stat, i) => (
-                    <Card key={i} className="glass-dark p-6 border-white/5 rounded-2xl satin-card group">
+                    <Card key={i} className="glass-dark p-6 border-white/5 rounded-2xl satin-card group hover:scale-[1.02] transition-transform">
                         <div className="flex justify-between items-center mb-4">
-                            <div className={cn("p-2.5 bg-white/5 border border-white/5 rounded-xl transition-transform group-hover:scale-110", stat.color)}>
+                            <div className={cn("p-2.5 rounded-xl bg-white/5 border border-white/5 transition-transform group-hover:scale-110 shadow-inner", stat.color)}>
                                 <stat.icon className="w-4 h-4" />
                             </div>
                         </div>
-                        <p className="text-[9px] font-bold text-muted-foreground tracking-widest opacity-30 uppercase mb-1">{stat.label}</p>
-                        <h3 className="text-2xl font-black tracking-tighter text-white">{stat.value}</h3>
-                        <p className="text-[9px] text-muted-foreground opacity-30 mt-3 font-semibold uppercase">{stat.trend}</p>
+                        <p className="text-[9px] font-bold text-muted-foreground  opacity-30 tracking-widest mb-1">{stat.label}</p>
+                        <h3 className="text-2xl font-black text-white tracking-tighter tabular-nums">{stat.val}</h3>
+                        <p className="text-[9px] font-bold text-muted-foreground opacity-30  tracking-widest mt-2">{stat.sub}</p>
                     </Card>
                 ))}
             </div>
 
-            {/* Filters & Table */}
-            <div className="space-y-6">
-                <div className="relative group w-full md:w-96">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground opacity-40 group-focus-within:opacity-100 transition-all" />
-                    <Input 
-                        placeholder="Locate professional by name, ID or discipline..." 
-                        className="h-12 bg-black/40 border-white/5 rounded-2xl pl-12 text-[11px] font-bold focus:ring-1 focus:ring-white/10 transition-all font-sans tracking-wide"
-                    />
-                </div>
-
-                <Card className="glass-dark border-white/5 rounded-3xl overflow-hidden satin-card">
-                    <Table>
-                        <TableHeader>
-                            <TableRow className="border-white/5 hover:bg-transparent bg-white/2">
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 pl-10 uppercase">Identity Node</TableHead>
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 uppercase">Discipline</TableHead>
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 uppercase text-center">Sessions</TableHead>
-                                <TableHead className="text-[9px] font-black tracking-widest text-muted-foreground h-16 uppercase text-right">Aggregate Yield</TableHead>
-                                <TableHead className="text-[10px] font-black tracking-widest text-muted-foreground h-16 text-right pr-10 uppercase">Auth Status</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {coachesData.map((coach, i) => (
-                                <TableRow key={i} className="border-white/5 hover:bg-white/5 transition-all group">
-                                    <TableCell className="pl-10 py-6">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center font-black text-[10px] text-white shadow-inner uppercase">
-                                                {coach.name.slice(0, 2)}
-                                            </div>
-                                            <div>
-                                                <h4 className="text-[11px] font-black text-white uppercase tracking-widest">{coach.name}</h4>
-                                                <p className="text-[9px] text-muted-foreground font-black opacity-30 tracking-widest uppercase">{coach.id} • Joined {coach.joined}</p>
-                                            </div>
-                                        </div>
-                                    </TableCell>
-                                    <TableCell>
-                                        <p className="text-[10px] font-bold text-white tracking-widest uppercase">{coach.specialty}</p>
-                                    </TableCell>
-                                    <TableCell className="text-center font-black text-xs text-white">
-                                        {coach.sessions}
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <p className="text-xs font-black text-white">RWF {coach.revenue.toLocaleString()}</p>
-                                        <Badge variant="outline" className="text-[7px] font-black border-white/5 mt-1 opacity-40 uppercase">System Audited</Badge>
-                                    </TableCell>
-                                    <TableCell className="text-right pr-10">
-                                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/5 bg-white/2">
-                                            <div className={cn(
-                                                "w-1 h-1 rounded-full",
-                                                coach.status === "Active" ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "bg-amber-500"
-                                            )} />
-                                            <span className={cn(
-                                                "text-[9px] font-black tracking-widest uppercase",
-                                                coach.status === "Active" ? "text-emerald-500" : "text-amber-500"
-                                            )}>{coach.status}</span>
-                                        </div>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Card>
-            </div>
-
-            {/* Invite Modal */}
-            <Dialog open={isInviteModalOpen} onOpenChange={setIsInviteModalOpen}>
-                <DialogContent className="max-w-xl bg-black/95 border-white/10 backdrop-blur-3xl rounded-[32px] satin-card sm:p-10">
-                    <DialogHeader>
-                        <DialogTitle className="text-2xl font-black tracking-tighter text-white">
-                            Invite Professional Node
-                        </DialogTitle>
-                        <DialogDescription className="text-[10px] font-bold text-muted-foreground opacity-50 uppercase tracking-widest">
-                            Issue temporary credentials to an independent service provider
-                        </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="py-8 space-y-8">
-                        <div className="grid grid-cols-2 gap-6">
-                            <div className="space-y-3">
-                                <Label className="text-[10px] font-black tracking-widest text-muted-foreground opacity-40 uppercase ml-1">Full Identity</Label>
-                                <Input placeholder="e.g. Jean Pierre" className="bg-white/5 border-white/10 rounded-2xl h-14 text-xs font-bold text-white px-6 w-full" />
-                            </div>
-                            <div className="space-y-3">
-                                <Label className="text-[10px] font-black tracking-widest text-muted-foreground opacity-40 uppercase ml-1">Contact Email</Label>
-                                <Input placeholder="jp@provider.com" className="bg-white/5 border-white/10 rounded-2xl h-14 text-xs font-bold text-white px-6 w-full" />
-                            </div>
-                        </div>
-
-                        <div className="space-y-3">
-                            <Label className="text-[10px] font-black tracking-widest text-muted-foreground opacity-40 uppercase ml-1">Service Discipline</Label>
-                            <Input placeholder="e.g. HIIT Specialist / Wellness Consultant" className="bg-white/5 border-white/10 rounded-2xl h-14 text-xs font-bold text-white px-6 w-full" />
-                        </div>
-
-                        <div className="bg-white/5 rounded-[20px] p-6 border border-white/5 space-y-3">
-                            <h4 className="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
-                                <ShieldCheck className="w-4 h-4 text-indigo-500" /> Security Protocol
-                            </h4>
-                            <p className="text-[9px] text-muted-foreground font-semibold opacity-60 leading-relaxed uppercase tracking-wider">
-                                A temporary encrypted password will be generated and dispatched. The provider will be required to establish a permanent credential node upon initial ingress.
-                            </p>
-                        </div>
+            {/* Registry Card */}
+            <Card className="glass-dark border-white/5 rounded-[2.5rem] overflow-hidden satin-card shadow-2xl">
+                <div className="p-8 border-b border-white/5 bg-white/2 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="space-y-1">
+                        <h3 className="text-sm font-black tracking-widest text-white  flex items-center gap-2">
+                            Professional Registry
+                        </h3>
+                        <p className="text-[10px] text-muted-foreground font-semibold opacity-40  tracking-wider">Governing {coaches.length} clinical professionals</p>
                     </div>
 
-                    <DialogFooter className="gap-4 sm:gap-0">
-                        <Button variant="ghost" onClick={() => setIsInviteModalOpen(false)} className="h-14 flex-1 text-muted-foreground text-[10px] font-black uppercase tracking-widest border border-white/5 rounded-2xl">
-                            ABORT
-                        </Button>
-                        <Button onClick={() => setIsInviteModalOpen(false)} className="h-14 flex-2 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] silver-gradient text-black shadow-2xl shadow-white/5">
-                            DISPATCH INVITE
-                        </Button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
+                    <div className="flex flex-wrap items-center gap-3">
+                        <div className="relative group w-64 md:w-80">
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground opacity-30 group-focus-within:text-indigo-400 group-focus-within:opacity-100 transition-all" />
+                            <Input
+                                placeholder="Identify professional by name or specialty..."
+                                className="h-10 bg-white/5 border-white/10 rounded-xl pl-12 text-[10px] font-black focus:ring-1 focus:ring-white/10 transition-all  opacity-60 focus:opacity-100 tracking-widest"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </div>
+
+                        <DataFilterModal title="Network Filter" description="Configure the clinical professional and performance registry parameters for extraction.">
+                            <div className="space-y-6">
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black tracking-widest text-muted-foreground  opacity-40 ml-1">Observation period</label>
+                                    <DateRangeFilter />
+                                </div>
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black tracking-widest text-muted-foreground  opacity-40 ml-1">Unit discipline</label>
+                                    <Select defaultValue="all">
+                                        <SelectTrigger className="h-12 bg-white/5 border-white/10 rounded-xl text-[10px] font-bold px-4">
+                                            <SelectValue placeholder="Clinical Specialty" />
+                                        </SelectTrigger>
+                                        <SelectContent className="glass-dark border-white/10 rounded-xl">
+                                            <SelectItem value="all" className="text-[10px] font-bold">All Clinical Disciplines</SelectItem>
+                                            <SelectItem value="fitness" className="text-[10px] font-bold">Performance Fitness</SelectItem>
+                                            <SelectItem value="yoga" className="text-[10px] font-bold">Functional Yoga</SelectItem>
+                                            <SelectItem value="hiit" className="text-[10px] font-bold">HIIT Calibration</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+                        </DataFilterModal>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-collapse">
+                    {filteredCoaches.map((coach) => (
+                        <Link
+                            key={coach.id}
+                            href={`/admin/coaches/${coach.id}`}
+                            className="p-8 border-b border-r border-white/5 hover:bg-white/4 transition-all group relative overflow-hidden flex flex-col justify-between"
+                        >
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-[50px] group-hover:bg-indigo-500/10 transition-all" />
+                            <div className="relative z-10">
+                                <div className="flex items-start justify-between mb-8 group-hover:translate-x-1 transition-transform">
+                                    <Avatar className="h-14 w-14 border-2 border-white/10 p-0.5 ring-4 ring-white/5 shadow-2xl transition-transform group-hover:scale-110">
+                                        <AvatarImage src={coach.avatar} />
+                                        <AvatarFallback className="bg-white/5 font-black text-xs">{coach.name.charAt(0)}</AvatarFallback>
+                                    </Avatar>
+                                    <div className="flex flex-col items-end gap-2">
+                                        <Badge className="bg-emerald-500/10 text-emerald-500 border-none text-[8px] font-black px-3 py-1  rounded-lg shadow-sm tracking-widest">Clinical Unit</Badge>
+                                        <div className="flex items-center gap-1.5 bg-white/5 px-2 py-1 rounded-lg border border-white/5">
+                                            <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+                                            <span className="text-[9px] font-black text-white tabular-nums">4.9</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-black text-white mb-2 tracking-tighter  group-hover:text-glow-silver transition-all">{coach.name}</h3>
+                                <p className="text-[10px] font-black text-muted-foreground opacity-30 flex items-center gap-2  tracking-widest">
+                                    <Briefcase className="w-3.5 h-3.5 text-indigo-400 group-hover:scale-110 transition-transform" /> {coach.specialty} Specialist
+                                </p>
+
+                                <div className="grid grid-cols-2 gap-6 mt-10 pt-8 border-t border-white/5">
+                                    <div className="space-y-1">
+                                        <p className="text-[9px] font-black text-muted-foreground  opacity-20 tracking-[0.2em]">Member Flux</p>
+                                        <p className="text-sm font-black text-white tabular-nums">{coach.activeMembers} Units</p>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <p className="text-[9px] font-black text-muted-foreground  opacity-20 tracking-[0.2em]">Net Outcome</p>
+                                        <p className="text-sm font-black text-emerald-500 tabular-nums">{coach.adherenceRate}%</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <Button variant="ghost" className="w-full h-11 mt-10 rounded-xl text-[10px] font-black border border-white/10 bg-white/2 text-muted-foreground opacity-40 hover:opacity-100 hover:text-white transition-all  tracking-widest">
+                                VIEW PROFESSIONAL PROFILE <ArrowUpRight className="w-3.5 h-3.5 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                            </Button>
+                        </Link>
+                    ))}
+                </div>
+            </Card>
         </div>
     );
 }

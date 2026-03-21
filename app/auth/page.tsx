@@ -47,7 +47,7 @@ export default function AuthChoicePage() {
 
             <div className="w-full max-w-3xl relative z-10">
                 <div className="flex flex-col items-center mb-12 px-4 text-center">
-                    <Link href="/" className="inline-flex items-center text-[9px] font-bold text-muted-foreground hover:text-white transition-opacity mb-8 group uppercase tracking-widest opacity-30 hover:opacity-100 italic">
+                    <Link href="/" className="inline-flex items-center text-[9px] font-bold text-muted-foreground hover:text-white transition-opacity mb-8 group  tracking-widest opacity-30 hover:opacity-100 italic">
                         <ArrowLeft className="mr-2 w-3 h-3 group-hover:-translate-x-1 transition-transform" />
                         Exit Application
                     </Link>
@@ -62,7 +62,7 @@ export default function AuthChoicePage() {
                     />
 
                     <h1 className="text-xl font-bold tracking-tight text-white mb-2 font-sans">Select Access Node</h1>
-                    <p className="text-muted-foreground text-[10px] opacity-40 font-medium uppercase tracking-[0.2em] font-sans">Identify your operational role to continue</p>
+                    <p className="text-muted-foreground text-[10px] opacity-40 font-medium  tracking-[0.2em] font-sans">Identify your operational role to continue</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4">
@@ -98,7 +98,7 @@ export default function AuthChoicePage() {
                     ))}
                 </div>
 
-                <div className="mt-16 text-center text-[9px] text-muted-foreground opacity-20 font-bold uppercase tracking-[0.35em] font-sans">
+                <div className="mt-16 text-center text-[9px] text-muted-foreground opacity-20 font-bold  tracking-[0.35em] font-sans">
                     Enterprise Security Standard 2.4.1
                 </div>
             </div>

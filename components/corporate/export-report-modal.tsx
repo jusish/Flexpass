@@ -35,7 +35,7 @@ export function ExportReportModal({ isOpen, onClose }: ExportReportModalProps) {
         setLoading(true);
         setTimeout(() => {
             toast.success("Report Generated", {
-                description: `Your ${format.toUpperCase()} report for the ${range} period is ready.`,
+                description: `Your ${format.to()} report for the ${range} period is ready.`,
             });
             setLoading(false);
             onClose();
@@ -56,7 +56,7 @@ export function ExportReportModal({ isOpen, onClose }: ExportReportModalProps) {
 
                 <div className="space-y-6 pt-6">
                     <div className="space-y-3">
-                        <Label className="text-[11px] font-bold uppercase tracking-wider opacity-60 pl-1">Report Period</Label>
+                        <Label className="text-[11px] font-bold  tracking-wider opacity-60 pl-1">Report Period</Label>
                         <Select value={range} onValueChange={setRange}>
                             <SelectTrigger className="bg-white/5 border-white/10 rounded-xl h-12 text-xs font-semibold">
                                 <div className="flex items-center gap-2">
@@ -74,7 +74,7 @@ export function ExportReportModal({ isOpen, onClose }: ExportReportModalProps) {
                     </div>
 
                     <div className="space-y-3">
-                        <Label className="text-[11px] font-bold uppercase tracking-wider opacity-60 pl-1">File Format</Label>
+                        <Label className="text-[11px] font-bold  tracking-wider opacity-60 pl-1">File Format</Label>
                         <div className="grid grid-cols-2 gap-3">
                             <button
                                 onClick={() => setFormat("pdf")}
@@ -82,7 +82,7 @@ export function ExportReportModal({ isOpen, onClose }: ExportReportModalProps) {
                                     }`}
                             >
                                 <FileText className={`w-5 h-5 ${format === "pdf" ? "text-primary" : "text-muted-foreground"}`} />
-                                <span className="text-xs font-bold uppercase tracking-wide">PDF</span>
+                                <span className="text-xs font-bold  tracking-wide">PDF</span>
                             </button>
                             <button
                                 onClick={() => setFormat("csv")}
@@ -90,7 +90,7 @@ export function ExportReportModal({ isOpen, onClose }: ExportReportModalProps) {
                                     }`}
                             >
                                 <Download className={`w-5 h-5 ${format === "csv" ? "text-primary" : "text-muted-foreground"}`} />
-                                <span className="text-xs font-bold uppercase tracking-wide">CSV</span>
+                                <span className="text-xs font-bold  tracking-wide">CSV</span>
                             </button>
                         </div>
                     </div>

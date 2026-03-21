@@ -10,16 +10,16 @@ import {
     DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { 
-    QrCode, 
-    User, 
-    Building2, 
-    Footprints, 
-    Download, 
-    Printer, 
-    Zap, 
-    ChevronRight, 
-    ArrowLeft 
+import {
+    QrCode,
+    User,
+    Building2,
+    Footprints,
+    Download,
+    Printer,
+    Zap,
+    ChevronRight,
+    ArrowLeft
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -98,9 +98,9 @@ export function CheckInModal({ isOpen, onClose }: CheckInModalProps) {
                 <DialogHeader className="space-y-4">
                     <div className="flex items-center gap-2">
                         {step !== "select_type" && (
-                            <Button 
-                                variant="ghost" 
-                                size="icon" 
+                            <Button
+                                variant="ghost"
+                                size="icon"
                                 className="h-8 w-8 rounded-full hover:bg-white/5 -ml-2"
                                 onClick={() => setStep(step === "qr" ? "select_activity" : "select_type")}
                             >
@@ -108,15 +108,15 @@ export function CheckInModal({ isOpen, onClose }: CheckInModalProps) {
                             </Button>
                         )}
                         <DialogTitle className="text-2xl font-black tracking-tighter text-white">
-                            {step === "select_type" ? "Archetype Selection" : 
-                             step === "select_activity" ? "Select Activity" : 
-                             "Access Protocol Active"}
+                            {step === "select_type" ? "Archetype Selection" :
+                                step === "select_activity" ? "Select Activity" :
+                                    "Access Protocol Active"}
                         </DialogTitle>
                     </div>
-                    <DialogDescription className="text-[11px] font-semibold tracking-widest opacity-50 uppercase">
-                        {step === "select_type" ? "Identify the member's engagement model" : 
-                         step === "select_activity" ? `Configuring activity for ${selectedType?.toUpperCase()}` : 
-                         "Terminal scan ready for verification"}
+                    <DialogDescription className="text-[11px] font-semibold tracking-widest opacity-50 ">
+                        {step === "select_type" ? "Identify the member's engagement model" :
+                            step === "select_activity" ? `Configuring activity for ${selectedType?.to()}` :
+                                "Terminal scan ready for verification"}
                     </DialogDescription>
                 </DialogHeader>
 
@@ -140,8 +140,8 @@ export function CheckInModal({ isOpen, onClose }: CheckInModalProps) {
                                             <type.icon className={cn("w-6 h-6", type.color)} />
                                         </div>
                                         <div className="flex-1">
-                                            <h4 className="text-[12px] font-black text-white uppercase tracking-widest">{type.label}</h4>
-                                            <p className="text-[9px] text-muted-foreground font-black opacity-40 uppercase">{type.description}</p>
+                                            <h4 className="text-[12px] font-black text-white  tracking-widest">{type.label}</h4>
+                                            <p className="text-[9px] text-muted-foreground font-black opacity-40 ">{type.description}</p>
                                         </div>
                                     </button>
                                 ))}
@@ -166,8 +166,8 @@ export function CheckInModal({ isOpen, onClose }: CheckInModalProps) {
                                             <Zap className="w-6 h-6 text-indigo-500 transition-all group-hover:scale-110" />
                                         </div>
                                         <div className="flex-1">
-                                            <h4 className="text-[12px] font-black text-white uppercase tracking-widest">{act.label}</h4>
-                                            <p className="text-[9px] text-muted-foreground font-black opacity-40 uppercase">Authorized Service Node</p>
+                                            <h4 className="text-[12px] font-black text-white  tracking-widest">{act.label}</h4>
+                                            <p className="text-[9px] text-muted-foreground font-black opacity-40 ">Authorized Service Node</p>
                                         </div>
                                         <ChevronRight className="w-4 h-4 text-muted-foreground opacity-20 group-hover:opacity-100 transition-all" />
                                     </button>
@@ -194,11 +194,11 @@ export function CheckInModal({ isOpen, onClose }: CheckInModalProps) {
 
                                 <div className="text-center space-y-4">
                                     <div className="flex items-center gap-2 justify-center opacity-60">
-                                        <Badge variant="outline" className="text-[8px] font-black tracking-widest border-white/10">{selectedType?.toUpperCase()}</Badge>
+                                        <Badge variant="outline" className="text-[8px] font-black tracking-widest border-white/10">{selectedType?.to()}</Badge>
                                         <div className="w-1 h-1 rounded-full bg-white/10" />
-                                        <Badge variant="outline" className="text-[8px] font-black tracking-widest border-white/10">{selectedActivity?.toUpperCase()}</Badge>
+                                        <Badge variant="outline" className="text-[8px] font-black tracking-widest border-white/10">{selectedActivity?.to()}</Badge>
                                     </div>
-                                    <p className="text-muted-foreground text-[10px] opacity-30 font-black tracking-widest uppercase truncate max-w-[200px]">Node: FP-{Math.random().toString(36).substring(7).toUpperCase()}</p>
+                                    <p className="text-muted-foreground text-[10px] opacity-30 font-black tracking-widest  truncate max-w-[200px]">Node: FP-{Math.random().toString(36).substring(7).to()}</p>
                                 </div>
                             </motion.div>
                         )}
@@ -208,18 +208,18 @@ export function CheckInModal({ isOpen, onClose }: CheckInModalProps) {
                 <DialogFooter className="flex flex-col gap-4">
                     {step === "qr" && (
                         <div className="grid grid-cols-2 gap-3 w-full">
-                            <Button variant="outline" className="h-14 bg-white/5 border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10">
+                            <Button variant="outline" className="h-14 bg-white/5 border-white/10 rounded-2xl text-[10px] font-black  tracking-widest hover:bg-white/10">
                                 <Download className="w-4 h-4 mr-2" /> PDF
                             </Button>
-                            <Button variant="outline" className="h-14 bg-white/5 border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10">
+                            <Button variant="outline" className="h-14 bg-white/5 border-white/10 rounded-2xl text-[10px] font-black  tracking-widest hover:bg-white/10">
                                 <Printer className="w-4 h-4 mr-2" /> Print
                             </Button>
                         </div>
                     )}
-                    <Button 
-                        variant="ghost" 
-                        onClick={step === "select_type" ? handleClose : reset} 
-                        className="w-full text-muted-foreground hover:text-white text-[10px] font-black uppercase tracking-widest h-12 rounded-2xl border border-white/5"
+                    <Button
+                        variant="ghost"
+                        onClick={step === "select_type" ? handleClose : reset}
+                        className="w-full text-muted-foreground hover:text-white text-[10px] font-black  tracking-widest h-12 rounded-2xl border border-white/5"
                     >
                         {step === "select_type" ? "Terminate Terminal" : "Start New Entry"}
                     </Button>
