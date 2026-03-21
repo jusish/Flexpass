@@ -115,7 +115,7 @@ export default function PartnerTeam() {
                                             </div>
                                             <div>
                                                 <h4 className="text-[11px] font-black text-white  tracking-widest">{member.name}</h4>
-                                                <p className="text-[9px] text-muted-foreground font-black opacity-30 tracking-widest ">{member.id} • {member.type.to()}</p>
+                                                <p className="text-[9px] text-muted-foreground font-black opacity-30 tracking-widest ">{member.id} • {member.type.toUpperCase()}</p>
                                             </div>
                                         </div>
                                     </TableCell>

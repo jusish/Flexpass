@@ -35,7 +35,7 @@ export function ExportReportModal({ isOpen, onClose }: ExportReportModalProps) {
         setLoading(true);
         setTimeout(() => {
             toast.success("Report Generated", {
-                description: `Your ${format.to()} report for the ${range} period is ready.`,
+                description: `Your ${format.toUpperCase()} report for the ${range} period is ready.`,
             });
             setLoading(false);
             onClose();

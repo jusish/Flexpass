@@ -115,7 +115,7 @@ export function CheckInModal({ isOpen, onClose }: CheckInModalProps) {
                     </div>
                     <DialogDescription className="text-[11px] font-semibold tracking-widest opacity-50 ">
                         {step === "select_type" ? "Identify the member's engagement model" :
-                            step === "select_activity" ? `Configuring activity for ${selectedType?.to()}` :
+                            step === "select_activity" ? `Configuring activity for ${selectedType?.toUpperCase()}` :
                                 "Terminal scan ready for verification"}
                     </DialogDescription>
                 </DialogHeader>
@@ -194,11 +194,11 @@ export function CheckInModal({ isOpen, onClose }: CheckInModalProps) {
 
                                 <div className="text-center space-y-4">
                                     <div className="flex items-center gap-2 justify-center opacity-60">
-                                        <Badge variant="outline" className="text-[8px] font-black tracking-widest border-white/10">{selectedType?.to()}</Badge>
+                                        <Badge variant="outline" className="text-[8px] font-black tracking-widest border-white/10">{selectedType?.toUpperCase()}</Badge>
                                         <div className="w-1 h-1 rounded-full bg-white/10" />
-                                        <Badge variant="outline" className="text-[8px] font-black tracking-widest border-white/10">{selectedActivity?.to()}</Badge>
+                                        <Badge variant="outline" className="text-[8px] font-black tracking-widest border-white/10">{selectedActivity?.toUpperCase()}</Badge>
                                     </div>
-                                    <p className="text-muted-foreground text-[10px] opacity-30 font-black tracking-widest  truncate max-w-[200px]">Node: FP-{Math.random().toString(36).substring(7).to()}</p>
+                                    <p className="text-muted-foreground text-[10px] opacity-30 font-black tracking-widest  truncate max-w-[200px]">Node: FP-{Math.random().toString(36).substring(7).toUpperCase()}</p>
                                 </div>
                             </motion.div>
                         )}

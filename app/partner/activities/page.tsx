@@ -199,7 +199,7 @@ export default function PartnerActivityManagement() {
                                         <SelectItem key={act.id} value={act.id} className="rounded-xl h-12 text-[11px] font-bold">
                                             <div className="flex items-center gap-3">
                                                 <act.icon className="w-4 h-4 text-indigo-400" />
-                                                {act.name.to()}
+                                                {act.name.toUpperCase()}
                                             </div>
                                         </SelectItem>
                                     ))}

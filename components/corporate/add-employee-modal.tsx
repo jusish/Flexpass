@@ -28,7 +28,7 @@ interface AddEmployeeModalProps {
 }
 
 export function AddEmployeeModal({ isOpen, onClose }: AddEmployeeModalProps) {
-    const { addEmployee, companyPlan } = useMockStore();
+    const { addEmployee, companyPlan, user } = useMockStore();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [tier, setTier] = useState<"Silver" | "Gold" | "Platinum">("Silver");
@@ -49,6 +49,7 @@ export function AddEmployeeModal({ isOpen, onClose }: AddEmployeeModalProps) {
                 tier,
                 department,
                 status: "Active",
+                companyId: user?.companyId || "c1",
             });
             toast.success("Employee Added", {
                 description: `${name} has been enrolled successfully.`,

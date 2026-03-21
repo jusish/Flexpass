@@ -62,7 +62,7 @@ export default function BillingPage() {
         if (id === activePlan) return;
         setIsUpdating(id);
         setTimeout(() => {
-            updatePlan(id.charAt(0).to() + id.slice(1) as any);
+            updatePlan(id.charAt(0).toUpperCase() + id.slice(1) as any);
             setIsUpdating(null);
             toast.success(`Subscription Updated`, { description: `You are now on the ${id} tier.` });
         }, 1200);
